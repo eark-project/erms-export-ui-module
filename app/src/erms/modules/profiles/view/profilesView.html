@@ -1,0 +1,37 @@
+<md-card flex="grow">
+    <md-card-content>
+        <table class="simple-list">
+            <thead>
+            <tr>
+                <th>{{ "ERMS.PROFILES.LIST.LABELS.PROFILE_NAME" | translate }}</th>
+                <th>{{ "ERMS.PROFILES.LIST.LABELS.REPO_URL" | translate }}</th>
+                <th>{{ "ERMS.PROFILES.LIST.LABELS.USER_ID" | translate }}</th>
+                <th>{{ "ERMS.PROFILES.LIST.LABELS.PASSWORD" | translate }}</th>
+                <th style="text-align: center;"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in empc.profiles">
+                <td>
+                    <span class="text-muted">{{ item.profileName }}</span>
+                </td>
+                <td>
+                    <span class="text-muted">{{ item.url }}</span>
+                </td>
+                <td>
+                    <span class="text-muted">{{ item.userName }}</span>
+                </td>
+                <td>
+                    <span class="text-muted">{{ item.password }}</span>
+                </td>
+                <td >
+                    <md-button class="md-primary" ng-click="empc.showProfileDialog(item)"><i class="material-icons ng-scope">edit</i> Edit</md-button>
+                </td>
+                <td style="text-align: center;"> </td>
+            </tr>
+            </tbody>
+        </table>
+        <md-button class="md-primary" ng-click="empc.showProfileDialog()"><i class="material-icons ng-scope">add</i> {{ 'COMMON.ADD_NEW' | translate }} {{ 'COMMON.PROFILE' | translate }}</md-button>
+
+    </md-card-content>
+</md-card>
