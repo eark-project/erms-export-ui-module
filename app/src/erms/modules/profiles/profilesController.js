@@ -7,8 +7,8 @@ function ErmsProfilesController($mdDialog, ermsProfilesService) {
     empc.profiles=[];
     empc.initialise = initialise;
     empc.showProfileDialog = showProfileDialog;
-
     empc.initialise();
+
     function initialise(){
         ermsProfilesService.getProfiles().then(function(response){
             empc.profiles = response.profiles;
@@ -18,7 +18,6 @@ function ErmsProfilesController($mdDialog, ermsProfilesService) {
     }
 
     function showProfileDialog(profile){
-
         return $mdDialog.show({
             controller: editProfileDialogController,
             controllerAs: 'epd',
@@ -35,7 +34,6 @@ function ErmsProfilesController($mdDialog, ermsProfilesService) {
             empc.initialise();
         });
     }
-
 
     function editProfileDialogController($scope, $mdDialog, profile) {
         var epd = this;

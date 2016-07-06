@@ -19,6 +19,12 @@ function ermsProfilesService($q, $http){
         return $http.put('http://localhost:8080/webapi/database/updateProfile', profile).then(_returnResult);
     }
 
+    /**
+     * Generic function for returning the results from the profile as promise
+     * @param response
+     * @returns {*}
+     * @private
+     */
     function _returnResult(response){
         var defer = $q.defer();
 
