@@ -1,7 +1,10 @@
 ﻿{
-  "ERMS": {
-    "HEADER": {
-      "LABEL": "Erms"
+    "ERMS": {
+        "HEADER": {
+            "LABEL": "ERMS"
+        },
+        "MODULES":{
+            "LABEL": "Moduler"
+        }
     }
-  }
 }
