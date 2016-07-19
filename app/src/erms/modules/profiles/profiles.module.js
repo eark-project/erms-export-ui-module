@@ -1,5 +1,5 @@
 angular
-    .module('eArkPlatform.erms.profile', [])
+    .module('eArkPlatform.erms.profile', ['pascalprecht.translate'])
     .config(config);
 
 function config($stateProvider, languageFilesProvider, ermsServiceProvider ){
@@ -16,7 +16,7 @@ function config($stateProvider, languageFilesProvider, ermsServiceProvider ){
     });
 
     languageFilesProvider.addFile('app/src/erms/modules/profiles/i18n/','-profiles.json');
-    ermsServiceProvider.addERMSModule('ERMS.PROFILES.MENU.LABEL.PROFILES','erms.profiles','list');
+    ermsServiceProvider.addERMSModule('ERMS_PROFILES.PROFILES.MENU.LABEL.PROFILES','erms.profiles','list');
 
 
 }
