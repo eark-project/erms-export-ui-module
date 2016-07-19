@@ -10,13 +10,13 @@ function ermsProfilesService($q, $http){
     };
 
     function getProfiles(){
-        return $http.get('http://localhost:8080/webapi/database/getProfiles').then(_returnResult);
+        return $http.get('http://erms-bridge/webapi/database/getProfiles').then(_returnResult);
     }
     function createProfile(profile){
-        return $http.post('http://localhost:8080/webapi/database/addProfile', profile).then(_returnResult);
+        return $http.post('http://erms-bridge/webapi/database/addProfile', profile).then(_returnResult);
     }
     function updateProfile(profile){
-        return $http.put('http://localhost:8080/webapi/database/updateProfile', profile).then(_returnResult);
+        return $http.put('http://erms-bridge/webapi/database/updateProfile', profile).then(_returnResult);
     }
 
     /**
