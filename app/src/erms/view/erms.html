@@ -1,16 +1,27 @@
-<div layout class="erms_sub_menu">
-
-    <md-card flex="25">
-
-        <md-card-content layout>
-            <md-list><md-subheader class="md-no-sticky">{{ 'ERMS.MODULES.LABEL' | translate}}</md-subheader>
-                <md-list-item ng-repeat="item in emc.modules" ui-sref="{{item.sref}}" ui-sref-active="active">
-                    <md-icon class="md-default-theme" class="material-icons">{{item.icon}}</md-icon>
-                    <p>{{ item.labelKey | translate}}</p>
-                </md-list-item>
-            </md-list>
-        </md-card-content>
-    </md-card>
-
-    <div flex="grow" ui-view="erms-modules-view"></div>
+<div layout="column" class="erms_sub_menu">
+    
+    <h1>ERMS export</h1>
+    
+    <md-tabs md-dynamic-height>
+        
+        <md-tab ui-sref="erms.repos">
+            <md-tab-label>
+                <span>Repositories</span>
+            </md-tab-label>
+            <md-tab-body layout="column">
+                <div ui-view="repos"></div>
+            </md-tab-body>
+        </md-tab>
+        
+        <md-tab ui-sref="erms.export">
+            <md-tab-label>
+                <span>Export</span>
+            </md-tab-label>
+            <md-tab-body layout="column">
+                <div ui-view="export"></div>
+            </md-tab-body>
+        </md-tab>
+        
+    </md-tabs>
+    
 </div>

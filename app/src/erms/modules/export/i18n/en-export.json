@@ -1,0 +1,32 @@
+﻿{
+    "ERMS_PROFILES": {
+        "PROFILES": {
+            "LIST": {
+                "LABELS": {
+                    "PROFILE_NAME" : "Name",
+                    "REPO_URL" : "Repository Url",
+                    "USER_ID":"Access ID",
+                    "PASSWORD":"Password"
+                }
+            },
+            "MENU":{
+                "LABELS":{
+                    "PROFILES": "Profiles"
+                },
+                "LABEL":{
+                    "PROFILES": "Profiles"
+                }
+            },
+            "DIALOG":{
+                "LABELS":{
+                    "CREATE_PROFILE": "Create Profile",
+                    "EDIT_PROFILE": "Edit Profile",
+                    "PROFILE_DIALOG": "Profile Dialog",
+                    "REPO_URL": "Repository Url",
+                    "ACCESS_ID": "Access ID",
+                    "ACCESS_PASSWORD": "Password"
+                }
+            }
+        }
+    }
+}

@@ -16,6 +16,8 @@ angular
         'eArkPlatform.dashboard',
         'eArkPlatform.erms',
         'eArkPlatform.erms.profile',
+        'eArkPlatform.erms.export',
+        'eArkPlatform.erms.repoView',
         'eArkPlatform.common.directives',
         'eArkPlatform.common.directives.filter',
         'dcbImgFallback',
