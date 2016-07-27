@@ -6,10 +6,12 @@ function config($stateProvider, languageFilesProvider ){
 
     $stateProvider.state('erms.repos.browseRepo', {
         parent: 'erms.repos',
-        url: '/repo-browser',
+        url: '/repo-browser/:profileName',
         views: {
             'repo-browser': {
-                templateUrl : 'app/src/erms/modules/repoView/view/repoView.html'
+                templateUrl : 'app/src/erms/modules/repoView/view/repoView.html',
+                controller : 'RepoViewController',
+                controllerAs: 'rvc'
             }
         }
     });

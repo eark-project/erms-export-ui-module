@@ -4,12 +4,18 @@ angular
 
 function fileUtilsService() {
     return {
+        getFolderIcon: getFolderIcon,
         getFileExtension: getFileExtension,
         getHumanFriendlyFileSize: formatBytes,
         getMsProtocolForFile: getMsProtocolForFile,
         getFileIconByMimetype: getFileIconByMimetype,
         getMsProtocolForFileExtension: getMsProtocolForFileExtension
     };
+
+    function getFolderIcon(p_iconSize){
+        var iconSize = typeof p_iconSize === "number" ? p_iconSize : 32;
+        return "generic-folder-" + iconSize + ".png";
+    }
 
     /**
      * Copied and adapted from Alfresco share for use. The next 3 functions that is.

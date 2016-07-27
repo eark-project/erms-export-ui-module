@@ -38,6 +38,10 @@ angular
     });
 
 function config($mdThemingProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
+        //$httpProvider.interceptors.push('httpTicketInterceptor');
+        //$httpProvider.defaults.headers.common.Authorization = undefined;
+        $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
     $mdThemingProvider.theme('default')
         .primaryPalette('blue')
         .accentPalette('yellow')
