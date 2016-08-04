@@ -5,7 +5,8 @@ angular
 function ermsRepoService($q, $http){
     return {
         connect             : connect,
-        getFolderChildren   : getFolderChildren
+        getFolderChildren   : getFolderChildren,
+        getDocument         : getDocument
     };
 
     /**
@@ -31,6 +32,17 @@ function ermsRepoService($q, $http){
     function getFolderChildren(requestObject){
         return $http.post('http://localhost:9090/webapi/repository/getFolder', requestObject).then(function(response){
             return response.data.folder;
+        });
+    }
+
+    /**
+     * Will return the properties of a document and, optionally, it's content stream.
+     * @param requestObject object constructed thus {profileName:[a profile name], objectId:[documentObjectId, includeContentStream:false/true}
+     * @returns {*}
+     */
+    function getDocument(requestObject){
+        return $http.post('http://localhost:9090/webapi/repository/getDocument', requestObject).then(function(response){
+            return response.data.document;
         });
     }
 

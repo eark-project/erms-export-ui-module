@@ -4,11 +4,13 @@ angular
 
 function fileUtilsService() {
     return {
+        formatBytes: formatBytes,
         getFolderIcon: getFolderIcon,
         getFileExtension: getFileExtension,
         getHumanFriendlyFileSize: formatBytes,
         getMsProtocolForFile: getMsProtocolForFile,
         getFileIconByMimetype: getFileIconByMimetype,
+        getFileExtensionFromMimeType: getFileExtensionFromMimeType,
         getMsProtocolForFileExtension: getMsProtocolForFileExtension
     };
 
@@ -23,22 +25,29 @@ function fileUtilsService() {
     function getFileIconByMimetype(mimetype, p_iconSize) {
         var extns =
         {
-            "text/css": "css",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document": "docx",
+            "application/vnd.openxmlformats-officedocument.presentationml.presentation": "pptx",
+            "application/vnd.oasis.opendocument.presentation": "odp",
+            "application/vnd.oasis.opendocument.spreadsheet": "ods",
+            "application/vnd.oasis.opendocument.graphics": "odg",
+            "application/vnd.oasis.opendocument.text": "odt",
+            "application/vnd.apple.numbers": "numbers",
+            "application/vnd.ms-powerpoint": "ppt",
             "application/vnd.ms-excel": "xls",
+            "application/illustrator": "ai",
+            "application/x-indesign": "indd",
+            "application/x-fla": "fla",
+            "application/rtf": "rtf",
+            "application/msword": "doc",
+            "application/eps": "eps",
+            "text/css": "css",
             "image/tiff": "tiff",
             "audio/x-aiff": "aiff",
-            "application/vnd.ms-powerpoint": "ppt",
-            "application/illustrator": "ai",
             "image/gif": "gif",
             "audio/mpeg": "mp3",
             "message/rfc822": "eml",
-            "application/vnd.oasis.opendocument.graphics": "odg",
-            "application/x-indesign": "indd",
-            "application/rtf": "rtf",
             "audio/x-wav": "wav",
-            "application/x-fla": "fla",
             "video/x-ms-wmv": "wmv",
-            "application/msword": "doc",
             "video/x-msvideo": "avi",
             "video/mpeg2": "mpeg2",
             "video/x-flv": "flv",
@@ -67,16 +76,9 @@ function fileUtilsService() {
             "video/x-rad-screenplay": "avx",
             "video/x-sgi-movie": "movie",
             "audio/x-ms-wma": "wma",
-            "application/vnd.openxmlformats-officedocument.wordprocessingml.document": "docx",
-            "application/vnd.openxmlformats-officedocument.presentationml.presentation": "pptx",
-            "application/vnd.oasis.opendocument.presentation": "odp",
             "video/x-ms-asf": "asf",
-            "application/vnd.oasis.opendocument.spreadsheet": "ods",
-            "application/vnd.oasis.opendocument.text": "odt",
             "application/vnd.apple.keynote": "key",
             "image/vnd.adobe.premiere": "ppj",
-            "application/vnd.apple.numbers": "numbers",
-            "application/eps": "eps",
             "audio/basic": "au"
         };
 
@@ -104,6 +106,15 @@ function fileUtilsService() {
         }
 
         return null;
+    }
+
+    /**
+     * Returns the file extension given the mimetype string (i.e. returns 'pdf' given 'application/pdf')
+     * @param mimetypeString
+     * @returns {string} extension
+     */
+    function getFileExtensionFromMimeType(mimetypeString) {
+        return mimetypeString.substring(mimetypeString.lastIndexOf("/")+1, mimetypeString.length);
     }
 
     /**

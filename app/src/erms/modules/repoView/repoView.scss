@@ -1,0 +1,14 @@
+.od-filebrowser-breadcrumb {
+  margin: 0;
+  background-color: #eee;
+  font-size: $u*0.9;
+
+  a {
+    display: inline-block;
+    padding: $u*0.5 0 $u*0.5 $u*0.5;
+  }
+  a:after {
+    display: inline-block;
+    content: '/';
+  }
+}

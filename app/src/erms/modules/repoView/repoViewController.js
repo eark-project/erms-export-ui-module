@@ -9,6 +9,8 @@ function RepoViewController($stateParams, ermsRepoService, fileUtilsService) {
     rvc.loadRepoView = loadRepoView;
     rvc.isFile = isFile;
     rvc.getItem = getItem;
+    rvc.breadcrumbs = [];
+    rvc.gotoCrumb = goToCrumb;
 
     rvc.loadRepoView();
 
@@ -18,7 +20,14 @@ function RepoViewController($stateParams, ermsRepoService, fileUtilsService) {
      * @param profileName Misleadingly, can be either the profile name or the object Id of the folder
      */
     function loadRepoView(){
-        rvc.profileName ? _getRootView(rvc.profileName) : _getFolderView(rvc.profileName);
+        rvc.breadcrumbs = [];
+        _getRootView(rvc.profileName);
+    }
+
+    function goToCrumb(index) {
+        var selected = rvc.breadcrumbs[index];
+        rvc.breadcrumbs = rvc.breadcrumbs.slice(0, index);
+        (index == 0) ? _getRootView(rvc.profileName) : _getFolderView(selected.objectId);
     }
 
     function _getRootView(profileName){
@@ -33,6 +42,7 @@ function RepoViewController($stateParams, ermsRepoService, fileUtilsService) {
                         item.displaySize = formatBytes(item.size);
                 })
             }
+            rvc.breadcrumbs=[{name:rvc.repo.properties.name, objectId:rvc.repo.properties.objectId}];
         });
     }
 
@@ -45,6 +55,26 @@ function RepoViewController($stateParams, ermsRepoService, fileUtilsService) {
             rvc.repo = response;
             //Check if the folder is empty
             rvc.repo.empty = (!rvc.repo.children === Array || rvc.repo.children.length == 0);
+            if(!rvc.repo.empty) {
+                addThumbnailUrl();
+                rvc.repo.children.forEach(function(item){
+                    if(item.type == 'document')
+                        item.displaySize = fileUtilsService.formatBytes(item.size);
+                })
+            }
+            rvc.breadcrumbs.push({name:rvc.repo.properties.name, objectId:rvc.repo.properties.objectId});
+        });
+    }
+
+    function _getDocument(objectId){
+        var requestObject = {
+            profileName: rvc.profileName,
+            documentObjectId: objectId
+        };
+        ermsRepoService.getDocument(requestObject).then(function(response){
+            rvc.document = response;
+            rvc.document.displaySize = fileUtilsService.formatBytes(response.properties.size);
+            debugger;
         });
     }
 
@@ -60,10 +90,10 @@ function RepoViewController($stateParams, ermsRepoService, fileUtilsService) {
     }
 
     function isFile(item){
-        return item.type == "folder";
+        return item.type === "document";
     }
 
-    function getItem(objectId){
-            _getFolderView(objectId);
+    function getItem(objectId, itemType){
+        (itemType === 'folder') ? _getFolderView(objectId) : _getDocument(objectId);
     }
 }
