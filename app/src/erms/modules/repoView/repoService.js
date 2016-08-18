@@ -25,7 +25,7 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
      * @returns {*}
      */
     function connect() {
-        return $http.post('http://localhost:9090/webapi/repository/connect', {profileName: ermsSvc.profile}).then(function (response) {
+        return $http.post('http://eark.magenta.dk:9090/webapi/repository/connect', {profileName: ermsSvc.profile}).then(function (response) {
             ermsSvc.breadcrumbs = [];
             initRepoView(response.data.rootFolder);
         });
@@ -37,7 +37,7 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
      * @returns {*}
      */
     function getFolderChildren(requestObject) {
-        return $http.post('http://localhost:9090/webapi/repository/getFolder', requestObject).then(function (response) {
+        return $http.post('http://eark.magenta.dk:9090/webapi/repository/getFolder', requestObject).then(function (response) {
             initRepoView(response.data.folder);
         });
     }
@@ -48,7 +48,7 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
      * @returns {*}
      */
     function getDocument(requestObject) {
-        return $http.post('http://localhost:9090/webapi/repository/getDocument', requestObject).then(function (response) {
+        return $http.post('http://eark.magenta.dk:9090/webapi/repository/getDocument', requestObject).then(function (response) {
             return response.data.document;
         });
     }
