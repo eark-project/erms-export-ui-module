@@ -5,9 +5,10 @@ angular
 function config($stateProvider, languageFilesProvider){
 
     $stateProvider.state('erms.export', {
+        parent: 'erms',
         url: '/export',
         views: {
-            'export': {
+            'erms': {
                 templateUrl : 'app/src/erms/modules/export/view/exportView.html',
                 controller  : 'ErmsExportController',
                 controllerAs: 'rxc'

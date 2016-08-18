@@ -5,9 +5,10 @@ angular
 function config($stateProvider, languageFilesProvider, ermsServiceProvider ){
 
     $stateProvider.state('erms.repos', {
+        parent: 'erms',
         url: '/repositories',
         views: {
-            'repos': {
+            'erms': {
                 templateUrl : 'app/src/erms/modules/profiles/view/profilesView.html',
                 controller : 'ErmsProfilesController',
                 controllerAs: 'empc'

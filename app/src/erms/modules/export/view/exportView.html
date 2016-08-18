@@ -1,15 +1,16 @@
+<div layout="row" layout-margin>
+    <h1 class="md-title">ERMS &rsaquo; Items for export</h1>
+</div>
+
+<div layout="row" layout-align="space-between center">
+    <md-button class="md-raised md-primary" ui-sref="erms.repos">Back: Browse repositories</md-button>
+    <md-button class="md-raised md-primary" ng-disabled="true">Next: Review export</md-button>
+</div>
+
 <md-card>
 
     <md-card-content>
-        <!--<h3 class="md-title">{{ 'DOCUMENT.DOCUMENTS' | translate }}</h3>-->
-        <h3 class="md-title">Items for export</h3>
 
-        <!--<span ng-repeat="crumb in docCtrl.breadcrumbs">
-            <a ng-if="$first" class="breadcrumb" ng-click="docCtrl.crumbClick()"><i class="material-icons">folder_open</i></a>
-            <span><i class="material-icons">keyboard_arrow_right</i></span>
-            <a ng-if="!$last" class="breadcrumb" ng-click="docCtrl.crumbClick(crumb)">{{crumb.title}}</a>
-            <span ng-if="$last">{{crumb.title}}</span>
-        </span>-->
         <div layout="column">
             <table class="simple-list" ng-show="rxc.exportItems">
                 <tbody>
@@ -36,21 +37,3 @@
     </md-card-content>
 
 </md-card>
-
-
-<!--
-            <div class="tlist">
-                <md-virtual-repeat-container class="tlist__body" md-auto-shrink flex-height>
-                    <div md-virtual-repeat="item in rxc.exportItems | orderObjectBy:orderByAttribute:reverseOrder"
-                         layout="column" flex>
-                        <div class="tlist__item__link" style="cursor: pointer" layout="row">
-                            <span class="tlist__cell tlist__cell__fileicon tlist__cardview__hide" flex="none">
-                                <img class="md-avatar" ng-src="app/assets/images/filetypes/{{item.thumbNailURL}}"/>
-                            </span>
-                            <span class="tlist__cell" flex>{{item.name}}<div class="muted">({{item.path}})</div></span>
-                        </div>
-                    </div>
-                    <div></div>
-                </md-virtual-repeat-container>
-            </div>
--->

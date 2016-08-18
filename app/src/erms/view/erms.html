@@ -1,27 +1,5 @@
 <div layout="column" class="erms_sub_menu">
     
-    <h1>ERMS export</h1>
-    
-    <md-tabs md-dynamic-height>
-        
-        <md-tab ui-sref="erms.repos">
-            <md-tab-label>
-                <span>Repositories</span>
-            </md-tab-label>
-            <md-tab-body layout="column">
-                <div ui-view="repos"></div>
-            </md-tab-body>
-        </md-tab>
-        
-        <md-tab ui-sref="erms.export">
-            <md-tab-label>
-                <span>Export</span>
-            </md-tab-label>
-            <md-tab-body layout="column">
-                <div ui-view="export"></div>
-            </md-tab-body>
-        </md-tab>
-        
-    </md-tabs>
+    <div ui-view="erms"></div>
     
 </div>
