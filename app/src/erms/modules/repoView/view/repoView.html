@@ -1,3 +1,7 @@
+<div layout="row" class="repview__title">
+    <h2 class="md-subhead">{{ rvc.profileName }} <span style="color: #999;">{{ 'DOCUMENT.DOCUMENTS' | translate }}</span></h2>
+</div>
+
 <md-card>
 
     <div class="repo-docs__nav window">
@@ -8,31 +12,24 @@
     </div>
 
     <md-card-content>
-        <h3 class="md-title">{{ 'DOCUMENT.DOCUMENTS' | translate }}</h3>
 
-        <!--<span ng-repeat="crumb in docCtrl.breadcrumbs">
-            <a ng-if="$first" class="breadcrumb" ng-click="docCtrl.crumbClick()"><i class="material-icons">folder_open</i></a>
-            <span><i class="material-icons">keyboard_arrow_right</i></span>
-            <a ng-if="!$last" class="breadcrumb" ng-click="docCtrl.crumbClick(crumb)">{{crumb.title}}</a>
-            <span ng-if="$last">{{crumb.title}}</span>
-        </span>-->
         <div layout="column">
             <div class="tlist">
                 <div class="tlist__header" layout="row">
-                    <div class="tlist__cell tlist__cell__fileicon tlist__cardview__hide" flex="none"></div>
+                    <div class="tlist__cell tlist__cell__fileicon tlist__cardview__hide" flex="10"></div>
                     <div class="tlist__cell" flex sort-table="title">{{ 'COMMON.TITLE' | translate }}</div>
                     <div class="tlist__cell" flex="10" sort-table="creator.fullName">{{ 'COMMON.CREATEDBY' | translate
                         }}
                     </div>
                     <!-- might not be convenient to sort if multiple owner -->
-                    <div class="tlist__cell tlist__cell__date" sort-table="created">{{ 'COMMON.CREATED' | translate }}
+                    <div class="tlist__cell" flex="10" sort-table="created">{{ 'COMMON.CREATED' | translate }}
                     </div>
                     <div class="tlist__cell" flex="10" sort-table="modified">{{ 'COMMON.MODIFIED_BY' | translate }}
                     </div>
-                    <div class="tlist__cell tlist__cell__date" sort-table="lastModificationDate">{{ 'COMMON.MODIFIED' |
+                    <div class="tlist__cell" flex="10" sort-table="lastModificationDate">{{ 'COMMON.MODIFIED' |
                         translate }}
                     </div>
-                    <div></div>
+                    <div class="tlist__cell" flex="10"></div>
                 </div>
                 <md-virtual-repeat-container class="tlist__body" md-auto-shrink flex-height
                                              ng-if="rvc.repo.children.length > 0">
@@ -41,18 +38,18 @@
                         <!--class="tlist__item {{ item.locked ? 'muted' : '' }}" ng-disabled="item.locked">-->
                         <div class="tlist__item__link" style="cursor: pointer"
                              ng-click="rvc.getItem(item.objectId, item.type)" layout="row">
-                            <span class="tlist__cell tlist__cell__fileicon tlist__cardview__hide" flex="none">
+                            <span class="tlist__cell tlist__cell__fileicon tlist__cardview__hide" flex="10">
                                 <img class="md-avatar" ng-src="app/assets/images/filetypes/{{item.thumbNailURL}}"/>
                             </span>
                             <span class="tlist__cell" flex>{{item.name}}<div class="muted" ng-show="rvc.isFile(item)">
                                 ({{item.displaySize}})
                             </div></span>
                             <span class="tlist__cell muted" flex="10"> {{item.createdBy}} </span>
-                            <span class="tlist__cell tlist__cell__date muted">{{ item.creationDate }}</span>
+                            <span class="tlist__cell muted" flex="10">{{ item.creationDate }}</span>
                             <span class="tlist__cell muted" flex="10">{{ item.lastModifiedBy  }}</span>
-                            <span class="tlist__cell tlist__cell__date muted">{{ item.lastModificationDate  }}</span>
-                            <span class="tlist__cell muted">
-                                    <md-checkbox ng-click="rvc.selectItemForExport(item)" ng-checked="item.selected"></md-checkbox>
+                            <span class="tlist__cell muted" flex="10">{{ item.lastModificationDate  }}</span>
+                            <span class="tlist__cell muted" flex="10">
+                                <md-checkbox ng-click="rvc.selectItemForExport(item)" ng-checked="item.selected"></md-checkbox>
                             </span>
                         </div>
                     </div>
