@@ -7,7 +7,7 @@
     display: inline-block;
     padding: $u*0.5 0 $u*0.5 $u*0.5;
   }
-  a:after {
+  a:before {
     display: inline-block;
     content: '/';
   }

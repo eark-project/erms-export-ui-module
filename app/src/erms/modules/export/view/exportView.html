@@ -1,3 +1,56 @@
-<h2>Export</h2>
+<md-card>
 
-bla bla bla
+    <md-card-content>
+        <!--<h3 class="md-title">{{ 'DOCUMENT.DOCUMENTS' | translate }}</h3>-->
+        <h3 class="md-title">Items for export</h3>
+
+        <!--<span ng-repeat="crumb in docCtrl.breadcrumbs">
+            <a ng-if="$first" class="breadcrumb" ng-click="docCtrl.crumbClick()"><i class="material-icons">folder_open</i></a>
+            <span><i class="material-icons">keyboard_arrow_right</i></span>
+            <a ng-if="!$last" class="breadcrumb" ng-click="docCtrl.crumbClick(crumb)">{{crumb.title}}</a>
+            <span ng-if="$last">{{crumb.title}}</span>
+        </span>-->
+        <div layout="column">
+            <table class="simple-list" ng-show="rxc.exportItems">
+                <tbody>
+                <tr ng-repeat="item in rxc.exportItems">
+                    <td>
+                        <img class="md-avatar" ng-src="app/assets/images/filetypes/{{item.thumbNailURL}}" alt="">
+                        {{item.name}}
+                        <div class="muted">({{item.path}})</div>
+                    </td>
+                    <td style="text-align: right;">
+                        <md-button ng-click="rxc.removeItem(item)">
+                            {{ 'COMMON.REMOVE' | translate }}
+                        </md-button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div ng-if="rxc.exportItems.length == 0" class="empty_file_list muted">
+                <i class="material-icons">insert_drive_file</i><br>
+                {{"COMMON.EMPTY" | translate}}
+            </div>
+
+        </div>
+    </md-card-content>
+
+</md-card>
+
+
+<!--
+            <div class="tlist">
+                <md-virtual-repeat-container class="tlist__body" md-auto-shrink flex-height>
+                    <div md-virtual-repeat="item in rxc.exportItems | orderObjectBy:orderByAttribute:reverseOrder"
+                         layout="column" flex>
+                        <div class="tlist__item__link" style="cursor: pointer" layout="row">
+                            <span class="tlist__cell tlist__cell__fileicon tlist__cardview__hide" flex="none">
+                                <img class="md-avatar" ng-src="app/assets/images/filetypes/{{item.thumbNailURL}}"/>
+                            </span>
+                            <span class="tlist__cell" flex>{{item.name}}<div class="muted">({{item.path}})</div></span>
+                        </div>
+                    </div>
+                    <div></div>
+                </md-virtual-repeat-container>
+            </div>
+-->

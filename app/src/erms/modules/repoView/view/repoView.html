@@ -52,7 +52,7 @@
                             <span class="tlist__cell muted" flex="10">{{ item.lastModifiedBy  }}</span>
                             <span class="tlist__cell tlist__cell__date muted">{{ item.lastModificationDate  }}</span>
                             <span class="tlist__cell muted">
-                                    <md-checkbox ng-click="selectCheckbox(item.value)"></md-checkbox>
+                                    <md-checkbox ng-click="rvc.selectItemForExport(item)" ng-checked="item.selected"></md-checkbox>
                             </span>
                         </div>
                     </div>

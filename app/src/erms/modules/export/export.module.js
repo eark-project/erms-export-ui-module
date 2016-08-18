@@ -9,8 +9,8 @@ function config($stateProvider, languageFilesProvider){
         views: {
             'export': {
                 templateUrl : 'app/src/erms/modules/export/view/exportView.html',
-                controller : 'ErmsExportController',
-                controllerAs: 'ermsxc'
+                controller  : 'ErmsExportController',
+                controllerAs: 'rxc'
             }
         }
     });

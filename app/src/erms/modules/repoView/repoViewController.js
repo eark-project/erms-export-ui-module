@@ -2,70 +2,59 @@ angular
     .module('eArkPlatform.erms.repoView')
     .controller('RepoViewController', RepoViewController);
 
-function RepoViewController($stateParams, ermsRepoService, fileUtilsService) {
+function RepoViewController($scope, $stateParams, ermsRepoService, fileUtilsService, ermsExportService) {
     var rvc = this;
-    rvc.repo = null;
-    rvc.profileName = decodeURIComponent($stateParams.profileName);
+    rvc.repo = ermsRepoService.repoItems;
+    rvc.profileName = "";
     rvc.loadRepoView = loadRepoView;
     rvc.isFile = isFile;
     rvc.getItem = getItem;
-    rvc.breadcrumbs = [];
-    rvc.gotoCrumb = goToCrumb;
+    rvc.breadcrumbs = ermsRepoService.breadcrumbs;
+    rvc.gotoCrumb = ermsRepoService.goToCrumb;
+    rvc.selectItemForExport = selectItemForExport;
 
     rvc.loadRepoView();
 
     /**
-     *  This function will either load the root folder view or the contents of the folder requested.
+     *  This function will load the root folder view. Triggered when a profile is selected.
      *
      * @param profileName Misleadingly, can be either the profile name or the object Id of the folder
      */
     function loadRepoView(){
-        rvc.breadcrumbs = [];
+        ermsRepoService.registerObserverCallback(repoViewObserver);
+        ermsRepoService.setProfile(decodeURIComponent($stateParams.profileName));
+        rvc.profileName = ermsRepoService.profile;
         _getRootView(rvc.profileName);
     }
 
-    function goToCrumb(index) {
-        var selected = rvc.breadcrumbs[index];
-        rvc.breadcrumbs = rvc.breadcrumbs.slice(0, index);
-        (index == 0) ? _getRootView(rvc.profileName) : _getFolderView(selected.objectId);
+    /**
+     * Returns the view for the repository root which also (can) include the repository information should one wish.
+     * (would require changing the return from the ermsRepoService to return response.data)
+     * @param profileName
+     * @private
+     */
+    function _getRootView(){
+        ermsRepoService.connect();
     }
 
-    function _getRootView(profileName){
-        ermsRepoService.connect(profileName).then(function(response){
-            rvc.repo = response;
-            //Check if the repository root is empty
-            rvc.repo.empty = (!rvc.repo.children === Array || rvc.repo.children.length == 0);
-            if(!rvc.repo.empty) {
-                addThumbnailUrl();
-                rvc.repo.children.forEach(function(item){
-                    if(item.type == 'document')
-                        item.displaySize = formatBytes(item.size);
-                })
-            }
-            rvc.breadcrumbs=[{name:rvc.repo.properties.name, objectId:rvc.repo.properties.objectId}];
-        });
-    }
-
+    /**
+     * Request folder children for view
+     * @param objectId
+     * @private
+     */
     function _getFolderView(objectId){
         var requestObject = {
             profileName: rvc.profileName,
             folderObjectId: objectId
         };
-        ermsRepoService.getFolderChildren(requestObject).then(function(response){
-            rvc.repo = response;
-            //Check if the folder is empty
-            rvc.repo.empty = (!rvc.repo.children === Array || rvc.repo.children.length == 0);
-            if(!rvc.repo.empty) {
-                addThumbnailUrl();
-                rvc.repo.children.forEach(function(item){
-                    if(item.type == 'document')
-                        item.displaySize = fileUtilsService.formatBytes(item.size);
-                })
-            }
-            rvc.breadcrumbs.push({name:rvc.repo.properties.name, objectId:rvc.repo.properties.objectId});
-        });
+        ermsRepoService.getFolderChildren(requestObject);
     }
 
+    /**
+     * Returns all the information about a document
+     * @param objectId
+     * @private
+     */
     function _getDocument(objectId){
         var requestObject = {
             profileName: rvc.profileName,
@@ -74,26 +63,50 @@ function RepoViewController($stateParams, ermsRepoService, fileUtilsService) {
         ermsRepoService.getDocument(requestObject).then(function(response){
             rvc.document = response;
             rvc.document.displaySize = fileUtilsService.formatBytes(response.properties.size);
-            debugger;
         });
     }
 
-    function addThumbnailUrl() {
-        var mimeTypeProperty = 'contentStreamMimeType';
-        rvc.repo.children.forEach(function(item) {
-            if(item.type === 'folder'){
-                item.thumbNailURL = fileUtilsService.getFolderIcon(24);
-            }else{
-                item.thumbNailURL = fileUtilsService.getFileIconByMimetype(item[mimeTypeProperty], 24);
-            }
-        });
-    }
-
+    /**
+     * Just returns whether the item is a document or folder
+     * @param item
+     * @returns {boolean}
+     */
     function isFile(item){
         return item.type === "document";
     }
 
+    /**
+     * Decides which to call between getting information on a document or a folder.
+     * @param objectId
+     * @param itemType
+     */
     function getItem(objectId, itemType){
         (itemType === 'folder') ? _getFolderView(objectId) : _getDocument(objectId);
+    }
+
+    /**
+     * Returns the current path based on the breadcrumbs
+     * @private
+     */
+    function _getBreadcrumbPath(){
+        var path = "";
+        rvc.breadcrumbs.forEach(function(item){
+            path += "/"+item.name;
+        });
+        return path;
+    }
+
+    function selectItemForExport(item){
+        item.path = _getBreadcrumbPath(); //At the point of selection we grab the breadcrumb path
+        ermsExportService.toggleItemInBasket(item);
+        debugger;
+    }
+
+    /**
+     * Re-assigns the repo view array on changes to objects in the array
+     */
+    function repoViewObserver(){
+        rvc.breadcrumbs = ermsRepoService.breadcrumbs;
+        rvc.repo = ermsRepoService.repoItems;
     }
 }
