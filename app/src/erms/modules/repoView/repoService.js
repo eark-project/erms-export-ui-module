@@ -17,7 +17,7 @@ function ermsRepoService($q, $http){
      * @returns {*}
      */
     function connect(profileName){
-        return $http.post('http://localhost:9090/webapi/repository/connect', {profileName:profileName} ).then(
+        return $http.post('http://eark.magenta.dk:9090/webapi/repository/connect', {profileName:profileName} ).then(
             function(response){
                 return response.data.rootFolder
             }
@@ -30,7 +30,7 @@ function ermsRepoService($q, $http){
      * @returns {*}
      */
     function getFolderChildren(requestObject){
-        return $http.post('http://localhost:9090/webapi/repository/getFolder', requestObject).then(function(response){
+        return $http.post('http://eark.magenta.dk:9090/webapi/repository/getFolder', requestObject).then(function(response){
             return response.data.folder;
         });
     }
@@ -41,7 +41,7 @@ function ermsRepoService($q, $http){
      * @returns {*}
      */
     function getDocument(requestObject){
-        return $http.post('http://localhost:9090/webapi/repository/getDocument', requestObject).then(function(response){
+        return $http.post('http://eark.magenta.dk:9090/webapi/repository/getDocument', requestObject).then(function(response){
             return response.data.document;
         });
     }
