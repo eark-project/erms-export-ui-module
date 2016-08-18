@@ -16,7 +16,6 @@
         <div layout="column">
             <div class="tlist">
                 <div class="tlist__header" layout="row">
-                    <div class="tlist__cell tlist__cell__fileicon tlist__cardview__hide" flex="10"></div>
                     <div class="tlist__cell" flex sort-table="title">{{ 'COMMON.TITLE' | translate }}</div>
                     <div class="tlist__cell" flex="10" sort-table="creator.fullName">{{ 'COMMON.CREATEDBY' | translate
                         }}
@@ -38,12 +37,12 @@
                         <!--class="tlist__item {{ item.locked ? 'muted' : '' }}" ng-disabled="item.locked">-->
                         <div class="tlist__item__link" style="cursor: pointer"
                              ng-click="rvc.getItem(item.objectId, item.type)" layout="row">
-                            <span class="tlist__cell tlist__cell__fileicon tlist__cardview__hide" flex="10">
-                                <img class="md-avatar" ng-src="app/assets/images/filetypes/{{item.thumbNailURL}}"/>
+                            <span class="tlist__cell" flex>
+                                <img class="md-avatar" alt="" ng-src="app/assets/images/filetypes/{{item.thumbNailURL}}">
+                                {{item.name}} <span class="muted" ng-show="rvc.isFile(item)">
+                                    ({{item.displaySize}})
+                                </span>
                             </span>
-                            <span class="tlist__cell" flex>{{item.name}}<div class="muted" ng-show="rvc.isFile(item)">
-                                ({{item.displaySize}})
-                            </div></span>
                             <span class="tlist__cell muted" flex="10"> {{item.createdBy}} </span>
                             <span class="tlist__cell muted" flex="10">{{ item.creationDate }}</span>
                             <span class="tlist__cell muted" flex="10">{{ item.lastModifiedBy  }}</span>
