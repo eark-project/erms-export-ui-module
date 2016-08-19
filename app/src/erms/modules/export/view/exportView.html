@@ -1,0 +1,39 @@
+<div layout="row" layout-margin>
+    <h1 class="md-title">ERMS &rsaquo; Items for export</h1>
+</div>
+
+<div layout="row" layout-align="space-between center">
+    <md-button class="md-raised" onclick="window.history.go(-1);">Back: Browse repositories</md-button>
+    <md-button class="md-raised md-primary" ng-disabled="true">Next: Export to ...</md-button>
+</div>
+
+<md-card>
+
+    <md-card-content>
+
+        <div layout="column">
+            <table class="simple-list" ng-show="rxc.exportItems">
+                <tbody>
+                <tr ng-repeat="item in rxc.exportItems">
+                    <td>
+                        <img class="md-avatar" ng-src="app/assets/images/filetypes/{{item.thumbNailURL}}" alt="">
+                        {{item.name}}
+                        <div class="muted">({{item.path}})</div>
+                    </td>
+                    <td style="text-align: right;">
+                        <md-button ng-click="rxc.removeItem(item)">
+                            {{ 'COMMON.REMOVE' | translate }}
+                        </md-button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div ng-if="rxc.exportItems.length == 0" class="empty_file_list muted">
+                <i class="material-icons">insert_drive_file</i><br>
+                {{"COMMON.EMPTY" | translate}}
+            </div>
+
+        </div>
+    </md-card-content>
+
+</md-card>

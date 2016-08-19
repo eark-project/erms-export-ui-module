@@ -4,10 +4,11 @@ angular
 
 function config($stateProvider, languageFilesProvider, ermsServiceProvider ){
 
-    $stateProvider.state('erms.profiles', {
-        url: '/erms-profile',
+    $stateProvider.state('erms.repos', {
+        parent: 'erms',
+        url: '/repositories',
         views: {
-            'erms-modules-view': {
+            'erms': {
                 templateUrl : 'app/src/erms/modules/profiles/view/profilesView.html',
                 controller : 'ErmsProfilesController',
                 controllerAs: 'empc'
@@ -17,6 +18,5 @@ function config($stateProvider, languageFilesProvider, ermsServiceProvider ){
 
     languageFilesProvider.addFile('app/src/erms/modules/profiles/i18n/','-profiles.json');
     ermsServiceProvider.addERMSModule('ERMS_PROFILES.PROFILES.MENU.LABEL.PROFILES','erms.profiles','list');
-
 
 }

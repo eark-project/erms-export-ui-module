@@ -1,37 +1,28 @@
-<md-card flex="grow">
-    <md-card-content>
-        <table class="simple-list">
-            <thead>
-            <tr>
-                <th>{{ "ERMS_PROFILES.PROFILES.LIST.LABELS.PROFILE_NAME" | translate }}</th>
-                <th>{{ "ERMS_PROFILES.PROFILES.LIST.LABELS.REPO_URL" | translate }}</th>
-                <th>{{ "ERMS_PROFILES.PROFILES.LIST.LABELS.USER_ID" | translate }}</th>
-                <th>{{ "ERMS_PROFILES.PROFILES.LIST.LABELS.PASSWORD" | translate }}</th>
-                <th style="text-align: center;"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="item in empc.profiles">
-                <td>
-                    <span class="text-muted">{{ item.profileName }}</span>
-                </td>
-                <td>
-                    <span class="text-muted">{{ item.url }}</span>
-                </td>
-                <td>
-                    <span class="text-muted">{{ item.userName }}</span>
-                </td>
-                <td>
-                    <span class="text-muted">{{ item.password }}</span>
-                </td>
-                <td >
-                    <md-button class="md-primary" ng-click="empc.showProfileDialog(item)"><i class="material-icons ng-scope">edit</i> Edit</md-button>
-                </td>
-                <td style="text-align: center;"> </td>
-            </tr>
-            </tbody>
-        </table>
-        <md-button class="md-primary" ng-click="empc.showProfileDialog()"><i class="material-icons ng-scope">add</i> {{ 'COMMON.ADD_NEW' | translate }} {{ 'COMMON.PROFILE' | translate }}</md-button>
+<div layout="row" layout-margin>
+    <h1 class="md-title">ERMS &rsaquo; Browse repositories</h2>
+</div>
 
-    </md-card-content>
-</md-card>
+<div layout="row" layout-align="space-between center">
+    <span></span>
+    <md-button class="md-raised md-primary" ui-sref="erms.export">Next: Review export</md-button>
+</div>
+
+<div layout="row">
+    
+    <div flex="33">
+        <md-button class="md-primary" ng-click="empc.showProfileDialog()"><i class="material-icons ng-scope">add</i> {{ 'COMMON.ADD_NEW' | translate }} {{ 'COMMON.PROFILE' | translate }}</md-button>
+        <md-list>
+            <md-list-item ng-repeat="item in empc.profiles" ng-click="empc.loadview(item.profileName)">
+                <span class="text-muted">{{ item.profileName }}</span>
+                <md-button class="md-secondary" ng-click="empc.showProfileDialog(item)"><i class="material-icons ng-scope">edit</i></md-button>
+            </md-list-item>
+        </md-list>
+    </div>
+    
+    <div flex="66">
+        
+        <div ui-view="repo-browser"></div>
+        
+    </div>
+
+</div>

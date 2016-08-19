@@ -18,7 +18,7 @@ function config(modulesMenuServiceProvider, $stateProvider, languageFilesProvide
 
     $stateProvider.state('erms', {
         parent: 'site',
-        url: '/',
+        url: '/erms',
         views: {
             'content@': {
                 templateUrl: 'app/src/erms/view/erms.html',

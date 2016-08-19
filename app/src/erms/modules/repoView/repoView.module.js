@@ -4,19 +4,18 @@ angular
 
 function config($stateProvider, languageFilesProvider ){
 
-    $stateProvider.state('erms.repoView', {
-        url: '/erms-repoView',
+    $stateProvider.state('erms.repos.browseRepo', {
+        parent: 'erms.repos',
+        url: '/:profileName',
         views: {
-            'erms-modules-view': {
-                templateUrl : 'app/src/erms/modules/profiles/view/repoView.html',
-                controller : 'ErmsRepoViewController',
-                controllerAs: 'evc'
+            'repo-browser': {
+                templateUrl : 'app/src/erms/modules/repoView/view/repoView.html',
+                controller : 'RepoViewController',
+                controllerAs: 'rvc'
             }
         }
     });
 
     languageFilesProvider.addFile('app/src/erms/modules/repoView/i18n/','-repoView.json');
-    ermsServiceProvider.addERMSModule('ERMS.REPO_VIEW.MENU.LABEL.BROWSE_REPO','erms.repoView','storage');
-
 
 }

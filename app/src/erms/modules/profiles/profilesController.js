@@ -2,13 +2,14 @@ angular
     .module('eArkPlatform.erms.profile')
     .controller('ErmsProfilesController', ErmsProfilesController);
 
-function ErmsProfilesController($mdDialog, ermsProfilesService) {
+function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $stateParams) {
     var empc = this;
     empc.profiles=[];
     empc.initialise = initialise;
     empc.showProfileDialog = showProfileDialog;
     empc.initialise();
-
+    empc.loadview = loadView;
+    
     function initialise(){
         ermsProfilesService.getProfiles().then(function(response){
             empc.profiles = response.profiles;
@@ -62,6 +63,10 @@ function ErmsProfilesController($mdDialog, ermsProfilesService) {
 
 
         };
+    }
+
+    function loadView(profileName){
+        $state.go('erms.repos.browseRepo', {'profileName': encodeURIComponent(profileName)} );
     }
 
 }
