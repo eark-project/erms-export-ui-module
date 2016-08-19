@@ -43,6 +43,9 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $statePa
         epd.dialogMode = profile ? 'ERMS.PROFILES.DIALOG.LABELS.EDIT_PROFILE' : 'ERMS.PROFILES.DIALOG.LABELS.CREATE_PROFILE';
         //Used to track whether we're editing or creating a new profile
         epd.edit = profile ? true : false;
+        if (!epd.profile) {
+            epd.profile = { rootNodes: [] };
+        };
 
         $scope.cancel = function() {
             $mdDialog.cancel();

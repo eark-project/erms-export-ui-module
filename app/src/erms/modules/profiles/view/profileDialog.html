@@ -5,7 +5,7 @@
                 <h2>{{ epd.dialogMode | translate }}</h2>
             </div>
         </md-toolbar>
-        <md-dialog-content style="max-width:800px;max-height:810px;min-width:20em">
+        <md-dialog-content style="max-width: 800px; max-height:810px; min-width:20em" layout-padding layout-margin>
             <div layout>
                 <md-input-container flex>
                     <label>{{ 'ERMS_PROFILES.PROFILES.DIALOG.LABELS.NAME' | translate }} *</label>
@@ -29,6 +29,9 @@
                     <label>{{ 'ERMS_PROFILES.PROFILES.DIALOG.LABELS.ACCESS_PASSWORD' | translate }} *</label>
                     <input type="text" ng-model="epd.profile.password" name="password" required>
                 </md-input-container>
+            </div>
+            <div>
+                <md-chips ng-model="epd.profile.rootNodes" placeholder="Add repository roots *"></md-chips>
             </div>
         </md-dialog-content>
         <div class="md-actions" layout="row">
