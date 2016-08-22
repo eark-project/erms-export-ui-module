@@ -1,0 +1,13 @@
+
+<p ng-show="emfc.mapfiles.length === 0">There are no mapping files</p>
+
+<ul ng-show="emfc.mapfiles.length > 0">
+    <li ng-repeat="mapfile in emfc.mapfiles">
+        {{ mapfile.name }} <md-button ng-click="emfc.delMapFile(mapfile)">Remove</md-button>
+    </li>
+</ul>
+
+<md-button class="md-primary md-text-icon-button" ng-click="emfc.addMapFile($event)">
+    <i class="material-icons ng-scope">add</i>
+    {{ 'COMMON.ADD_NEW' | translate }} mapping files
+</md-button>

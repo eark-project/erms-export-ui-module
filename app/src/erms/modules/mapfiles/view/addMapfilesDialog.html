@@ -1,0 +1,25 @@
+<md-dialog aria-label="Upload map file">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Upload map file</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <i class="material-icons">close</i>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content layout="padding">
+            <label for="mapfileinput">Map file</label>
+            <input id="mapfileinput" type="file" onchange="angular.element(this).scope().fileNameChanged(this)">
+        </md-dialog-content>
+        <md-dialog-actions layout="row" layout-align="space-between center">
+            <md-button ng-click="cancel()">
+                Cancel
+            </md-button>
+            <md-button ng-click="upload()">
+                Save
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
