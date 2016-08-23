@@ -2,7 +2,7 @@ angular
     .module('eArkPlatform.erms.profile')
     .controller('ErmsProfilesController', ErmsProfilesController);
 
-function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $stateParams) {
+function ErmsProfilesController($mdDialog, $state, ermsProfilesService) {
     var empc = this;
     empc.profiles=[];
     empc.initialise = initialise;
@@ -11,6 +11,13 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $statePa
     empc.showConnectDialog2 = showConnectDialog2;
     empc.initialise();
     empc.loadview = loadView;
+    empc.currently = '';
+    
+    if ($state.params.name) {
+        empc.currently = decodeURIComponent($state.params.name);
+    };
+    
+    console.log(empc.currently);
     
     function initialise(){
         ermsProfilesService.getProfiles().then(function(response){
@@ -69,9 +76,9 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $statePa
         };
     };
 
-    function loadView(profileName, selectedRoot, selectedMap){
+    function loadView(name, selectedRoot, selectedMap){
         console.log('Selected root: ' +selectedRoot + ' & map: ' + selectedMap);
-        $state.go('erms.repos.browseRepo', {'profileName': encodeURIComponent(profileName)} );
+        $state.go('erms.repos.browseRepo', {'name': encodeURIComponent(name)} );
     };
     
     function showConnectDialog1(profile){
@@ -115,8 +122,9 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $statePa
             clickOutsideToClose: true,
             focusOnOpen: true
         }).then(function() {
-            console.log(profile.profileName + ' & selected root: ' + profile.selectedRoot + ' & map: ' + profile.selectedMap.name);
-            $state.go('erms.repos.browseRepo', {'profileName': encodeURIComponent(profile.profileName)} );
+            empc.currently = profile.name;
+            console.log(profile.name + ' & selected root: ' + profile.selectedRoot + ' & map: ' + profile.selectedMap.name);
+            $state.go('erms.repos.browseRepo', {'name': encodeURIComponent(profile.name)} );
         });
     };
     
