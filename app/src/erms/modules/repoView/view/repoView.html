@@ -1,5 +1,6 @@
-<div layout="row" class="repview__title">
+<div layout="row" class="repview__title" layout-align="space-between center">
     <h2 class="md-subhead">{{ rvc.profileName }} <span style="color: #999;">{{ 'DOCUMENT.DOCUMENTS' | translate }}</span></h2>
+    <md-button class="md-raised md-primary" ng-disabled="rvc.repo.length === 0" ui-sref="erms.export">Next: Review export</md-button>
 </div>
 
 <md-card>
