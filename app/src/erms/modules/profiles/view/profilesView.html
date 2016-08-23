@@ -7,7 +7,7 @@
         </md-button>
         <md-list>
             <md-list-item ng-repeat="item in empc.profiles" ng-click="empc.showConnectDialog1(item)">
-                <span class="text-muted">{{ item.profileName }}</span>
+                <span class="text-muted">{{ item.name }}</span>
                 <md-button class="md-secondary" ng-click="empc.showProfileDialog(item);"><i class="material-icons ng-scope">edit</i></md-button>
             </md-list-item>
         </md-list>
