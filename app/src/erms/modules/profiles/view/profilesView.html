@@ -5,8 +5,8 @@
             <i class="material-icons ng-scope">add</i>
             {{ 'COMMON.ADD_NEW' | translate }} {{ 'COMMON.PROFILE' | translate }}
         </md-button>
-        <md-list>
-            <md-list-item ng-repeat="item in empc.profiles" ng-click="empc.showConnectDialog1(item)">
+        <md-list class="profile-list">
+            <md-list-item ng-repeat="item in empc.profiles" ng-click="empc.showConnectDialog1(item)" ng-class="{'active':empc.currently === item.name}">
                 <span class="text-muted">{{ item.name }}</span>
                 <md-button class="md-secondary" ng-click="empc.showProfileDialog(item);"><i class="material-icons ng-scope">edit</i></md-button>
             </md-list-item>
