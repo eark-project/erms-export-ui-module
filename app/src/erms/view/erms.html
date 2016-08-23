@@ -1,5 +1,14 @@
 <div layout="column" class="erms_sub_menu">
     
+    <div layout="row nowrap" layout-align="flex-start end">
+        <h1 class="md-title">ERMS</h1>
+        <p class="md-subheader">Browse and export documents</p>
+    </div>
+    
+    <div layout="row nowrap">
+        <md-button ui-sref="erms.repos">Repositories</md-button>
+        <md-button ui-sref="erms.mapfiles">Mapping files</md-button>
+    </div>
     <div ui-view="erms"></div>
     
 </div>

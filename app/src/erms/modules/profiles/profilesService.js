@@ -6,7 +6,9 @@ function ermsProfilesService($q, $http){
     return {
         getProfiles     : getProfiles,
         createProfile   : createProfile,
-        updateProfile   : updateProfile
+        updateProfile   : updateProfile,
+        addProfileRepo  : addProfileRepo,
+        removeProfileRepo : removeProfileRepo
     };
 
     function getProfiles(){
@@ -17,6 +19,14 @@ function ermsProfilesService($q, $http){
     }
     function updateProfile(profile){
         return $http.put('http://eark.magenta.dk:9090/webapi/database/updateProfile', profile).then(_returnResult);
+    }
+
+    function addProfileRepo(profileName, repo){
+        return $http.put('http://eark.magenta.dk:9090/webapi/database/profile/'+profileName+'/repository/'+repo).then(_returnResult);
+    }
+
+    function removeProfileRepo(profileName, repo){
+        return $http.delete('http://eark.magenta.dk:9090/webapi/database/profile/'+profileName+'/repository/'+repo).then(_returnResult);
     }
 
     /**
