@@ -24,9 +24,9 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService) {
             empc.profiles = response.profiles;
             if (!empc.profiles.constructor === Array) {
                 empc.profiles = [empc.profiles]
-            };
+            }
         });
-    };
+    }
 
     function showProfileDialog(profile){
         return $mdDialog.show({
@@ -44,7 +44,7 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService) {
             profile = null; //clean on close
             empc.initialise();
         });
-    };
+    }
 
     function editProfileDialogController($scope, $mdDialog, profile) {
         var epd = this;
@@ -54,7 +54,38 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService) {
         //Used to track whether we're editing or creating a new profile
         epd.edit = profile ? true : false;
         if (!epd.profile) {
-            epd.profile = { rootNodes: [] };
+            epd.profile = {repositories: [] };
+        }
+        if(epd.profile && !epd.profile.repositories)
+            epd.profile.repositories = [];
+
+        epd.profileName = epd.profile.name;
+
+        /**
+         * Determines whether we want to add or remove the repository root item from the array
+         * @param newValue
+         * @param oldValue
+         */
+        $scope.updateRootList = function(newValue, oldValue){
+            if (oldValue)
+            var profileName = epd.profile.name;
+            var action ;
+            if(oldValue.length > newValue.length) action= "delete";
+            if(oldValue.length < newValue.length) action= "add";
+            if (action =="add") {
+                //We only ever add one item at a time
+                var newItem = newValue.filter(function (item) { return oldValue.indexOf(item) == -1;})[0];
+                ermsProfilesService.addProfileRepo(profileName, newItem).then(function(result){
+                    console.log("Profile added: "+ result.success);
+                });
+            }
+            if (action =="delete") {
+                //We only ever remove one item at a time
+                var removed = oldValue.filter(function (item) { return newValue.indexOf(item) == -1;})[0];
+                ermsProfilesService.removeProfileRepo(profileName, removed).then(function(result){
+                    console.log("Profile removed: "+ result.success);
+                });
+            }
         };
 
         $scope.cancel = function() {
@@ -71,10 +102,14 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService) {
                 ermsProfilesService.createProfile(epd.profile).then(function(response){
                     console.log("==> Profile created: "+ response);
                 })
-            };
+            }
 
         };
-    };
+
+        //Set a watcher on the repository root array
+        if(epd.profile.repositories && epd.profile.repositories.length >= 0)
+            $scope.$watchCollection('epd.profile.repositories', $scope.updateRootList, $scope);
+    }
 
     function loadView(name, selectedRoot, selectedMap){
         console.log('Selected root: ' +selectedRoot + ' & map: ' + selectedMap);
@@ -126,7 +161,7 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService) {
             console.log(profile.name + ' & selected root: ' + profile.selectedRoot + ' & map: ' + profile.selectedMap.name);
             $state.go('erms.repos.browseRepo', {'name': encodeURIComponent(profile.name)} );
         });
-    };
+    }
     
     function pickMapDialogController($scope, $mdDialog, profile, ermsMapfilesService) {
         var pmdc = this;
@@ -139,6 +174,6 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService) {
         $scope.cancel = function() {
             $mdDialog.cancel();
         };
-    };
+    }
 
-};
+}

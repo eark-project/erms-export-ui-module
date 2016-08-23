@@ -9,7 +9,7 @@
             <div layout>
                 <md-input-container flex>
                     <label>{{ 'ERMS_PROFILES.PROFILES.DIALOG.LABELS.NAME' | translate }} *</label>
-                    <input type="text" ng-model="epd.profile.profileName" name="profileName" required ng-disabled="epd.edit">
+                    <input type="text" ng-model="epd.profile.name" name="name" required ng-disabled="epd.edit">
                 </md-input-container>
             </div>
             <div layout>
@@ -31,7 +31,7 @@
                 </md-input-container>
             </div>
             <div>
-                <md-chips ng-model="epd.profile.rootNodes" placeholder="Add repository roots *"></md-chips>
+                <md-chips ng-model="epd.profile.repositories" placeholder="Add repository roots *"></md-chips>
             </div>
         </md-dialog-content>
         <md-dialog-actions layout="row">

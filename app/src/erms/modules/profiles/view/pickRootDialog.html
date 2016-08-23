@@ -7,7 +7,7 @@
         </md-toolbar>
         <md-dialog-content layout="column" layout-padding layout-margin>
             <h3>Select a root directory</h3>
-            <md-button ng-repeat="root in prdc.profile.rootNodes" ng-click="prdc.selectRoot(root)">
+            <md-button ng-repeat="root in prdc.profile.repositories" ng-click="prdc.selectRoot(root)">
                 {{ root }}
             </md-button>
         </md-dialog-content>
