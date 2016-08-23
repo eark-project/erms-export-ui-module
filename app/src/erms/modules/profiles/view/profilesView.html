@@ -1,13 +1,4 @@
-<div layout="row" layout-margin>
-    <h2 class="md-title">ERMS &rsaquo; Browse repositories</h2>
-</div>
-
-<div layout="row" layout-align="space-between center">
-    <span></span>
-    <md-button class="md-raised md-primary" ui-sref="erms.export">Next: Review export</md-button>
-</div>
-
-<div layout="row">
+<div layout="row" style="background-color: #eee;" layout-padding>
     
     <div flex="33">
         <md-button class="md-primary md-text-icon-button" ng-click="empc.showProfileDialog()">
@@ -16,8 +7,8 @@
         </md-button>
         <md-list>
             <md-list-item ng-repeat="item in empc.profiles" ng-click="empc.showConnectDialog1(item)">
-                <span class="text-muted">{{ item.name }}</span>
-                <md-button class="md-secondary" ng-click="empc.showProfileDialog(item)"><i class="material-icons ng-scope">edit</i></md-button>
+                <span class="text-muted">{{ item.profileName }}</span>
+                <md-button class="md-secondary" ng-click="empc.showProfileDialog(item);"><i class="material-icons ng-scope">edit</i></md-button>
             </md-list-item>
         </md-list>
     </div>
