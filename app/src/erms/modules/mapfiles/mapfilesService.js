@@ -18,10 +18,10 @@ function ermsMapfilesService(){
     
     function getMapFiles() {
         return(mapFiles);
-    }
+    };
     
     function delMapFile(file) {
         mapFiles.splice(mapFiles.indexOf(file), 1);
-    }
+    };
 
 }

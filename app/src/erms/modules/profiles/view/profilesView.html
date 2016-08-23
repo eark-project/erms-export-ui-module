@@ -10,9 +10,12 @@
 <div layout="row">
     
     <div flex="33">
-        <md-button class="md-primary md-text-icon-button" ng-click="empc.showProfileDialog()"><i class="material-icons ng-scope">add</i> {{ 'COMMON.ADD_NEW' | translate }} {{ 'COMMON.PROFILE' | translate }}</md-button>
+        <md-button class="md-primary md-text-icon-button" ng-click="empc.showProfileDialog()">
+            <i class="material-icons ng-scope">add</i>
+            {{ 'COMMON.ADD_NEW' | translate }} {{ 'COMMON.PROFILE' | translate }}
+        </md-button>
         <md-list>
-            <md-list-item ng-repeat="item in empc.profiles" ng-click="empc.loadview(item.profileName)">
+            <md-list-item ng-repeat="item in empc.profiles" ng-click="empc.showConnectDialog1(item)">
                 <span class="text-muted">{{ item.profileName }}</span>
                 <md-button class="md-secondary" ng-click="empc.showProfileDialog(item)"><i class="material-icons ng-scope">edit</i></md-button>
             </md-list-item>
@@ -20,6 +23,8 @@
     </div>
     
     <div flex="66">
+        
+        <p ng-show="empc.profiles.length === 0">There are no profiles</p>
         
         <div ui-view="repo-browser"></div>
         
