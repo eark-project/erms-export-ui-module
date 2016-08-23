@@ -1,5 +1,18 @@
 <div layout="column" class="erms_sub_menu">
     
+    <div layout="row nowrap" layout-align="flex-start end">
+        <h1 class="md-title">ERMS: <span style="color: #999;">Browse and export documents</span></h1>
+    </div>
+    
+    <nav layout="row nowrap" class="erms-tabs">
+        <div ng-class="{'active':emc.currently === 'repos'}" ng-click="emc.currently = 'repos'">
+            <md-button ui-sref="erms.repos">Repositories</md-button>
+        </div>
+        <div ng-class="{'active':emc.currently === 'mapfi'}" ng-click="emc.currently = 'mapfi'">
+            <md-button ui-sref="erms.mapfiles">Mapping files</md-button>
+        </div>
+    </nav>
+    
     <div ui-view="erms"></div>
     
 </div>

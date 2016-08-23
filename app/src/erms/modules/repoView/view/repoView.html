@@ -1,5 +1,6 @@
-<div layout="row" class="repview__title">
+<div layout="row" class="repview__title" layout-align="space-between center">
     <h2 class="md-subhead">{{ rvc.profileName }} <span style="color: #999;">{{ 'DOCUMENT.DOCUMENTS' | translate }}</span></h2>
+    <md-button class="md-raised md-primary" ng-disabled="rvc.repo.length === 0" ui-sref="erms.export">Next: Review export</md-button>
 </div>
 
 <md-card>
@@ -48,7 +49,7 @@
                             <span class="tlist__cell muted" flex="10">{{ item.lastModifiedBy  }}</span>
                             <span class="tlist__cell muted" flex="10">{{ item.lastModificationDate  }}</span>
                             <span class="tlist__cell muted" flex="10">
-                                <md-checkbox ng-click="rvc.selectItemForExport(item)" ng-checked="item.selected"></md-checkbox>
+                                <md-checkbox ng-click="rvc.selectItemForExport(item); $event.stopPropagation();" ng-checked="item.selected" aria-label="Check for export"></md-checkbox>
                             </span>
                         </div>
                     </div>

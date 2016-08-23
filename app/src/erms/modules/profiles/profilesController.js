@@ -7,16 +7,19 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $statePa
     empc.profiles=[];
     empc.initialise = initialise;
     empc.showProfileDialog = showProfileDialog;
+    empc.showConnectDialog1 = showConnectDialog1;
+    empc.showConnectDialog2 = showConnectDialog2;
     empc.initialise();
     empc.loadview = loadView;
     
     function initialise(){
         ermsProfilesService.getProfiles().then(function(response){
             empc.profiles = response.profiles;
-            if (!empc.profiles.constructor === Array)
+            if (!empc.profiles.constructor === Array) {
                 empc.profiles = [empc.profiles]
+            };
         });
-    }
+    };
 
     function showProfileDialog(profile){
         return $mdDialog.show({
@@ -34,7 +37,7 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $statePa
             profile = null; //clean on close
             empc.initialise();
         });
-    }
+    };
 
     function editProfileDialogController($scope, $mdDialog, profile) {
         var epd = this;
@@ -43,6 +46,9 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $statePa
         epd.dialogMode = profile ? 'ERMS.PROFILES.DIALOG.LABELS.EDIT_PROFILE' : 'ERMS.PROFILES.DIALOG.LABELS.CREATE_PROFILE';
         //Used to track whether we're editing or creating a new profile
         epd.edit = profile ? true : false;
+        if (!epd.profile) {
+            epd.profile = { rootNodes: [] };
+        };
 
         $scope.cancel = function() {
             $mdDialog.cancel();
@@ -50,23 +56,81 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $statePa
 
         $scope.save = function() {
             $mdDialog.hide();
-            if(epd.edit){
+            if (epd.edit) {
                 ermsProfilesService.updateProfile(epd.profile).then(function(response){
                     console.log("==> Profile updated: "+ response);
                 })
-            }
-            else{
+            } else {
                 ermsProfilesService.createProfile(epd.profile).then(function(response){
                     console.log("==> Profile created: "+ response);
                 })
-            }
-
+            };
 
         };
-    }
+    };
 
-    function loadView(profileName){
+    function loadView(profileName, selectedRoot, selectedMap){
+        console.log('Selected root: ' +selectedRoot + ' & map: ' + selectedMap);
         $state.go('erms.repos.browseRepo', {'profileName': encodeURIComponent(profileName)} );
-    }
+    };
+    
+    function showConnectDialog1(profile){
+        return $mdDialog.show({
+            controller: pickRootDialogController,
+            controllerAs: 'prdc',
+            templateUrl: 'app/src/erms/modules/profiles/view/pickRootDialog.html',
+            locals: {
+                profile: profile
+            },
+            parent: angular.element(document.body),
+            clickOutsideToClose: true,
+            focusOnOpen: true
+        }).then(function() {
+            empc.showConnectDialog2(profile);
+        });
+    };
+    
+    function pickRootDialogController($scope, $mdDialog, profile) {
+        var prdc = this;
+        prdc.profile = angular.copy(profile);
+        prdc.profile.rootNodes = ['root 1', 'root 2', 'root 3', 'root 4'];
+        prdc.selectRoot = function(root) {
+            profile.selectedRoot = root;
+            $mdDialog.hide();
+        };
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+    };
+    
+    function showConnectDialog2(profile) {
+        return $mdDialog.show({
+            controller: pickMapDialogController,
+            controllerAs: 'pmdc',
+            templateUrl: 'app/src/erms/modules/profiles/view/pickMapDialog.html',
+            locals: {
+                profile: profile
+            },
+            parent: angular.element(document.body),
+            clickOutsideToClose: true,
+            focusOnOpen: true
+        }).then(function() {
+            console.log(profile.profileName + ' & selected root: ' + profile.selectedRoot + ' & map: ' + profile.selectedMap.name);
+            $state.go('erms.repos.browseRepo', {'profileName': encodeURIComponent(profile.profileName)} );
+        });
+    };
+    
+    function pickMapDialogController($scope, $mdDialog, profile, ermsMapfilesService) {
+        var pmdc = this;
+        pmdc.profile = angular.copy(profile);
+        pmdc.mapFiles = ermsMapfilesService.getMapFiles();
+        pmdc.selectMap = function(mapfile) {
+            profile.selectedMap = mapfile;
+            $mdDialog.hide();
+        };
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+    };
 
-}
+};
