@@ -48,7 +48,7 @@
                             <span class="tlist__cell muted" flex="10">{{ item.lastModifiedBy  }}</span>
                             <span class="tlist__cell muted" flex="10">{{ item.lastModificationDate  }}</span>
                             <span class="tlist__cell muted" flex="10">
-                                <md-checkbox ng-click="rvc.selectItemForExport(item)" ng-checked="item.selected" aria-label="Check for export"></md-checkbox>
+                                <md-checkbox ng-click="rvc.selectItemForExport(item); $event.stopPropagation();" ng-checked="item.selected" aria-label="Check for export"></md-checkbox>
                             </span>
                         </div>
                     </div>
