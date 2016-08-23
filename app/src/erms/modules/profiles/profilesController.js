@@ -44,8 +44,10 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $statePa
         //Used to track whether we're editing or creating a new profile
         epd.edit = profile ? true : false;
         if (!epd.profile) {
-            epd.profile = { rootNodes: [] };
-        };
+            epd.profile = {repositories: [] };
+        }
+        if(epd.profile && !epd.profile.repositories)
+            epd.profile.repositories = [];
 
         $scope.cancel = function() {
             $mdDialog.cancel();
