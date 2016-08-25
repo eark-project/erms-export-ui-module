@@ -1,5 +1,5 @@
-<md-dialog aria-label="Upload map file">
-    <form>
+<md-dialog aria-label="Upload mapping file">
+    <form name="emfc.addMappingForm">
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2>Upload map file</h2>
@@ -10,8 +10,14 @@
             </div>
         </md-toolbar>
         <md-dialog-content layout-padding>
+            <div layout>
+                <md-input-container flex>
+                    <label>{{ 'ERMS.MAPPINGS.DIALOG.LABELS.MAPPING_NAME' | translate }} *</label>
+                    <input type="text"  name="mappingName" ng-model="mapping.mappingName" required>
+                </md-input-container>
+            </div>
             <label for="mapfileinput" hide>Map file</label>
-            <input id="mapfileinput" type="file" onchange="angular.element(this).scope().fileNameChanged(this)">
+            <input id="mapfileinput" type="file" file-model="mapping.file" onchange="angular.element(this).scope().fileNameChanged(this)" required>
         </md-dialog-content>
         <md-dialog-actions layout="row" layout-align="end center">
             <md-button ng-click="cancel()">

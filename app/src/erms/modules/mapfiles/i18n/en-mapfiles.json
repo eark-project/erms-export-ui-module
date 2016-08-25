@@ -1,30 +1,15 @@
 ﻿{
-    "ERMS_PROFILES": {
-        "PROFILES": {
+    "ERMS": {
+        "MAPPINGS": {
             "LIST": {
                 "LABELS": {
-                    "PROFILE_NAME" : "Name",
-                    "REPO_URL" : "Repository Url",
-                    "USER_ID":"Access ID",
-                    "PASSWORD":"Password"
-                }
-            },
-            "MENU":{
-                "LABELS":{
-                    "PROFILES": "Profiles"
-                },
-                "LABEL":{
-                    "PROFILES": "Profiles"
+                    "MAPPING_NAME" : "Name"
                 }
             },
             "DIALOG":{
                 "LABELS":{
-                    "CREATE_PROFILE": "Create Profile",
-                    "EDIT_PROFILE": "Edit Profile",
-                    "PROFILE_DIALOG": "Profile Dialog",
-                    "REPO_URL": "Repository Url",
-                    "ACCESS_ID": "Access ID",
-                    "ACCESS_PASSWORD": "Password"
+                    "ADD_MAPPING": "Add Mapping File",
+                    "MAPPING_NAME": "Mapping Name"
                 }
             }
         }

@@ -1,33 +1,17 @@
 ﻿{
-    "ERMS_PROFILES": {
-        "PROFILES": {
-            "LIST": {
-                "LABELS": {
-                    "PROFILE_NAME" : "Navn",
-                    "REPO_URL" : "Arkiv-URL",
-                    "USER_ID":"Bruger-ID",
-                    "PASSWORD":"Adgangskode"
-                }
-            },
-            "MENU":{
-                "LABELS":{
-                    "PROFILES": "Profiler"
-                },
-                "LABEL":{
-                    "PROFILES": "Profiler"
-                }
-            },
-            "DIALOG":{
-                "LABELS":{
-                    "CREATE_PROFILE": "Opret profil",
-                    "EDIT_PROFILE": "Redigér profil",
-                    "PROFILE_DIALOG": "Profil",
-                    "REPO_URL": "Arkiv-URL",
-                    "ACCESS_ID": "Bruger-ID",
-                    "ACCESS_PASSWORD": "Adgangskode",
-                    "NAME": "Navn"
-                }
-            }
+  "ERMS": {
+    "MAPPINGS": {
+      "LIST": {
+        "LABELS": {
+          "MAPPING_NAME": "Navn"
         }
+      },
+      "DIALOG": {
+        "LABELS": {
+          "ADD_MAPPING": "Tilføj kortlægning fil",
+          "MAPPING_NAME": "Kortlægning Navn"
+        }
+      }
     }
+  }
 }

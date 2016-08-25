@@ -4,10 +4,11 @@ angular
 
 function ErmsMapfilesController($state, $mdDialog, ermsMapfilesService) {
     var emfc = this;
-    
+
     emfc.mapfiles = ermsMapfilesService.getMapFiles();
-    
-    emfc.addMapFile = function(ev) {
+
+
+    emfc.addMapFile = function (ev) {
         $mdDialog.show({
             controller: AddMapFileDialogController,
             templateUrl: 'app/src/erms/modules/mapfiles/view/addMapfilesDialog.html',
@@ -19,21 +20,26 @@ function ErmsMapfilesController($state, $mdDialog, ermsMapfilesService) {
             }
         });
     };
-    
-    emfc.delMapFile = function(file) {
+
+    emfc.delMapFile = function (file) {
         ermsMapfilesService.delMapFile(file);
     };
-    
+
     function AddMapFileDialogController($scope, $mdDialog, mapfiles, ermsMapfilesService) {
         var file = {};
-        $scope.hide = function() {
+        $scope.mapping = {
+            file: null,
+            mappingName: null
+        };
+        $scope.hide = function () {
             $mdDialog.hide();
         };
-        $scope.cancel = function() {
+        $scope.cancel = function () {
             $mdDialog.cancel();
         };
-        $scope.upload = function() {
-            ermsMapfilesService.addMapFile(file);
+        $scope.upload = function () {
+            debugger;
+            ermsMapfilesService.addMapFile($scope.mapping);
             $mdDialog.hide();
         };
         $scope.fileNameChanged = function (el) {
