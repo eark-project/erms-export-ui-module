@@ -5,6 +5,7 @@ angular
 function ermsMapfilesService($http){
     
     var mapFiles = [];
+    var baseUrl = 'http://eark.magenta.dk:9090/webapi/mapping/';
     
     return {
         addMapFile: addMapFile,
@@ -14,7 +15,7 @@ function ermsMapfilesService($http){
     
     function addMapFile(mapping){
         var formData = new FormData();
-        var url = 'http://localhost:9090/webapi/mapping/upload';
+        var url = baseUrl+'upload';
         formData.append('file', mapping.file);
         formData.append('mappingName', mapping.mappingName);
         return $http.post(url, formData, {
@@ -27,8 +28,11 @@ function ermsMapfilesService($http){
     }
     
     function getMapFiles() {
-        return(mapFiles);
-    };
+        $http.get(baseUrl+'mappings').then(function(response){
+            mapFiles = response.data.mappings;
+            return mapFiles;
+        });
+    }
     
     function delMapFile(file) {
         mapFiles.splice(mapFiles.indexOf(file), 1);

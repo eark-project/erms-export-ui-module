@@ -38,13 +38,12 @@ function ErmsMapfilesController($state, $mdDialog, ermsMapfilesService) {
             $mdDialog.cancel();
         };
         $scope.upload = function () {
-            debugger;
             ermsMapfilesService.addMapFile($scope.mapping);
             $mdDialog.hide();
         };
         $scope.fileNameChanged = function (el) {
             file = el.files[0];
         };
-    };
+    }
 
 }
