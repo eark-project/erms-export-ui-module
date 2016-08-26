@@ -3,10 +3,17 @@ angular
     .controller('ErmsMapfilesController', ErmsMapfilesController);
 
 function ErmsMapfilesController($state, $mdDialog, ermsMapfilesService) {
+    
     var emfc = this;
-
-    emfc.mapfiles = ermsMapfilesService.getMapFiles();
-
+    
+    emfc.mapfiles = [];
+    
+    ermsMapfilesService.getMapFiles().then(function(response){
+        emfc.mapfiles = response;
+    });
+    
+    console.log(emfc.mapfiles);
+    
     emfc.addMapFile = function (ev) {
         $mdDialog.show({
             controller: AddMapFileDialogController,

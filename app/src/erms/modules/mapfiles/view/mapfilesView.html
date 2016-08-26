@@ -7,7 +7,7 @@
         {{ 'COMMON.ADD' | translate }} {{ 'ERMS_MAPS.MAPPINGS.DIALOG.LABELS.MAPPING_FILE' | translate }}
     </md-button>
     
-    <md-list ng-show="emfc.mapfiles.length > 0">
+    <md-list >
         <md-list-item ng-repeat="mapfile in emfc.mapfiles" style="background-color: #fff; padding: 0.5em 1em; margin-bottom: 1px;">
             {{ mapfile.name }} <md-button ng-click="emfc.delMapFile(mapfile)">Remove</md-button>
         </md-list-item>
