@@ -1,15 +1,6 @@
 ﻿{
-  "ERMS": {
-    "REPO_VIEW": {
-      "MENU":{
-        "LABELS":{
-          "BROWSE_REPO": "Browse Repository"
-        }
-      },
-      "DIALOG":{
-        "LABELS":{}
-      }
+    "ERMS_REPOS": {
+        "REPO": "Repository",
+        "REPOS": "Repositories"
     }
-
-  }
 }

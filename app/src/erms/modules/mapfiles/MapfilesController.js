@@ -7,7 +7,6 @@ function ErmsMapfilesController($state, $mdDialog, ermsMapfilesService) {
 
     emfc.mapfiles = ermsMapfilesService.getMapFiles();
 
-
     emfc.addMapFile = function (ev) {
         $mdDialog.show({
             controller: AddMapFileDialogController,

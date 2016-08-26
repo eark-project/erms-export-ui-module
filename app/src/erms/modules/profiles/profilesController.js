@@ -50,7 +50,7 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService) {
         var epd = this;
         epd.profile = angular.copy(profile);
         //Set the label for the pop up dialog
-        epd.dialogMode = profile ? 'ERMS.PROFILES.DIALOG.LABELS.EDIT_PROFILE' : 'ERMS.PROFILES.DIALOG.LABELS.CREATE_PROFILE';
+        epd.dialogMode = profile ? 'ERMS_PROFILES.PROFILES.DIALOG.LABELS.EDIT_PROFILE' : 'ERMS_PROFILES.PROFILES.DIALOG.LABELS.CREATE_PROFILE';
         //Used to track whether we're editing or creating a new profile
         epd.edit = profile ? true : false;
         if (!epd.profile) {

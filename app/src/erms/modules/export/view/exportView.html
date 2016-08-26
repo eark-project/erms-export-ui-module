@@ -1,10 +1,10 @@
 <div layout="row" layout-margin>
-    <h1 class="md-title">ERMS &rsaquo; Items for export</h1>
+    <h1 class="md-title">{{ 'ERMS.HEADER.LABEL' | translate }} &rsaquo; {{ 'ERMS_EXPORT.ITEMS | translate '}}</h1>
 </div>
 
 <div layout="row" layout-align="space-between center">
-    <md-button class="md-raised" onclick="window.history.go(-1);">Back: Browse repositories</md-button>
-    <md-button class="md-raised md-primary" ng-disabled="true">Next: Export to ...</md-button>
+    <md-button class="md-raised" onclick="window.history.go(-1);">{{ 'COMMON.BACK' | translate}}: {{ 'ERMS_EXPORT.BROWSE_REPOS | translate '}}</md-button>
+    <md-button class="md-raised md-primary" ng-disabled="true">{{ 'COMMON.NEXT' | translate }}: {{ 'ERMS_EXPORT.EXPORT | translate'}}</md-button>
 </div>
 
 <md-card>

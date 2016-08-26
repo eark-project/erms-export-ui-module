@@ -2,11 +2,11 @@
     <form>
         <md-toolbar layout="row">
             <div class="md-toolbar-tools">
-                <h2>Repository connect</h2>
+                <h2>{{ 'ERMS_PROFILES.PROFILES.CONNECT' | translate }}</h2>
             </div>
         </md-toolbar>
         <md-dialog-content layout="column" layout-padding layout-margin>
-            <h3>Select a root directory</h3>
+            <h3>{{ 'ERMS_PROFILES.PROFILES.DIALOG.LABELS.SELECT_ROOT' | translate }}</h3>
             <md-button ng-repeat="root in prdc.profile.repositories" ng-click="prdc.selectRoot(root)">
                 {{ root }}
             </md-button>

@@ -2,11 +2,11 @@
     <form>
         <md-toolbar layout="row">
             <div class="md-toolbar-tools">
-                <h2>Repository connect</h2>
+                <h2>{{ 'ERMS_PROFILES.PROFILES.CONNECT' | translate }}</h2>
             </div>
         </md-toolbar>
         <md-dialog-content layout="column" layout-padding layout-margin>
-            <h3>Select a mapping XML file</h3>
+            <h3>{{ 'ERMS_PROFILES.PROFILES.DIALOG.LABELS.SELECT_MAP_FILE' | translate }}</h3>
             <md-button ng-repeat="mapfile in pmdc.mapFiles" ng-click="pmdc.selectMap(mapfile)">
                 {{ mapfile.name }}
             </md-button>

@@ -1,17 +1,21 @@
 ﻿{
-  "ERMS": {
-    "MAPPINGS": {
-      "LIST": {
-        "LABELS": {
-          "MAPPING_NAME": "Navn"
+    "ERMS_MAPS": {
+        "MAPPINGS": {
+            "LABEL": "Kortlægningsfiler",
+            "LIST": {
+                "LABELS": {
+                    "MAPPING_NAME" : "Navn"
+                }
+            },
+            "DIALOG":{
+                "LABELS":{
+                    "UPLOAD_MAPPING_FILE": "Upload kortlægningsfil",
+                    "ADD_MAPPING": "Tilføj kortlægningsfil",
+                    "MAPPING_NAME": "Navn for kortlægningsfil",
+                    "MAPPING_FILE": "Kortlægningsfil"
+                }
+            },
+            "NO_MAP_FILES": "Der er ingen kortlægningsfiler"
         }
-      },
-      "DIALOG": {
-        "LABELS": {
-          "ADD_MAPPING": "Tilføj kortlægning fil",
-          "MAPPING_NAME": "Kortlægning Navn"
-        }
-      }
     }
-  }
 }
