@@ -159,14 +159,17 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService) {
         }).then(function() {
             empc.currently = profile.name;
             console.log(profile.name + ' & selected root: ' + profile.selectedRoot + ' & map: ' + profile.selectedMap.name);
-            $state.go('erms.repos.browseRepo', {'name': encodeURIComponent(profile.name)} );
+            $state.go('erms.repos.browseRepo', {'profileName': encodeURIComponent(profile.name)} );
         });
     }
     
     function pickMapDialogController($scope, $mdDialog, profile, ermsMapfilesService) {
         var pmdc = this;
         pmdc.profile = angular.copy(profile);
-        pmdc.mapFiles = ermsMapfilesService.getMapFiles();
+        pmdc.mapFiles = [];
+        ermsMapfilesService.getMapFiles().then(function(response){
+            pmdc.mapFiles = response;
+        });
         pmdc.selectMap = function(mapfile) {
             profile.selectedMap = mapfile;
             $mdDialog.hide();
