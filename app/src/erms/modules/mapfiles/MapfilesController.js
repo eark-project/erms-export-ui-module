@@ -7,11 +7,15 @@ function ErmsMapfilesController($state, $mdDialog, ermsMapfilesService) {
     var emfc = this;
     
     emfc.mapfiles = [];
-    
-    ermsMapfilesService.getMapFiles().then(function(response){
-        emfc.mapfiles = response;
-    });
-    
+
+    function initialiseMappings() {
+        ermsMapfilesService.getMapFiles().then(function (response) {
+            emfc.mapfiles = response;
+        });
+    }
+
+    initialiseMappings();
+
     console.log(emfc.mapfiles);
     
     emfc.addMapFile = function (ev) {
@@ -28,10 +32,13 @@ function ErmsMapfilesController($state, $mdDialog, ermsMapfilesService) {
     };
 
     emfc.delMapFile = function (file) {
-        ermsMapfilesService.delMapFile(file);
+        ermsMapfilesService.delMapFile(file).then(function (response){
+            console.log(response.message);
+            initialiseMappings();
+        });
     };
 
-    function AddMapFileDialogController($scope, $mdDialog, mapfiles, ermsMapfilesService) {
+    function AddMapFileDialogController($scope, $mdDialog, ermsMapfilesService) {
         var file = {};
         $scope.mapping = {
             file: null,
@@ -44,8 +51,10 @@ function ErmsMapfilesController($state, $mdDialog, ermsMapfilesService) {
             $mdDialog.cancel();
         };
         $scope.upload = function () {
-            ermsMapfilesService.addMapFile($scope.mapping);
             $mdDialog.hide();
+            ermsMapfilesService.addMapFile($scope.mapping).then(function(response){
+                initialiseMappings();
+            });
         };
         $scope.fileNameChanged = function (el) {
             file = el.files[0];
