@@ -2,9 +2,10 @@ angular
     .module('eArkPlatform.erms.mapfiles')
     .factory('ermsMapfilesService', ermsMapfilesService);
 
-function ermsMapfilesService(){
+function ermsMapfilesService($http){
     
-    var mapFiles = [];
+    var baseUrl = 'http://localhost:9090/webapi/mapping/';
+    var mapFiles;
     
     return {
         addMapFile: addMapFile,
@@ -12,16 +13,31 @@ function ermsMapfilesService(){
         delMapFile: delMapFile
     };
     
-    function addMapFile(file){
-        mapFiles.push(file);
-    };
+    function addMapFile(mapping){
+        var formData = new FormData();
+        var url = baseUrl+'upload';
+        formData.append('file', mapping.file);
+        formData.append('mappingName', mapping.mappingName);
+        return $http.post(url, formData, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        }).then(function (response) {
+            console.log(response.data);
+            return response.data;
+        });
+    }
     
     function getMapFiles() {
-        return(mapFiles);
-    };
+        mapFiles = $http.get(baseUrl+'get/mappings').then(function(response){
+            return response.data.mappings;
+        });
+        return mapFiles;
+    }
     
     function delMapFile(file) {
-        mapFiles.splice(mapFiles.indexOf(file), 1);
-    };
+        return $http.delete(baseUrl+'remove/'+file.name).then(function(response){
+            return response.data;
+        });
+    }
 
 }

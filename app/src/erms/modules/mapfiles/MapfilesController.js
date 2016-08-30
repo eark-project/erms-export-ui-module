@@ -3,11 +3,22 @@ angular
     .controller('ErmsMapfilesController', ErmsMapfilesController);
 
 function ErmsMapfilesController($state, $mdDialog, ermsMapfilesService) {
+    
     var emfc = this;
     
-    emfc.mapfiles = ermsMapfilesService.getMapFiles();
+    emfc.mapfiles = [];
+
+    function initialiseMappings() {
+        ermsMapfilesService.getMapFiles().then(function (response) {
+            emfc.mapfiles = response;
+        });
+    }
+
+    initialiseMappings();
+
+    console.log(emfc.mapfiles);
     
-    emfc.addMapFile = function(ev) {
+    emfc.addMapFile = function (ev) {
         $mdDialog.show({
             controller: AddMapFileDialogController,
             templateUrl: 'app/src/erms/modules/mapfiles/view/addMapfilesDialog.html',
@@ -19,26 +30,35 @@ function ErmsMapfilesController($state, $mdDialog, ermsMapfilesService) {
             }
         });
     };
-    
-    emfc.delMapFile = function(file) {
-        ermsMapfilesService.delMapFile(file);
+
+    emfc.delMapFile = function (file) {
+        ermsMapfilesService.delMapFile(file).then(function (response){
+            console.log(response.message);
+            initialiseMappings();
+        });
     };
-    
-    function AddMapFileDialogController($scope, $mdDialog, mapfiles, ermsMapfilesService) {
+
+    function AddMapFileDialogController($scope, $mdDialog, ermsMapfilesService) {
         var file = {};
-        $scope.hide = function() {
+        $scope.mapping = {
+            file: null,
+            mappingName: null
+        };
+        $scope.hide = function () {
             $mdDialog.hide();
         };
-        $scope.cancel = function() {
+        $scope.cancel = function () {
             $mdDialog.cancel();
         };
-        $scope.upload = function() {
-            ermsMapfilesService.addMapFile(file);
+        $scope.upload = function () {
             $mdDialog.hide();
+            ermsMapfilesService.addMapFile($scope.mapping).then(function(response){
+                initialiseMappings();
+            });
         };
         $scope.fileNameChanged = function (el) {
             file = el.files[0];
         };
-    };
+    }
 
 }

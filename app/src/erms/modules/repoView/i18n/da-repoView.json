@@ -1,14 +1,6 @@
 ﻿{
-  "ERMS": {
-    "PROFILE": {
-      "LIST": {
-        "LABELS": {
-          "PROFILE_NAME" : "Navn",
-          "REPO_URL" : "Opbevaring Url",
-          "USER_ID":"Bruger ID",
-          "PASSWORD":"Adgangskode"
-        }
-      }
+    "ERMS_REPOS": {
+        "REPO": "Dokumentarkiv",
+        "REPOS": "Dokumentarkiver"
     }
-  }
 }

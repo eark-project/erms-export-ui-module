@@ -1,5 +1,8 @@
 ﻿{
     "ERMS_PROFILES": {
+        "REPOSITORIES": {
+            "LABEL": "Repositories"
+        },
         "PROFILES": {
             "LIST": {
                 "LABELS": {
@@ -24,9 +27,16 @@
                     "PROFILE_DIALOG": "Profile Dialog",
                     "REPO_URL": "Repository Url",
                     "ACCESS_ID": "Access ID",
-                    "ACCESS_PASSWORD": "Password"
+                    "ACCESS_PASSWORD": "Password",
+                    "NAME": "Name",
+                    "SELECT_MAP_FILE": "Select a mapping XML file",
+                    "SELECT_ROOT": "Select repository root directory",
+                    "ADD_ROOTS": "Add repository roots"
                 }
-            }
+            },
+            "CONNECT": "Repository connect",
+            "PROFILE_LABEL": "Connection profile",
+            "NO_PROFILES": "There are no profiles"
         }
     }
 }

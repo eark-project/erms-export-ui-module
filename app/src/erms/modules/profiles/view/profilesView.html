@@ -3,7 +3,7 @@
     <div flex="33">
         <md-button class="md-primary md-text-icon-button" ng-click="empc.showProfileDialog()">
             <i class="material-icons ng-scope">add</i>
-            {{ 'COMMON.ADD_NEW' | translate }} {{ 'COMMON.PROFILE' | translate }}
+            {{ 'COMMON.ADD' | translate }} {{ 'ERMS_PROFILES.PROFILES.PROFILE_LABEL' | translate }}
         </md-button>
         <md-list class="profile-list">
             <md-list-item ng-repeat="item in empc.profiles" ng-click="empc.showConnectDialog1(item)" ng-class="{'active':empc.currently === item.name}">
@@ -15,7 +15,9 @@
     
     <div flex="66">
         
-        <p ng-show="empc.profiles.length === 0">There are no profiles</p>
+        <p ng-show="!empc.profiles || empc.profiles.length === 0">
+            {{ 'ERMS_PROFILES.PROFILES.NO_PROFILES' | translate }}
+        </p>
         
         <div ui-view="repo-browser"></div>
         

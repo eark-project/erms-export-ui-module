@@ -1,13 +1,13 @@
 <div style="background-color: #eee;" layout-padding>
     
-    <p ng-show="emfc.mapfiles.length === 0">There are no mapping files</p>
+    <p ng-show="!emfc.mapfiles || emfc.mapfiles.length === 0">{{ 'ERMS_MAPS.MAPPINGS.NO_MAP_FILES' | translate }}</p>
     
     <md-button class="md-primary md-text-icon-button" ng-click="emfc.addMapFile($event)">
         <i class="material-icons ng-scope">add</i>
-        {{ 'COMMON.ADD_NEW' | translate }} mapping files
+        {{ 'COMMON.ADD' | translate }} {{ 'ERMS_MAPS.MAPPINGS.DIALOG.LABELS.MAPPING_FILE' | translate }}
     </md-button>
     
-    <md-list ng-show="emfc.mapfiles.length > 0">
+    <md-list >
         <md-list-item ng-repeat="mapfile in emfc.mapfiles" style="background-color: #fff; padding: 0.5em 1em; margin-bottom: 1px;">
             {{ mapfile.name }} <md-button ng-click="emfc.delMapFile(mapfile)">Remove</md-button>
         </md-list-item>

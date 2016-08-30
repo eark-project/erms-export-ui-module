@@ -1,33 +1,21 @@
 ﻿{
-    "ERMS_PROFILES": {
-        "PROFILES": {
+    "ERMS_MAPS": {
+        "MAPPINGS": {
+            "LABEL": "Kortlægningsfiler",
             "LIST": {
                 "LABELS": {
-                    "PROFILE_NAME" : "Navn",
-                    "REPO_URL" : "Arkiv-URL",
-                    "USER_ID":"Bruger-ID",
-                    "PASSWORD":"Adgangskode"
-                }
-            },
-            "MENU":{
-                "LABELS":{
-                    "PROFILES": "Profiler"
-                },
-                "LABEL":{
-                    "PROFILES": "Profiler"
+                    "MAPPING_NAME" : "Navn"
                 }
             },
             "DIALOG":{
                 "LABELS":{
-                    "CREATE_PROFILE": "Opret profil",
-                    "EDIT_PROFILE": "Redigér profil",
-                    "PROFILE_DIALOG": "Profil",
-                    "REPO_URL": "Arkiv-URL",
-                    "ACCESS_ID": "Bruger-ID",
-                    "ACCESS_PASSWORD": "Adgangskode",
-                    "NAME": "Navn"
+                    "UPLOAD_MAPPING_FILE": "Upload kortlægningsfil",
+                    "ADD_MAPPING": "Tilføj kortlægningsfil",
+                    "MAPPING_NAME": "Navn for kortlægningsfil",
+                    "MAPPING_FILE": "Kortlægningsfil"
                 }
-            }
+            },
+            "NO_MAP_FILES": "Der er ingen kortlægningsfiler"
         }
     }
 }
