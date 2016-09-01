@@ -23,7 +23,7 @@ function ermsProfilesService($q, $http){
     }
 
     function deleteProfile(profileName){
-        return $http.put('/webapi/profile/delete', profileName).then(_returnResult);
+        return $http.delete('/webapi/profile/delete/'+ profileName).then(_returnResult);
     }
 
     function addProfileRepo(profileName, repo){
