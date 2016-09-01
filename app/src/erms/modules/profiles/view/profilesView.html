@@ -8,7 +8,7 @@
         <md-list class="profile-list">
             <md-list-item
                 ng-repeat="item in empc.profiles"
-                ng-click="empc.showConnectDialog1(item); $event.stopPropagation();"
+                ng-click="empc.showConnectDialog2(item);"
                 ng-class="{'active':empc.currently === item.name}"
                 layout="row"
                 layout-align="space-between center">
@@ -19,12 +19,12 @@
                     <md-button
                         aria-label="{{ 'ERMS_PROFILES.PROFILES.PROFILE_ACTIONS' | translate }}"
                         class="md-icon-button"
-                        ng-click="$mdOpenMenu($event)">
+                        ng-click="$mdOpenMenu($event); $event.stopPropagation();">
                         <i class="material-icons">arrow_drop_down</i>
                     </md-button>
-                    <md-menu-content width="4">
+                    <md-menu-content>
                         <md-menu-item>
-                            <md-button ng-click="empc.showConnectDialog1(item);">
+                            <md-button ng-click="empc.showConnectDialog2(item);">
                                 <i class="material-icons">swap_horiz</i>
                                 {{ 'ERMS_PROFILES.PROFILES.CONNECT' | translate }}
                             </md-button>
@@ -44,7 +44,6 @@
                         </md-menu-item>
                     </md-menu-content>
                 </md-menu>
-                
             </md-list-item>
         </md-list>
     </div>

@@ -121,7 +121,6 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $transla
         console.log('Selected root: ' + selectedRoot + ' & map: ' + selectedMap);
         $state.go('erms.repos.browseRepo', {
             'profileName': encodeURIComponent(name),
-            'repositoryRoot': encodeURIComponent(selectedRoot),
             'mapName': encodeURIComponent(selectedMap)
         });
     }
@@ -171,7 +170,6 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $transla
             console.log(profile.name + ' & selected root: ' + profile.selectedRoot + ' & map: ' + profile.selectedMap.name);
             $state.go('erms.repos.browseRepo', {
                 'profileName': encodeURIComponent(profile.name),
-                'repositoryRoot': encodeURIComponent(profile.selectedRoot),
                 'mapName': encodeURIComponent(profile.selectedMap.name)
             });
         });
@@ -203,7 +201,7 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $transla
               .ok( $translate.instant('COMMON.DELETE') )
               .cancel( $translate.instant('COMMON.CANCEL') );
         $mdDialog.show(confirm).then(function() {
-            console.log('deleting profile')
+            ermsProfilesService.deleteProfile(profile.name);
         }, function() {
             console.log('cancel delete')
         });

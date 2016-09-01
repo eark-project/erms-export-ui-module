@@ -6,7 +6,7 @@ function config($stateProvider, languageFilesProvider ){
 
     $stateProvider.state('erms.repos.browseRepo', {
         parent: 'erms.repos',
-        url: '/:profileName/:repositoryRoot/:mapName',
+        url: '/:profileName/:mapName',
         views: {
             'repo-browser': {
                 templateUrl : 'app/src/erms/modules/repoView/view/repoView.html',

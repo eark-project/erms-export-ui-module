@@ -6,6 +6,7 @@ function ermsProfilesService($q, $http){
     return {
         getProfiles     : getProfiles,
         createProfile   : createProfile,
+        deleteProfile   : deleteProfile,
         updateProfile   : updateProfile,
         addProfileRepo  : addProfileRepo,
         removeProfileRepo : removeProfileRepo
@@ -19,6 +20,10 @@ function ermsProfilesService($q, $http){
     }
     function updateProfile(profile){
         return $http.put('/webapi/profile/updateProfile', profile).then(_returnResult);
+    }
+
+    function deleteProfile(profileName){
+        return $http.put('/webapi/profile/delete', profileName).then(_returnResult);
     }
 
     function addProfileRepo(profileName, repo){

@@ -7,7 +7,6 @@ function RepoViewController($scope, $stateParams, ermsRepoService, fileUtilsServ
     rvc.repo = ermsRepoService.repoItems;
     rvc.mapName = "";
     rvc.profileName = "";
-    rvc.repositoryRoot= "";
     rvc.loadRepoView = loadRepoView;
     rvc.isFile = isFile;
     rvc.getItem = getItem;
@@ -25,7 +24,6 @@ function RepoViewController($scope, $stateParams, ermsRepoService, fileUtilsServ
     function loadRepoView(){
         ermsRepoService.registerObserverCallback(repoViewObserver);
         ermsRepoService.setProfile(decodeURIComponent($stateParams.profileName),
-                                   decodeURIComponent($stateParams.repositoryRoot),
                                    decodeURIComponent($stateParams.mapName)
         );
         rvc.profileName = ermsRepoService.profile;
