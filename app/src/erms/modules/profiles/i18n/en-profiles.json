@@ -22,10 +22,11 @@
             },
             "DIALOG":{
                 "LABELS":{
-                    "CREATE_PROFILE": "Create Profile",
-                    "EDIT_PROFILE": "Edit Profile",
-                    "PROFILE_DIALOG": "Profile Dialog",
-                    "REPO_URL": "Repository Url",
+                    "CREATE_PROFILE": "Create profile",
+                    "EDIT_PROFILE": "Edit profile",
+                    "DELETE_PROFILE": "Delete profile",
+                    "PROFILE_DIALOG": "Profile dialog",
+                    "REPO_URL": "Repository URL",
                     "ACCESS_ID": "Access ID",
                     "ACCESS_PASSWORD": "Password",
                     "NAME": "Name",
@@ -36,7 +37,9 @@
             },
             "CONNECT": "Repository connect",
             "PROFILE_LABEL": "Connection profile",
-            "NO_PROFILES": "There are no profiles"
+            "NO_PROFILES": "There are no profiles",
+            "PROFILE_ACTIONS": "Profile actions",
+            "REALLY_DELETE_PROFILE": "Do you want to delete {{ profile }}?"
         }
     }
 }

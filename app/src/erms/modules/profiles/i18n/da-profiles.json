@@ -24,6 +24,7 @@
                 "LABELS":{
                     "CREATE_PROFILE": "Opret profil",
                     "EDIT_PROFILE": "Redigér profil",
+                    "DELETE_PROFILE": "Slet profil",
                     "PROFILE_DIALOG": "Profil",
                     "REPO_URL": "Arkiv-URL",
                     "ACCESS_ID": "Bruger-ID",
@@ -36,7 +37,9 @@
             },
             "CONNECT": "Forbind til arkiv",
             "PROFILE_LABEL": "Forbindelsesprofil",
-            "NO_PROFILES": "Der er ingen forbindelsesprofiler"
+            "NO_PROFILES": "Der er ingen forbindelsesprofiler",
+            "PROFILE_ACTIONS": "Forbindelsesprofilhandlinger",
+            "REALLY_DELETE_PROFILE": "Vil du slette {{ profile }}?"
         }
     }
 }

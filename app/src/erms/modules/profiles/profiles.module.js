@@ -1,5 +1,5 @@
 angular
-    .module('eArkPlatform.erms.profile', ['pascalprecht.translate'])
+    .module('eArkPlatform.erms.profile', ['ngMaterial', 'pascalprecht.translate'])
     .config(config);
 
 function config($stateProvider, languageFilesProvider, ermsServiceProvider ){

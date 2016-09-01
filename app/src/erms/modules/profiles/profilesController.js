@@ -2,13 +2,14 @@ angular
     .module('eArkPlatform.erms.profile')
     .controller('ErmsProfilesController', ErmsProfilesController);
 
-function ErmsProfilesController($mdDialog, $state, ermsProfilesService) {
+function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $translate) {
     var empc = this;
     empc.profiles = [];
     empc.initialise = initialise;
     empc.showProfileDialog = showProfileDialog;
     empc.showConnectDialog1 = showConnectDialog1;
     empc.showConnectDialog2 = showConnectDialog2;
+    empc.deleteProfile = deleteProfile;
     empc.initialise();
     empc.loadview = loadView;
     empc.currently = '';
@@ -190,6 +191,22 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService) {
         $scope.cancel = function () {
             $mdDialog.cancel();
         };
+    }
+    
+    function deleteProfile(ev, profile) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.confirm()
+              .title( $translate.instant('ERMS_PROFILES.PROFILES.REALLY_DELETE_PROFILE', { profile: profile.name }) )
+              //.textContent('All of the banks have agreed to forgive you your debts.')
+              .ariaLabel( $translate.instant('ERMS_PROFILES.PROFILES.DIALOG.LABELS.DELETE_PROFILE') )
+              .targetEvent(ev)
+              .ok( $translate.instant('COMMON.DELETE') )
+              .cancel( $translate.instant('COMMON.CANCEL') );
+        $mdDialog.show(confirm).then(function() {
+            console.log('deleting profile')
+        }, function() {
+            console.log('cancel delete')
+        });
     }
 
 }
