@@ -27,7 +27,6 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
     function connect() {
         return $http.post('/webapi/repository/connect', {
                     name: ermSvc.profile, 
-                    repositoryRoot: ermSvc.repositoryRoot,
                     mapName: ermSvc.mapName}).then(function (response) {
             ermSvc.breadcrumbs = [];
             initRepoView(response.data.rootFolder);
@@ -56,10 +55,9 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
         });
     }
 
-    function setProfile(profileName, repositoryRoot, mapName) {
+    function setProfile(profileName, mapName) {
         ermSvc.mapName = mapName;
         ermSvc.profile = profileName;
-        ermSvc.repositoryRoot = repositoryRoot;
         ermSvc.repoItems = [];
         ermSvc.notifyObservers();
 

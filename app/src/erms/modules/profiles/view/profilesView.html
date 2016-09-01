@@ -6,7 +6,7 @@
             {{ 'COMMON.ADD' | translate }} {{ 'ERMS_PROFILES.PROFILES.PROFILE_LABEL' | translate }}
         </md-button>
         <md-list class="profile-list">
-            <md-list-item ng-repeat="item in empc.profiles" ng-click="empc.showConnectDialog1(item)" ng-class="{'active':empc.currently === item.name}">
+            <md-list-item ng-repeat="item in empc.profiles" ng-click="empc.showConnectDialog2(item)" ng-class="{'active':empc.currently === item.name}">
                 <span class="text-muted">{{ item.name }}</span>
                 <md-button class="md-secondary" ng-click="empc.showProfileDialog(item);"><i class="material-icons ng-scope">edit</i></md-button>
             </md-list-item>
