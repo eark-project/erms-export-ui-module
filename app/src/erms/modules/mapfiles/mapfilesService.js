@@ -26,7 +26,7 @@ function ermsMapfilesService($http){
     }
     
     function getMapFiles() {
-        mapFiles = $http.get(baseUrl+'get/mappings').then(function(response){
+        mapFiles = $http.get('/webapi/mapping/get/mappings').then(function(response){
             return response.data.mappings;
         });
         return mapFiles;

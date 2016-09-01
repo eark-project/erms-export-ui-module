@@ -31,7 +31,6 @@ function RepoViewController($scope, $stateParams, ermsRepoService, fileUtilsServ
         rvc.profileName = ermsRepoService.profile;
         rvc.repositoryRoot = ermsRepoService.repositoryRoot;
         rvc.mapName = ermsRepoService.mapName;
-        debugger;
         _getRootView(rvc.profileName);
     }
 
@@ -107,7 +106,6 @@ function RepoViewController($scope, $stateParams, ermsRepoService, fileUtilsServ
     function selectItemForExport(item){
         item.path = _getBreadcrumbPath(); //At the point of selection we grab the breadcrumb path
         ermsExportService.toggleItemInBasket(item);
-        debugger;
     }
 
     /**
