@@ -4,18 +4,18 @@ angular
 
 function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
 
-    var ermsSvc = this;
-    ermsSvc.observerCallbacks = [];
-    ermsSvc.breadcrumbs = [];
-    ermsSvc.repoItems = [];
-    ermsSvc.profile = "";
+    var ermSvc = this;
+    ermSvc.observerCallbacks = [];
+    ermSvc.breadcrumbs = [];
+    ermSvc.repoItems = [];
+    ermSvc.profile = "";
     //methods
-    ermsSvc.connect = connect;
-    ermsSvc.initRepoView = initRepoView;
-    ermsSvc.getFolderChildren = getFolderChildren;
-    ermsSvc.getDocument = getDocument;
-    ermsSvc.setProfile = setProfile;
-    ermsSvc.goToCrumb = goToCrumb;
+    ermSvc.connect = connect;
+    ermSvc.initRepoView = initRepoView;
+    ermSvc.getFolderChildren = getFolderChildren;
+    ermSvc.getDocument = getDocument;
+    ermSvc.setProfile = setProfile;
+    ermSvc.goToCrumb = goToCrumb;
 
     /**
      * Returns the properties of the root folder of a profile repository along with its children.
@@ -25,8 +25,11 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
      * @returns {*}
      */
     function connect() {
-        return $http.post('http://eark.magenta.dk:9090/webapi/repository/connect', {profileName: ermsSvc.profile}).then(function (response) {
-            ermsSvc.breadcrumbs = [];
+        return $http.post('/webapi/repository/connect', {
+                    name: ermSvc.profile, 
+                    repositoryRoot: ermSvc.repositoryRoot,
+                    mapName: ermSvc.mapName}).then(function (response) {
+            ermSvc.breadcrumbs = [];
             initRepoView(response.data.rootFolder);
         });
     }
@@ -37,7 +40,7 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
      * @returns {*}
      */
     function getFolderChildren(requestObject) {
-        return $http.post('http://eark.magenta.dk:9090/webapi/repository/getFolder', requestObject).then(function (response) {
+        return $http.post('/webapi/repository/getFolder', requestObject).then(function (response) {
             initRepoView(response.data.folder);
         });
     }
@@ -48,15 +51,17 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
      * @returns {*}
      */
     function getDocument(requestObject) {
-        return $http.post('http://eark.magenta.dk:9090/webapi/repository/getDocument', requestObject).then(function (response) {
+        return $http.post('/webapi/repository/getDocument', requestObject).then(function (response) {
             return response.data.document;
         });
     }
 
-    function setProfile(profileName) {
-        ermsSvc.profile = profileName;
-        ermsSvc.repoItems = [];
-        ermsSvc.notifyObservers();
+    function setProfile(profileName, repositoryRoot, mapName) {
+        ermSvc.mapName = mapName;
+        ermSvc.profile = profileName;
+        ermSvc.repositoryRoot = repositoryRoot;
+        ermSvc.repoItems = [];
+        ermSvc.notifyObservers();
 
     }
 
@@ -80,11 +85,11 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
      * @param response
      */
     function initRepoView(response) {
-        ermsSvc.repoItems = response;
-        ermsSvc.repoItems.empty = (!ermsSvc.repoItems.children === Array || ermsSvc.repoItems.children.length == 0);
-        if (!ermsSvc.repoItems.empty) {
-            _addThumbnailUrl(ermsSvc.repoItems);
-            ermsSvc.repoItems.children.forEach(function (item) {
+        ermSvc.repoItems = response;
+        ermSvc.repoItems.empty = (!ermSvc.repoItems.children === Array || ermSvc.repoItems.children.length == 0);
+        if (!ermSvc.repoItems.empty) {
+            _addThumbnailUrl(ermSvc.repoItems);
+            ermSvc.repoItems.children.forEach(function (item) {
                 if (item.type == 'document')
                     item.displaySize = fileUtilsService.formatBytes(item.size);
                 (ermsExportService.itemExists(item)) ? item.selected = true : item.selected = false;
@@ -92,15 +97,15 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
             })
         }
         var crumb = {
-            name: ermsSvc.repoItems.properties.name,
-            objectId: ermsSvc.repoItems.properties.objectId
+            name: ermSvc.repoItems.properties.name,
+            objectId: ermSvc.repoItems.properties.objectId
         };
-        if(ermsSvc.repoItems.children.length <= 0)
-            ermsSvc.breadcrumbs = [crumb];
+        if(ermSvc.repoItems.children.length <= 0)
+            ermSvc.breadcrumbs = [crumb];
         else
-            ermsSvc.breadcrumbs.push(crumb);
+            ermSvc.breadcrumbs.push(crumb);
 
-        ermsSvc.notifyObservers();
+        ermSvc.notifyObservers();
     }
 
     /**
@@ -108,22 +113,22 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
      * @param index
      */
     function goToCrumb(index) {
-        var selected = ermsSvc.breadcrumbs[index];
-        ermsSvc.breadcrumbs = ermsSvc.breadcrumbs.slice(0, index);
-        (index == 0) ? ermsSvc.connect() : ermsSvc.getFolderChildren({
-            profileName: ermsSvc.profile,
+        var selected = ermSvc.breadcrumbs[index];
+        ermSvc.breadcrumbs = ermSvc.breadcrumbs.slice(0, index);
+        (index == 0) ? ermSvc.connect() : ermSvc.getFolderChildren({
+            profileName: ermSvc.profile,
             folderObjectId: selected.objectId
         });
     }
 
     function registerSelection(item, all){
         if(all && !item)
-            ermsSvc.repoItems.forEach(function(item){
+            ermSvc.repoItems.forEach(function(item){
                 item.seletced = false;
             });
         if(item && !all){
             var idx = _getItemPos(item);
-            ermsSvc.repoItems.splice(idx,1);
+            ermSvc.repoItems.splice(idx,1);
         }
     }
 
@@ -135,22 +140,22 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
      * @returns number of item in the flat array or -1 indicating it doesn't exist
      */
     function _getItemPos(item) {
-        if (ermsSvc.repoItems.length <= 0)
+        if (ermSvc.repoItems.length <= 0)
             return -1;
         else
-            return ermsSvc.repoItems.map(function (o) {
+            return ermSvc.repoItems.map(function (o) {
                 return o.objectId
             }).indexOf(item.objectId);
     }
 
     //register an observer
-    ermsSvc.registerObserverCallback = function(callback){
-        ermsSvc.observerCallbacks.push(callback);
+    ermSvc.registerObserverCallback = function(callback){
+        ermSvc.observerCallbacks.push(callback);
     };
 
     //call this when repoItems has been changed
-    ermsSvc.notifyObservers = function(){
-        angular.forEach(ermsSvc.observerCallbacks, function(callback){
+    ermSvc.notifyObservers = function(){
+        angular.forEach(ermSvc.observerCallbacks, function(callback){
             callback();
         });
     };

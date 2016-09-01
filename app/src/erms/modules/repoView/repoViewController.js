@@ -5,7 +5,9 @@ angular
 function RepoViewController($scope, $stateParams, ermsRepoService, fileUtilsService, ermsExportService) {
     var rvc = this;
     rvc.repo = ermsRepoService.repoItems;
+    rvc.mapName = "";
     rvc.profileName = "";
+    rvc.repositoryRoot= "";
     rvc.loadRepoView = loadRepoView;
     rvc.isFile = isFile;
     rvc.getItem = getItem;
@@ -22,8 +24,14 @@ function RepoViewController($scope, $stateParams, ermsRepoService, fileUtilsServ
      */
     function loadRepoView(){
         ermsRepoService.registerObserverCallback(repoViewObserver);
-        ermsRepoService.setProfile(decodeURIComponent($stateParams.profileName));
+        ermsRepoService.setProfile(decodeURIComponent($stateParams.profileName),
+                                   decodeURIComponent($stateParams.repositoryRoot),
+                                   decodeURIComponent($stateParams.mapName)
+        );
         rvc.profileName = ermsRepoService.profile;
+        rvc.repositoryRoot = ermsRepoService.repositoryRoot;
+        rvc.mapName = ermsRepoService.mapName;
+        debugger;
         _getRootView(rvc.profileName);
     }
 
@@ -44,7 +52,7 @@ function RepoViewController($scope, $stateParams, ermsRepoService, fileUtilsServ
      */
     function _getFolderView(objectId){
         var requestObject = {
-            profileName: rvc.profileName,
+            name: rvc.profileName,
             folderObjectId: objectId
         };
         ermsRepoService.getFolderChildren(requestObject);
@@ -57,7 +65,7 @@ function RepoViewController($scope, $stateParams, ermsRepoService, fileUtilsServ
      */
     function _getDocument(objectId){
         var requestObject = {
-            profileName: rvc.profileName,
+            name: rvc.profileName,
             documentObjectId: objectId
         };
         ermsRepoService.getDocument(requestObject).then(function(response){

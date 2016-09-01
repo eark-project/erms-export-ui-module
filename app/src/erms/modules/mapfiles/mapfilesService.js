@@ -4,7 +4,6 @@ angular
 
 function ermsMapfilesService($http){
     
-    var baseUrl = 'http://localhost:9090/webapi/mapping/';
     var mapFiles;
     
     return {
@@ -15,10 +14,9 @@ function ermsMapfilesService($http){
     
     function addMapFile(mapping){
         var formData = new FormData();
-        var url = baseUrl+'upload';
         formData.append('file', mapping.file);
         formData.append('mappingName', mapping.mappingName);
-        return $http.post(url, formData, {
+        return $http.post('/webapi/mapping/upload', formData, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
         }).then(function (response) {
@@ -35,7 +33,7 @@ function ermsMapfilesService($http){
     }
     
     function delMapFile(file) {
-        return $http.delete(baseUrl+'remove/'+file.name).then(function(response){
+        return $http.delete('/webapi/mapping/remove/'+file.name).then(function(response){
             return response.data;
         });
     }
