@@ -1,10 +1,11 @@
-# Angular stub for Alfresco/AngularJS UI projects
+# E-Ark ERMS module export project using AngularJS UI projects
 
-This repo's code serves as a starting point for new projects combining Alfresco backend and AngularJS frontends.
+This repository code is the UI for the E-Ark export bridge project and thus all issues concerning features and issues with UI should to be reported here.
 
 Included features are
 
-* Authentication
+* Mapping upload
+* Repository profile creation
 * Build setup with Gulp
 * Sass pre-processing of CSS (scss)
 
@@ -17,6 +18,8 @@ Included features are
 ´´´
 npm update
 npm install
+bower update
+bower install
 gulp build
 ´´´
 4. [Then read the documentation](/documentation/README.md)
@@ -26,22 +29,11 @@ gulp build
 
 **Good to go**
 
-- [x] authentication - maybe add some documentation
-- [x] dashboard - modularize
-- [x] footer - maybe add some documentation
-- [x] header - maybe add some documentation
-- [x] i18n
+- [x] Repository Profile creation - maybe add some documentation
+- [x] Mapping.xml addition - Some proper error reporting to be done
+- [x] Repository browsing - Some documentation needed
+- [x] Translations and local selection (i18n) - Some parts of the UI still require additional translation
 
-**Shame**
-- [ ] common
-- [ ] core
-- [ ] *documents*
-- [ ] *files*
-- [ ] shared
-- [ ] *search*
-
-**Possibly delete**
-- [ ] groups
-- [ ] system_settings
-- [ ] admin
-- [ ] users 
+**Outstanding**
+- [ ] export (ongoing)
+- [ ] search
