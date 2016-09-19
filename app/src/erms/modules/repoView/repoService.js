@@ -29,7 +29,7 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
                     name: ermSvc.profile, 
                     mapName: ermSvc.mapName}).then(function (response) {
             ermSvc.breadcrumbs = [];
-            initRepoView(response.data.rootFolder);
+            initRepoView(response.data);
         });
     }
 
@@ -39,8 +39,12 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
      * @returns {*}
      */
     function getFolderChildren(requestObject) {
+        //inject the current map name to each request object
+        requestObject.mapName = ermSvc.mapName;
+        //Findout if this item has been selected
+        //if (requestObject.selected || ermsExportService.itemExists(requestObject.folderObjectId))
         return $http.post('/webapi/repository/getFolder', requestObject).then(function (response) {
-            initRepoView(response.data.folder);
+            initRepoView(response.data);
         });
     }
 
@@ -50,6 +54,8 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
      * @returns {*}
      */
     function getDocument(requestObject) {
+        //inject the current map name to each request object
+        requestObject.mapName = ermSvc.mapName;
         return $http.post('/webapi/repository/getDocument', requestObject).then(function (response) {
             return response.data.document;
         });
@@ -83,7 +89,7 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
      * @param response
      */
     function initRepoView(response) {
-        ermSvc.repoItems = response;
+        ermSvc.repoItems = (response.folder) ? response.folder : response.rootFolder;
         ermSvc.repoItems.empty = (!ermSvc.repoItems.children === Array || ermSvc.repoItems.children.length == 0);
         if (!ermSvc.repoItems.empty) {
             _addThumbnailUrl(ermSvc.repoItems);
@@ -92,11 +98,17 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
                     item.displaySize = fileUtilsService.formatBytes(item.size);
                 (ermsExportService.itemExists(item)) ? item.selected = true : item.selected = false;
 
-            })
+            });
+
+            if(response.selected)
+                ermSvc.repoItems.children.forEach(function (item) {
+                     item.selected = !ermsExportService.itemDeselected(item);
+                });
         }
         var crumb = {
             name: ermSvc.repoItems.properties.name,
-            objectId: ermSvc.repoItems.properties.objectId
+            objectId: ermSvc.repoItems.properties.objectId,
+            selected: response.selected
         };
         if(ermSvc.repoItems.children.length <= 0)
             ermSvc.breadcrumbs = [crumb];
@@ -114,11 +126,13 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
         var selected = ermSvc.breadcrumbs[index];
         ermSvc.breadcrumbs = ermSvc.breadcrumbs.slice(0, index);
         (index == 0) ? ermSvc.connect() : ermSvc.getFolderChildren({
-            profileName: ermSvc.profile,
-            folderObjectId: selected.objectId
+            name: ermSvc.profile,
+            folderObjectId: selected.objectId,
+            selected: selected.selected
         });
     }
 
+    //TODO delete when confirmed uselessness
     function registerSelection(item, all){
         if(all && !item)
             ermSvc.repoItems.forEach(function(item){
@@ -129,7 +143,6 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
             ermSvc.repoItems.splice(idx,1);
         }
     }
-
 
     /**
      * returns the index of the item in the basket

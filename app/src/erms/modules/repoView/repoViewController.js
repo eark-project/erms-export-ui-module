@@ -23,13 +23,16 @@ function RepoViewController($scope, $stateParams, ermsRepoService, fileUtilsServ
      */
     function loadRepoView(){
         ermsRepoService.registerObserverCallback(repoViewObserver);
-        ermsRepoService.setProfile(decodeURIComponent($stateParams.profileName),
-                                   decodeURIComponent($stateParams.mapName)
-        );
+        ermsRepoService.setProfile(decodeURIComponent($stateParams.profileName), decodeURIComponent($stateParams.mapName));
         rvc.profileName = ermsRepoService.profile;
         rvc.repositoryRoot = ermsRepoService.repositoryRoot;
         rvc.mapName = ermsRepoService.mapName;
+        //load the root view for the repository
         _getRootView(rvc.profileName);
+        //Re-initialise the export feature by clearing the export basket and re-initialising the profile and mapping params
+        ermsExportService.clearBasket();
+        ermsExportService.initExportParams(ermsRepoService.profile, ermsRepoService.mapName);
+
     }
 
     /**
@@ -47,10 +50,11 @@ function RepoViewController($scope, $stateParams, ermsRepoService, fileUtilsServ
      * @param objectId
      * @private
      */
-    function _getFolderView(objectId){
+    function _getFolderView(item){
         var requestObject = {
             name: rvc.profileName,
-            folderObjectId: objectId
+            folderObjectId: item.objectId,
+            selected: item.selected
         };
         ermsRepoService.getFolderChildren(requestObject);
     }
@@ -82,11 +86,10 @@ function RepoViewController($scope, $stateParams, ermsRepoService, fileUtilsServ
 
     /**
      * Decides which to call between getting information on a document or a folder.
-     * @param objectId
-     * @param itemType
+     * @param item
      */
-    function getItem(objectId, itemType){
-        (itemType === 'folder') ? _getFolderView(objectId) : _getDocument(objectId);
+    function getItem(item){
+        (item.type === 'folder') ? _getFolderView(item) : _getDocument(item);
     }
 
     /**
@@ -102,7 +105,6 @@ function RepoViewController($scope, $stateParams, ermsRepoService, fileUtilsServ
     }
 
     function selectItemForExport(item){
-        item.path = _getBreadcrumbPath(); //At the point of selection we grab the breadcrumb path
         ermsExportService.toggleItemInBasket(item);
     }
 

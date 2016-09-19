@@ -2,19 +2,54 @@ angular
     .module('eArkPlatform.erms.export')
     .factory('ermsExportService', ErmsExportService);
 
-function ErmsExportService() {
+function ErmsExportService($http) {
 
-    var exportBasket = [];
+    var exportBasket = [], exclusionList = [];
+    var exportProfile = '', exportMap='';
 
     return {
         getBasket           : getBasket,
         itemExists          : itemExists,
+        removeItem          : removeItem,
+        exportItems         : exportItems,
         clearBasket         : clearBasket,
-        toggleItemInBasket  : toggleItemInBasket
+        itemDeselected      : itemDeselected,
+        deSelectItem        : deSelectItem,
+        toggleItemInBasket  : toggleItemInBasket,
+        initExportParams    : initExportParams
     };
+
+    function initExportParams(profileName, mapName){
+        exportProfile = profileName;
+        exportMap = mapName;
+    }
 
     function getBasket() {
         return exportBasket;
+    }
+
+    function removeItem(item){
+        _removeItem(item, exportBasket);
+    }
+
+    function exportItems(){
+        console.log("The number of items to be exported is:" + exportBasket.length +"\nThe number of items to exclude: "+exclusionList.length);
+        return $http.post('/webapi/repository/extract', {
+            name: exportProfile,
+            mapName : exportMap,
+            exportList: _getItemIds(exportBasket),
+            excludeList: _getItemIds(exclusionList)
+        });
+    }
+
+    /**
+     * Serves to add an item to the exclusion list
+     * @param item
+     */
+    function deSelectItem(item){
+        if(exclusionList.length <=0)
+            exclusionList = [item];
+        else exclusionList.push(item);
     }
 
     /**
@@ -22,61 +57,101 @@ function ErmsExportService() {
      * @param item
      */
     function toggleItemInBasket(item) {
-        //Check if it's empty
-        if (exportBasket.length > 0) {
-            //check if it exists
-            if (!itemExists(item)) {
-                item.selected = true;
-                exportBasket.push(item); //if it doesn't add it to the array
-            }
-            else {
-                item.selected = true;
-                _removeItem(item); //else if it does then we must want to remove the item
-            }
+        if(item.selected == true){
+            item.selected = false;
+            //check the export basket first
+            if(itemExists(item))
+                removeItem(item);
+            //otherwise it's a child of an export root and we simply want to place it in the exclusion basket
+            else
+                deSelectItem(item);
         }
-        else {
+        else{ //It's either an export root or something we want to reselect from the exclusion list
             item.selected = true;
-            exportBasket = [item];//if it's empty initialise a new array with the item
+            //check if it's in the exclusion list them remove it
+            if(itemDeselected(item))
+                _removeItem(item, exclusionList);
+            else{
+                try{
+                    exportBasket.push(item);
+                }
+                catch(err){
+                    console.log("Unable to add the item to the basket so it must be empty. Initialising new export basket");
+                    exportBasket = [item];
+                }
+            }
         }
+
     }
 
     /**
-     * Returns a boolean indicating whether the item is already in the basket
+     * Returns a boolean indicating whether the item is already in the export basket
      * @param item
-     * @returns {boolean}
+     * @returns {true|false}
      */
     function itemExists(item) {
-        return _getItemPos(item) >= 0;
+        return _getItemPos(item, exportBasket) >= 0;
     }
 
     /**
-     * removes an item from the basket
+     * Checks whether item is in deselection basket. returns true if it is
      * @param item
+     * @returns {true|false}
+     */
+    function itemDeselected(item) {
+        return _getItemPos(item, exclusionList) >= 0;
+    }
+
+    /**
+     * Clears both the export basket and the exclusion list
+     */
+    function clearBasket(){
+        exportBasket = [];
+        exclusionList = [];
+    }
+
+    /**
+     *
+     * @param item the item to be removed
+     * @param basket the basket from which to remove the item
      * @private
      */
-    function _removeItem(item) {
-        var idx = _getItemPos(item);
+    function _removeItem(item, basket) {
+        var idx = _getItemPos(item, basket);
         if (idx >= 0) {
-            exportBasket.splice(idx, 1);
+            basket.splice(idx, 1);
         }
     }
 
     /**
-     * returns the index of the item in the basket
+     * Returns the index of the item in the specified basket
      * @param item
+     * @param basket
      * @private
-     * @returns number of item in the flat array or -1 indicating it doesn't exist
+     * @returns position of the item in the flat array or -1 indicating it doesn't exist
      */
-    function _getItemPos(item) {
-        if (exportBasket.length <= 0)
+    function _getItemPos(item, basket) {
+        if (basket.length <= 0)
             return -1;
-        else
-            return exportBasket.map(function (o) {
-                return o.objectId
-            }).indexOf(item.objectId);
+
+        return basket.map(function (o) {
+            return o.objectId
+        }).indexOf(typeof item ==  'object' ? item.objectId : item);
+
     }
 
-    function clearBasket(){
-        exportBasket = [];
+    /**
+     * Returns a flat array of item id strings from the given basket
+     * @param basket
+     * @returns {Array}
+     * @private
+     */
+    function _getItemIds(basket){
+        var flatList = [];
+        basket.forEach(function(item){
+            flatList.push(item.objectId);
+        });
+        debugger;
+        return flatList;
     }
 }

@@ -7,6 +7,7 @@ function ErmsExportController(ermsExportService) {
 
     rxc.exportItems = [];
     rxc.removeItem = removeItem;
+    rxc.initExport = initExport;
 
     loadBasket();
 
@@ -15,7 +16,17 @@ function ErmsExportController(ermsExportService) {
     }
 
     function removeItem(item){
+        ermsExportService.removeItem(item);
+        loadBasket();
+    }
 
+    /**
+     * Initiates an export process
+     */
+    function initExport(){
+        ermsExportService.exportItems().then(function(response){
+            console.log(response.data);
+        });
     }
 
 }
