@@ -15,7 +15,8 @@ function ErmsExportController(ermsExportService) {
     }
 
     function removeItem(item){
-
+        ermsExportService.removeItem(item);
+        loadBasket();
     }
 
 }

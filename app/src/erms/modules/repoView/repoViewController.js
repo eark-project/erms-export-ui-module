@@ -23,9 +23,7 @@ function RepoViewController($scope, $stateParams, ermsRepoService, fileUtilsServ
      */
     function loadRepoView(){
         ermsRepoService.registerObserverCallback(repoViewObserver);
-        ermsRepoService.setProfile(decodeURIComponent($stateParams.profileName),
-                                   decodeURIComponent($stateParams.mapName)
-        );
+        ermsRepoService.setProfile(decodeURIComponent($stateParams.profileName), decodeURIComponent($stateParams.mapName));
         rvc.profileName = ermsRepoService.profile;
         rvc.repositoryRoot = ermsRepoService.repositoryRoot;
         rvc.mapName = ermsRepoService.mapName;
@@ -47,10 +45,11 @@ function RepoViewController($scope, $stateParams, ermsRepoService, fileUtilsServ
      * @param objectId
      * @private
      */
-    function _getFolderView(objectId){
+    function _getFolderView(item){
         var requestObject = {
             name: rvc.profileName,
-            folderObjectId: objectId
+            folderObjectId: item.objectId,
+            selected: item.selected
         };
         ermsRepoService.getFolderChildren(requestObject);
     }
@@ -82,11 +81,10 @@ function RepoViewController($scope, $stateParams, ermsRepoService, fileUtilsServ
 
     /**
      * Decides which to call between getting information on a document or a folder.
-     * @param objectId
-     * @param itemType
+     * @param item
      */
-    function getItem(objectId, itemType){
-        (itemType === 'folder') ? _getFolderView(objectId) : _getDocument(objectId);
+    function getItem(item){
+        (item.type === 'folder') ? _getFolderView(item) : _getDocument(item);
     }
 
     /**
@@ -102,7 +100,16 @@ function RepoViewController($scope, $stateParams, ermsRepoService, fileUtilsServ
     }
 
     function selectItemForExport(item){
-        item.path = _getBreadcrumbPath(); //At the point of selection we grab the breadcrumb path
+        /*if(!item.selected) {
+            item.path = _getBreadcrumbPath(); //At the point of selection we grab the breadcrumb path
+            console.log("item [" + item.objectId + "] is selected -> " + item.selected);
+            item.selected = true;
+            ermsExportService.toggleItemInBasket(item);
+        }
+        else{
+            item.selected = false;
+            ermsExportService.itemDeselected(item);
+        }*/
         ermsExportService.toggleItemInBasket(item);
     }
 
