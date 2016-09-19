@@ -4,7 +4,7 @@
 
 <div layout="row" layout-align="space-between center">
     <md-button class="md-raised" onclick="window.history.go(-1);">{{ 'COMMON.BACK' | translate}}: {{ 'ERMS_EXPORT.BROWSE_REPOS | translate '}}</md-button>
-    <md-button class="md-raised md-primary" ng-disabled="true">{{ 'COMMON.NEXT' | translate }}: {{ 'ERMS_EXPORT.EXPORT | translate'}}</md-button>
+    <md-button class="md-raised md-primary" ng-click="rxc.initExport();" ng-disabled="false">{{ 'COMMON.NEXT' | translate }}: {{ 'ERMS_EXPORT.EXPORT | translate'}}</md-button>
 </div>
 
 <md-card>

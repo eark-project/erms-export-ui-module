@@ -139,8 +139,14 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $transla
         }).then(function () {
             empc.showConnectDialog2(profile);
         });
-    };
+    }
 
+    /**
+     * This method currently useless but is left here because we might actually need it in the near future
+     * @param $scope
+     * @param $mdDialog
+     * @param profile
+     */
     function pickRootDialogController($scope, $mdDialog, profile) {
         var prdc = this;
         prdc.profile = angular.copy(profile);

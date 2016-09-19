@@ -125,7 +125,6 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
     function goToCrumb(index) {
         var selected = ermSvc.breadcrumbs[index];
         ermSvc.breadcrumbs = ermSvc.breadcrumbs.slice(0, index);
-        debugger;
         (index == 0) ? ermSvc.connect() : ermSvc.getFolderChildren({
             name: ermSvc.profile,
             folderObjectId: selected.objectId,
@@ -133,6 +132,7 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
         });
     }
 
+    //TODO delete when confirmed uselessness
     function registerSelection(item, all){
         if(all && !item)
             ermSvc.repoItems.forEach(function(item){
@@ -143,7 +143,6 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
             ermSvc.repoItems.splice(idx,1);
         }
     }
-
 
     /**
      * returns the index of the item in the basket

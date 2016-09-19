@@ -2,19 +2,27 @@ angular
     .module('eArkPlatform.erms.export')
     .factory('ermsExportService', ErmsExportService);
 
-function ErmsExportService() {
+function ErmsExportService($http) {
 
     var exportBasket = [], exclusionList = [];
+    var exportProfile = '', exportMap='';
 
     return {
         getBasket           : getBasket,
         itemExists          : itemExists,
         removeItem          : removeItem,
+        exportItems         : exportItems,
         clearBasket         : clearBasket,
         itemDeselected      : itemDeselected,
         deSelectItem        : deSelectItem,
-        toggleItemInBasket  : toggleItemInBasket
+        toggleItemInBasket  : toggleItemInBasket,
+        initExportParams    : initExportParams
     };
+
+    function initExportParams(profileName, mapName){
+        exportProfile = profileName;
+        exportMap = mapName;
+    }
 
     function getBasket() {
         return exportBasket;
@@ -24,6 +32,20 @@ function ErmsExportService() {
         _removeItem(item, exportBasket);
     }
 
+    function exportItems(){
+        console.log("The number of items to be exported is:" + exportBasket.length +"\nThe number of items to exclude: "+exclusionList.length);
+        return $http.post('/webapi/repository/extract', {
+            name: exportProfile,
+            mapName : exportMap,
+            exportList: _getItemIds(exportBasket),
+            excludeList: _getItemIds(exclusionList)
+        });
+    }
+
+    /**
+     * Serves to add an item to the exclusion list
+     * @param item
+     */
     function deSelectItem(item){
         if(exclusionList.length <=0)
             exclusionList = [item];
@@ -63,26 +85,35 @@ function ErmsExportService() {
     }
 
     /**
-     * Returns a boolean indicating whether the item is already in the basket
+     * Returns a boolean indicating whether the item is already in the export basket
      * @param item
-     * @returns {boolean}
+     * @returns {true|false}
      */
     function itemExists(item) {
         return _getItemPos(item, exportBasket) >= 0;
     }
 
     /**
-     * check whether item is in deselection basket
+     * Checks whether item is in deselection basket. returns true if it is
      * @param item
-     * @returns {boolean}
+     * @returns {true|false}
      */
     function itemDeselected(item) {
         return _getItemPos(item, exclusionList) >= 0;
     }
 
     /**
-     * removes an item from the basket
-     * @param item
+     * Clears both the export basket and the exclusion list
+     */
+    function clearBasket(){
+        exportBasket = [];
+        exclusionList = [];
+    }
+
+    /**
+     *
+     * @param item the item to be removed
+     * @param basket the basket from which to remove the item
      * @private
      */
     function _removeItem(item, basket) {
@@ -93,11 +124,11 @@ function ErmsExportService() {
     }
 
     /**
-     * returns the index of the item in the basket
+     * Returns the index of the item in the specified basket
      * @param item
      * @param basket
      * @private
-     * @returns number of item in the flat array or -1 indicating it doesn't exist
+     * @returns position of the item in the flat array or -1 indicating it doesn't exist
      */
     function _getItemPos(item, basket) {
         if (basket.length <= 0)
@@ -109,7 +140,18 @@ function ErmsExportService() {
 
     }
 
-    function clearBasket(){
-        exportBasket = [];
+    /**
+     * Returns a flat array of item id strings from the given basket
+     * @param basket
+     * @returns {Array}
+     * @private
+     */
+    function _getItemIds(basket){
+        var flatList = [];
+        basket.forEach(function(item){
+            flatList.push(item.objectId);
+        });
+        debugger;
+        return flatList;
     }
 }

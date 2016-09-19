@@ -27,7 +27,12 @@ function RepoViewController($scope, $stateParams, ermsRepoService, fileUtilsServ
         rvc.profileName = ermsRepoService.profile;
         rvc.repositoryRoot = ermsRepoService.repositoryRoot;
         rvc.mapName = ermsRepoService.mapName;
+        //load the root view for the repository
         _getRootView(rvc.profileName);
+        //Re-initialise the export feature by clearing the export basket and re-initialising the profile and mapping params
+        ermsExportService.clearBasket();
+        ermsExportService.initExportParams(ermsRepoService.profile, ermsRepoService.mapName);
+
     }
 
     /**
@@ -100,16 +105,6 @@ function RepoViewController($scope, $stateParams, ermsRepoService, fileUtilsServ
     }
 
     function selectItemForExport(item){
-        /*if(!item.selected) {
-            item.path = _getBreadcrumbPath(); //At the point of selection we grab the breadcrumb path
-            console.log("item [" + item.objectId + "] is selected -> " + item.selected);
-            item.selected = true;
-            ermsExportService.toggleItemInBasket(item);
-        }
-        else{
-            item.selected = false;
-            ermsExportService.itemDeselected(item);
-        }*/
         ermsExportService.toggleItemInBasket(item);
     }
 
