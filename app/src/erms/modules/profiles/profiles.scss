@@ -7,11 +7,12 @@
     }
     
     md-list-item {
-        border-bottom: dashed 1px #fff;
+        border-top: solid 1px #ddd;
     }
 }
 
 .profile-btn {
     text-align: left;
     text-transform: capitalize;
+    font-weight: normal;
 }
