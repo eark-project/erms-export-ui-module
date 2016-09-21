@@ -5,10 +5,13 @@
     .active button.md-no-style:hover {
         background-color: #fff;
     }
-    .active:after {
-        content: '';
-        display: inline-block;
-        border: solid 1.5em #eee;
-        border-left-color: transparent;
+    
+    md-list-item {
+        border-bottom: dashed 1px #fff;
     }
+}
+
+.profile-btn {
+    text-align: left;
+    text-transform: capitalize;
 }
