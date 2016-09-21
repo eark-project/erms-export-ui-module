@@ -1,8 +1,9 @@
 ﻿{
     "ERMS_EXPORT": {
-        "ITEMS": "Items for export",
-        "BROWSE_REPOS": "Browse repositories",
-        "EXPORT": "Export to ...",
+        "LABEL": "Export",
+        "ITEMS": "Items ready for export",
+        "BROWSE_REPOS": "Continue browsing repository",
+        "EXPORT": "Start export",
         "REVIEW": "Review export"
     }
 }

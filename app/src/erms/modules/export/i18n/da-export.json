@@ -1,8 +1,9 @@
 ﻿{
     "ERMS_EXPORT": {
-        "ITEMS": "Dokumenter der kan eksporteres",
-        "BROWSE_REPOS": "Gennemse dokumentarkiver",
-        "EXPORT": "Eksportér til ...",
-        "REVIEW": "Godkend dokumenter til eksport"
+        "LABEL": "Eksport",
+        "ITEMS": "Dokumenter der er klar til at blive eksporteret",
+        "BROWSE_REPOS": "Fortsæt med at gennemse arkiv",
+        "EXPORT": "Start eksport",
+        "REVIEW": "Gennemgå eksport"
     }
 }

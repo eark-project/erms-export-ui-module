@@ -1,0 +1,21 @@
+<md-dialog aria-label="">
+    <form ng-model="stdc.xmlFile">
+        <md-toolbar layout="row">
+            <div class="md-toolbar-tools">
+                <h2>Upload template XML</h2>
+            </div>
+        </md-toolbar>
+        <md-dialog-content layout-padding layout-margin>
+            <label>Select a template XML file for export:</label>
+            <input type="file" name="file">
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <md-button ng-click="stdc.cancel()">
+                {{ 'COMMON.CANCEL' | translate }}
+            </md-button>
+            <md-button class="md-primary" ng-click="stdc.selectTemplate()" aria-label="Save profile edits">
+                {{ 'COMMON.UPLOAD' | translate }}
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
