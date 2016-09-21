@@ -8,7 +8,7 @@
     </div>
     
     <nav layout="row nowrap" class="erms-tabs">
-        <div ng-class="{'active':emc.currently === 'repos'}" ng-click="emc.currently = 'repos'">
+        <div ng-class="{'active':emc.currently === 'repos' || 'pre-export'}" ng-click="emc.currently = 'repos'">
             <md-button ui-sref="erms.repos">{{ 'ERMS_PROFILES.REPOSITORIES.LABEL' | translate }}</md-button>
         </div>
         <div ng-class="{'active':emc.currently === 'mapfi'}" ng-click="emc.currently = 'mapfi'">

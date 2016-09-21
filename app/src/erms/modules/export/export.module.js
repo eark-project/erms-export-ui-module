@@ -4,7 +4,17 @@ angular
 
 function config($stateProvider, languageFilesProvider){
 
-    $stateProvider.state('erms.export', {
+    $stateProvider.state('erms.pre-export', {
+        parent: 'erms',
+        url: '/pre-export',
+        views: {
+            'erms': {
+                templateUrl : 'app/src/erms/modules/export/view/pre-exportView.html',
+                controller  : 'ErmsExportController',
+                controllerAs: 'rxc'
+            }
+        }
+    }).state('erms.export', {
         parent: 'erms',
         url: '/export',
         views: {
