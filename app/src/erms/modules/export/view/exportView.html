@@ -1,11 +1,29 @@
-<div layout="column" style="background-color: #eee;" layout-padding>
+<div id="export" layout="column" layout-fill>
     
-    <h1 class="md-title">{{ 'ERMS_EXPORT.LABEL' | translate }}</h1>
+    <md-toolbar class="md-hue-2 repo-view__toolbar">
+        <div class="md-toolbar-tools">
+            
+            <span>{{ 'ERMS_EXPORT.LABEL' | translate }}</span>
+                    
+        </div>
+    </md-toolbar>
     
-    <p>Exporting <strong>43736</strong> items.</p>
-    <md-progress-linear md-mode="indeterminate"></md-progress-linear>
-    <p>Depending on your selection, the export process may take hours.</p>
-    <p>When done, your export package will be available at <a href="google.dk">this location.</a></p>
+    <div layout-padding class="export__content">
+        
+        <p>Exporting <strong>43736</strong> items.</p>
+        
+        <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+        
+        <p>Depending on your selection, the export process may take hours.</p>
+        <p>When done, your export package will be available at <a href="google.dk">this location.</a></p>
+        <div>
+            <md-button
+                class="md-raised"
+                ui-sref="erms.repos">
+                {{ 'COMMON.CANCEL' | translate }}
+            </md-button>
+        </div>
+        
+    </div>
     
-
 </div>

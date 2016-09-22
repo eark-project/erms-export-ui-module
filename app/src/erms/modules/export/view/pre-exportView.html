@@ -1,46 +1,56 @@
-<div layout="column" style="background-color: #eee;" layout-padding>
+<div id="pre-export" layout="column" layout-fill>
     
-    <h1 class="md-title">{{ 'ERMS_EXPORT.ITEMS' | translate }}</h1>
+    <md-toolbar class="md-hue-2 repo-view__toolbar">
+        <div class="md-toolbar-tools">
+        
+            <md-button class="md-icon-button" onclick="window.history.go(-1);">
+                <i class="material-icons">arrow_back</i>
+            </md-button>
+            
+            <span>{{ 'ERMS_EXPORT.ITEMS' | translate }}</span>
+            
+            <span flex></span>
+                    
+        </div>
+    </md-toolbar>
     
-    <div layout="row" layout-align="space-between center">
-        <md-button class="md-raised md-text-icon-button" onclick="window.history.go(-1);">
-            <i class="material-icons">arrow_back</i>
-            {{ 'ERMS_EXPORT.BROWSE_REPOS' | translate }}
-        </md-button>
-        <md-button class="md-raised md-primary" ng-click="rxc.initExport();" ng-disabled="false">
-            {{ 'ERMS_EXPORT.EXPORT' | translate }}
-        </md-button>
-    </div>
-    
-    <md-card>
+    <md-card class="pre-export__list" flex>
     
         <md-card-content>
     
             <div layout="column">
-                <table class="simple-list" ng-show="rxc.exportItems">
-                    <tbody>
-                    <tr ng-repeat="item in rxc.exportItems">
-                        <td>
+                
+                <div ng-show="rxc.exportItems">
+                    <div ng-repeat="item in rxc.exportItems" layout="row" layout-align="space-between center">
+                        
+                        <div>
                             <img class="md-avatar" ng-src="app/assets/images/filetypes/{{item.thumbNailURL}}" alt="">
                             {{item.name}}
                             <div class="muted">({{item.path}})</div>
-                        </td>
-                        <td style="text-align: right;">
-                            <md-button ng-click="rxc.removeItem(item)">
-                                {{ 'COMMON.REMOVE' | translate }}
-                            </md-button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                        </div>
+                        
+                        <md-button ng-click="rxc.removeItem(item)">
+                            {{ 'COMMON.REMOVE' | translate }}
+                        </md-button>
+                        
+                    </div>
+                </div>
+                
                 <div ng-if="rxc.exportItems.length == 0" class="empty_file_list muted">
-                    <i class="material-icons">insert_drive_file</i><br>
+                    <i class="material-icons">insert_drive_file</i>
                     {{"COMMON.EMPTY" | translate}}
                 </div>
-    
+                
             </div>
+            
         </md-card-content>
     
     </md-card>
+    
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised md-primary" ng-click="rxc.initExport();" ng-disabled="false">
+                {{ 'ERMS_EXPORT.EXPORT' | translate }}
+        </md-button>
+    </div>
 
 </div>

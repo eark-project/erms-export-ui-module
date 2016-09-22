@@ -12,14 +12,6 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $transla
     empc.deleteProfile = deleteProfile;
     empc.initialise();
     empc.loadview = loadView;
-    empc.currently = '';
-
-    if ($state.params.name) {
-        empc.currently = decodeURIComponent($state.params.name);
-    }
-    ;
-
-    console.log(empc.currently);
 
     function initialise() {
         ermsProfilesService.getProfiles().then(function (response) {
@@ -172,7 +164,6 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $transla
             clickOutsideToClose: true,
             focusOnOpen: true
         }).then(function () {
-            empc.currently = profile.name;
             console.log(profile.name + ' & selected root: ' + profile.selectedRoot + ' & map: ' + profile.selectedMap.name);
             $state.go('erms.repos.browseRepo', {
                 'profileName': encodeURIComponent(profile.name),
