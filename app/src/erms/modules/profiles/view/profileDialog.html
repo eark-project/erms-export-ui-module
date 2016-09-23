@@ -27,11 +27,8 @@
             <div layout>
                 <md-input-container flex>
                     <label>{{ 'ERMS_PROFILES.PROFILES.DIALOG.LABELS.ACCESS_PASSWORD' | translate }} *</label>
-                    <input type="text" ng-model="epd.profile.password" name="password" required>
+                    <input type="password" ng-model="epd.profile.password" name="password" required>
                 </md-input-container>
-            </div>
-            <div>
-                <md-chips ng-model="epd.profile.repositories" placeholder="{{ 'ERMS_PROFILES.PROFILES.DIALOG.LABELS.ADD_ROOTS' | translate }} *"></md-chips>
             </div>
         </md-dialog-content>
         <md-dialog-actions layout="row">

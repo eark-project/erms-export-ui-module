@@ -2,7 +2,7 @@ angular
     .module('eArkPlatform.erms.profile')
     .controller('ErmsProfilesController', ErmsProfilesController);
 
-function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $translate) {
+function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $translate, errorService) {
     var empc = this;
     empc.profiles = [];
     empc.initialise = initialise;
@@ -198,7 +198,12 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $transla
               .ok( $translate.instant('COMMON.DELETE') )
               .cancel( $translate.instant('COMMON.CANCEL') );
         $mdDialog.show(confirm).then(function() {
-            ermsProfilesService.deleteProfile(profile.name);
+            ermsProfilesService.deleteProfile(profile.name).then(function(response){
+                debugger;
+                errorService.displayErrorMsg( 'profile successfully deleted' );
+                initialise();
+
+            });
         }, function() {
             console.log('cancel delete')
         });
