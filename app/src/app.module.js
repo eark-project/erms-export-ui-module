@@ -14,6 +14,7 @@ angular
         'eArkPlatform.translations.init',
         'eArkPlatform.header',
         'eArkPlatform.dashboard',
+        'eArkPlatform.errors',
         'eArkPlatform.erms',
         'eArkPlatform.erms.profile',
         'eArkPlatform.erms.export',
