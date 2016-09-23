@@ -30,7 +30,7 @@ function RepoViewController($scope, $stateParams, ermsRepoService, fileUtilsServ
         //load the root view for the repository
         _getRootView(rvc.profileName);
         //Re-initialise the export feature by clearing the export basket and re-initialising the profile and mapping params
-        ermsExportService.clearBasket();
+        //ermsExportService.clearBasket();
         ermsExportService.initExportParams(ermsRepoService.profile, ermsRepoService.mapName);
 
     }

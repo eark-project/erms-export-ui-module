@@ -26,8 +26,9 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
      */
     function connect() {
         return $http.post('/webapi/repository/connect', {
-                    name: ermSvc.profile, 
-                    mapName: ermSvc.mapName}).then(function (response) {
+            name: ermSvc.profile,
+            mapName: ermSvc.mapName
+        }).then(function (response) {
             ermSvc.breadcrumbs = [];
             initRepoView(response.data);
         });
@@ -97,12 +98,11 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
                 if (item.type == 'document')
                     item.displaySize = fileUtilsService.formatBytes(item.size);
                 (ermsExportService.itemExists(item)) ? item.selected = true : item.selected = false;
-
             });
 
-            if(response.selected)
+            if (response.selected)
                 ermSvc.repoItems.children.forEach(function (item) {
-                     item.selected = !ermsExportService.itemDeselected(item);
+                    item.selected = !ermsExportService.itemDeselected(item);
                 });
         }
         var crumb = {
@@ -110,10 +110,7 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
             objectId: ermSvc.repoItems.properties.objectId,
             selected: response.selected
         };
-        if(ermSvc.repoItems.children.length <= 0)
-            ermSvc.breadcrumbs = [crumb];
-        else
-            ermSvc.breadcrumbs.push(crumb);
+        ermSvc.breadcrumbs.push(crumb);
 
         ermSvc.notifyObservers();
     }
@@ -133,14 +130,14 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
     }
 
     //TODO delete when confirmed uselessness
-    function registerSelection(item, all){
-        if(all && !item)
-            ermSvc.repoItems.forEach(function(item){
+    function registerSelection(item, all) {
+        if (all && !item)
+            ermSvc.repoItems.forEach(function (item) {
                 item.seletced = false;
             });
-        if(item && !all){
+        if (item && !all) {
             var idx = _getItemPos(item);
-            ermSvc.repoItems.splice(idx,1);
+            ermSvc.repoItems.splice(idx, 1);
         }
     }
 
@@ -160,13 +157,13 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
     }
 
     //register an observer
-    ermSvc.registerObserverCallback = function(callback){
+    ermSvc.registerObserverCallback = function (callback) {
         ermSvc.observerCallbacks.push(callback);
     };
 
     //call this when repoItems has been changed
-    ermSvc.notifyObservers = function(){
-        angular.forEach(ermSvc.observerCallbacks, function(callback){
+    ermSvc.notifyObservers = function () {
+        angular.forEach(ermSvc.observerCallbacks, function (callback) {
             callback();
         });
     };
