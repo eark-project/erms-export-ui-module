@@ -1,15 +1,26 @@
-<div style="background-color: #eee;" layout-padding>
+<div layout="column" layout-padding layout-fill id="mapfiles">
+    
+    <h1 class="md-title">
+        {{ 'COMMON.EDIT' | translate }} {{ 'ERMS_MAPS.MAPPINGS.LABEL' | translate }}
+    </h1>
     
     <p ng-show="!emfc.mapfiles || emfc.mapfiles.length === 0">{{ 'ERMS_MAPS.MAPPINGS.NO_MAP_FILES' | translate }}</p>
     
-    <md-button class="md-primary md-text-icon-button" ng-click="emfc.addMapFile($event)">
-        <i class="material-icons ng-scope">add</i>
-        {{ 'COMMON.ADD' | translate }} {{ 'ERMS_MAPS.MAPPINGS.DIALOG.LABELS.MAPPING_FILE' | translate }}
-    </md-button>
+    <div>
+        <md-button class="md-primary md-text-icon-button" ng-click="emfc.addMapFile($event)">
+            <i class="material-icons ng-scope">add</i>
+            {{ 'COMMON.ADD' | translate }} {{ 'ERMS_MAPS.MAPPINGS.DIALOG.LABELS.MAPPING_FILE' | translate }}
+        </md-button>
+    </div>
     
-    <md-list >
-        <md-list-item ng-repeat="mapfile in emfc.mapfiles" style="background-color: #fff; padding: 0.5em 1em; margin-bottom: 1px;">
-            {{ mapfile.name }} <md-button ng-click="emfc.delMapFile(mapfile)">Remove</md-button>
+    <md-list>
+        <md-list-item
+            class="mapfiles__list__item"
+            ng-repeat="mapfile in emfc.mapfiles"
+            layout="row"
+            layout-align="space-between center">
+            {{ mapfile.name }}
+            <md-button ng-click="emfc.delMapFile(mapfile)">Remove</md-button>
         </md-list-item>
     </md-list>
     

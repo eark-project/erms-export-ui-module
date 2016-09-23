@@ -2,7 +2,7 @@ angular
     .module('eArkPlatform.erms.repoView')
     .controller('RepoViewController', RepoViewController);
 
-function RepoViewController($scope, $stateParams, ermsRepoService, fileUtilsService, ermsExportService) {
+function RepoViewController($scope, $state, $stateParams, ermsRepoService, fileUtilsService, ermsExportService) {
     var rvc = this;
     rvc.repo = ermsRepoService.repoItems;
     rvc.mapName = "";
@@ -115,4 +115,35 @@ function RepoViewController($scope, $stateParams, ermsRepoService, fileUtilsServ
         rvc.breadcrumbs = ermsRepoService.breadcrumbs;
         rvc.repo = ermsRepoService.repoItems;
     }
+    
+    
+    /**
+     * Intermediate methods and fake data for repo search
+     */
+    rvc.searchRepo = searchRepo;
+    rvc.searchResult = [
+        {
+            name: 'Udgifter1.ods',
+            thumbNailURL: 'ods-file-24.png',
+            displaySize: '26.015 KB',
+            creationDate: '18-12-2014',
+            createdBy: 'Someuser',
+            lastModificationDate: '23-04-2016',
+            lastModifiedBy: 'Some Otheruser'
+        },
+        {
+            name: 'Regnskab.pdf',
+            thumbNailURL: 'pdf-file-24.png',
+            displaySize: '103 KB',
+            creationDate: '01-03-1967',
+            createdBy: 'Admin',
+            lastModificationDate: '27-12-2018',
+            lastModifiedBy: 'Someuser'
+        }
+    ];
+    function searchRepo() {
+        $state.go('erms.repos.searchRepo', { profileName: rvc.profileName, mapName: rvc.mapName });
+    };
+    
+    
 }

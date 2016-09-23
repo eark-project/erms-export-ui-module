@@ -1,65 +1,89 @@
-<div layout="row" class="repview__title" layout-align="space-between center">
-    <h2 class="md-subhead">{{ rvc.profileName }} <span style="color: #999;">{{ 'DOCUMENT.DOCUMENTS' | translate }}</span></h2>
-    <md-button class="md-raised md-primary" ng-disabled="rvc.repo.length === 0" ui-sref="erms.pre-export">{{ 'COMMON.NEXT' | translate }}: {{ 'ERMS_EXPORT.REVIEW' | translate}}</md-button>
-</div>
-
-<md-card>
-
-    <div class="repo-docs__nav window">
+<div id="repo-view" layout="column" layout-fill>
+    
+    <md-toolbar class="md-hue-2 repo-view__toolbar">
+        <div class="md-toolbar-tools">
+            
+            <span>{{ rvc.profileName }} <span class="muted">{{ 'DOCUMENT.DOCUMENTS' | translate }}</span></span>
+            
+            <span flex></span>
+            
+            <form ng-submit="rvc.searchRepo()">
+                <md-input-container md-no-float layout="row" class="search__input">
+                    <input class="repo-view__search__input" type="search" placeholder="Search repository">
+                    <i class="material-icons">search</i>
+                </md-input-container>
+            </form>
+                    
+        </div>
+    </md-toolbar>
+    
+    <div class="repo-view__breadcrumb" layout-padding>
         <nav class="od-filebrowser-breadcrumb">
             <a ng-repeat="crumb in rvc.breadcrumbs" ng-click="rvc.gotoCrumb($index)">{{crumb.name}}</a>
             <span ng-if="$last" class="active">{{crumb.name}}</span>
         </nav>
     </div>
-
-    <md-card-content>
-
-        <div layout="column">
-            <div class="tlist">
-                <div class="tlist__header" layout="row">
-                    <div class="tlist__cell" flex sort-table="title">{{ 'COMMON.TITLE' | translate }}</div>
-                    <div class="tlist__cell" flex="10" sort-table="creator.fullName">{{ 'COMMON.CREATEDBY' | translate
-                        }}
-                    </div>
-                    <!-- might not be convenient to sort if multiple owner -->
-                    <div class="tlist__cell" flex="10" sort-table="created">{{ 'COMMON.CREATED' | translate }}
-                    </div>
-                    <div class="tlist__cell" flex="10" sort-table="modified">{{ 'COMMON.MODIFIED_BY' | translate }}
-                    </div>
-                    <div class="tlist__cell" flex="10" sort-table="lastModificationDate">{{ 'COMMON.MODIFIED' |
-                        translate }}
-                    </div>
-                    <div class="tlist__cell" flex="10"></div>
+    
+    <div layout="column" flex layout-padding class="repo-view__list">
+        <div class="tlist">
+            <div class="tlist__header" layout="row">
+                <div class="tlist__cell" flex sort-table="title">{{ 'COMMON.TITLE' | translate }}</div>
+                <div hide-xs hide-sm class="tlist__cell" flex="10" sort-table="creator.fullName">
+                    {{ 'COMMON.CREATEDBY' | translate }}
                 </div>
-                <md-virtual-repeat-container class="tlist__body" md-auto-shrink flex-height
-                                             ng-if="rvc.repo.children.length > 0">
-                    <div md-virtual-repeat="item in rvc.repo.children | orderObjectBy:orderByAttribute:reverseOrder"
-                         layout="column" flex>
-                        <!--class="tlist__item {{ item.locked ? 'muted' : '' }}" ng-disabled="item.locked">-->
-                        <div class="tlist__item__link" style="cursor: pointer"
-                             ng-click="rvc.getItem(item)" layout="row">
-                            <span class="tlist__cell" flex>
-                                <img class="md-avatar" alt="" ng-src="app/assets/images/filetypes/{{item.thumbNailURL}}">
-                                {{item.name}} <span class="muted" ng-show="rvc.isFile(item)">
-                                    ({{item.displaySize}})
-                                </span>
-                            </span>
-                            <span class="tlist__cell muted" flex="10"> {{item.createdBy}} </span>
-                            <span class="tlist__cell muted" flex="10">{{ item.creationDate }}</span>
-                            <span class="tlist__cell muted" flex="10">{{ item.lastModifiedBy  }}</span>
-                            <span class="tlist__cell muted" flex="10">{{ item.lastModificationDate  }}</span>
-                            <span class="tlist__cell muted" flex="10">
-                                <md-checkbox ng-show="item.exportable" ng-click="rvc.selectItemForExport(item); $event.stopPropagation();" ng-checked="item.selected" aria-label="Check for export"></md-checkbox>
-                            </span>
-                        </div>
-                    </div>
-                </md-virtual-repeat-container>
-                <div ng-if="rvc.repo.children.length == 0" class="empty_file_list muted">
-                    <i class="material-icons">insert_drive_file</i><br>
-                    {{"COMMON.EMPTY" | translate}}
+                <!-- might not be convenient to sort if multiple owner -->
+                <div hide-xs hide-sm class="tlist__cell" flex="10" sort-table="created">
+                    {{ 'COMMON.CREATED' | translate }}
+                </div>
+                <div hide-xs hide-sm class="tlist__cell" flex="10" sort-table="modified">
+                    {{ 'COMMON.MODIFIED_BY' | translate }}
+                </div>
+                <div hide-xs class="tlist__cell" flex="10" sort-table="lastModificationDate">
+                    {{ 'COMMON.MODIFIED' | translate }}
+                </div>
+                <div class="tlist__cell" flex="10">
+                    {{ 'SELECT' | translate }}
                 </div>
             </div>
+            <div
+                class="tlist__body"
+                ng-if="rvc.repo.children.length > 0">
+                <div
+                    ng-repeat="item in rvc.repo.children | orderObjectBy:orderByAttribute:reverseOrder"
+                    layout="column"
+                    flex>
+                    <!--class="tlist__item {{ item.locked ? 'muted' : '' }}" ng-disabled="item.locked">-->
+                    <div
+                        class="tlist__item__link"
+                        style="cursor: pointer"
+                        ng-click="rvc.getItem(item)"
+                        layout="row">
+                        <span class="tlist__cell" flex>
+                            <img class="md-avatar" alt="" ng-src="app/assets/images/filetypes/{{item.thumbNailURL}}">
+                            {{item.name}}
+                            <span class="muted" ng-show="rvc.isFile(item)">
+                                ({{item.displaySize}})
+                            </span>
+                        </span>
+                        <span hide-xs hide-sm class="tlist__cell muted" flex="10">{{ item.createdBy }}</span>
+                        <span hide-xs hide-sm class="tlist__cell muted" flex="10">{{ item.creationDate }}</span>
+                        <span hide-xs hide-sm class="tlist__cell muted" flex="10">{{ item.lastModifiedBy }}</span>
+                        <span hide-xs class="tlist__cell muted" flex="10">{{ item.lastModificationDate }}</span>
+                        <span class="tlist__cell muted" flex="10">
+                            <md-checkbox ng-show="item.exportable" ng-click="rvc.selectItemForExport(item); $event.stopPropagation();" ng-checked="item.selected" aria-label="Check for export"></md-checkbox>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="rvc.repo.children.length == 0" class="empty_file_list muted">
+                <i class="material-icons">insert_drive_file</i><br>
+                {{"COMMON.EMPTY" | translate}}
+            </div>
         </div>
-    </md-card-content>
-
-</md-card>
+    </div>
+    
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised md-primary" ng-disabled="rvc.repo.length === 0" ui-sref="erms.pre-export">{{ 'COMMON.NEXT' | translate }}: {{ 'ERMS_EXPORT.REVIEW' | translate}}</md-button>    
+    </div>
+    
+</div>

@@ -1,0 +1,67 @@
+<div id="repo-view" layout="column" layout-fill>
+    
+    <md-toolbar class="md-hue-2 repo-view__toolbar">
+        <div class="md-toolbar-tools">
+            
+            <md-button
+                class="md-icon-button"
+                ui-sref="erms.repos.browseRepo({ profileName: rvc.profileName, mapName: rvc.mapName })">
+                <i class="material-icons">arrow_back</i>
+            </md-button>
+            
+            <span>
+                {{ rvc.profileName }}
+                <span class="muted">
+                    {{ 'SEARCH.SEARCH' | translate }}
+                </span>
+            </span>
+            
+            <span flex></span>
+                    
+        </div>
+    </md-toolbar>
+    
+    <div layout="column" flex layout-padding class="repo-view__list">
+        
+        <form ng-submit="rvc.searchRepo()">
+            <md-input-container md-no-float layout="row" class="search__input">
+                <input type="search" placeholder="Search repository">
+                <i class="material-icons">search</i>
+            </md-input-container>
+        </form>
+        
+        <div class="search__list tlist">
+            <div class="tlist__body">
+                <div ng-repeat="item in rvc.searchResult" layout="column" flex>
+                    <div class="tlist__item__link" layout="row">
+                        <span class="tlist__cell muted" flex="10">
+                            <md-checkbox
+                                aria-label="Check for export"
+                                ng-click="rvc.selectItemForExport(item); $event.stopPropagation();">
+                            </md-checkbox>
+                        </span>
+                        <span class="tlist__cell" flex>
+                            <img class="md-avatar" alt="" ng-src="app/assets/images/filetypes/{{ item.thumbNailURL }}">
+                            {{ item.name }}
+                            <span class="muted">
+                                ({{ item.displaySize }})
+                            </span>
+                        </span>
+                        <span class="tlist__cell muted" flex="10">{{ item.createdBy}}</span>
+                        <span class="tlist__cell muted" flex="10">{{ item.creationDate }}</span>
+                        <span class="tlist__cell muted" flex="10">{{ item.lastModifiedBy }}</span>
+                        <span class="tlist__cell muted" flex="10">{{ item.lastModificationDate }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised md-primary" ng-disabled="rvc.repo.length === 0" ui-sref="erms.pre-export">{{ 'COMMON.NEXT' | translate }}: {{ 'ERMS_EXPORT.REVIEW' | translate}}</md-button>    
+    </div>
+    
+</div>
+        
+        

@@ -1,12 +1,26 @@
-.repview__title .md-subhead {
-    margin: $u $u*0.5 0;
+#repo-view {
+    
+}
+
+.repo-view__toolbar {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.repo-view__list {
+    overflow: auto;
+    border-bottom: solid 1px #eee;
+}
+
+.repo-view__breadcrumb {
+    background-color: #eee;
 }
 
 .od-filebrowser-breadcrumb {
     margin: 0;
-    background-color: #eee;
     font-size: $u*0.9;
-    padding: 0 $u*0.25;
+    padding: 0;
   
     a,
     a:link,
@@ -31,6 +45,11 @@
     }
 }
 
+.repo-view__search__input {
+    color: #fff !important;
+    font-size: smaller;
+}
+
 .tlist {
     
     .tlist__header {
@@ -41,22 +60,11 @@
         }
     }
     
-    .tlist__body {
-        
-    }
-    
-    .tlist__item__link {
-        
-    }
-    
     .tlist__cell {
         padding: $u*0.25;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        
-        &.muted {
-            color: #999;
-        }
+        vertical-align: middle;
     }
 }

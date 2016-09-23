@@ -5,10 +5,10 @@ angular
 function config($stateProvider, languageFilesProvider, ermsServiceProvider ){
 
     $stateProvider.state('erms.mapfiles', {
-        parent: 'erms',
+        parent: 'erms.repos',
         url: '/mapfiles',
         views: {
-            'erms': {
+            'repo-browser': {
                 templateUrl : 'app/src/erms/modules/mapfiles/view/mapfilesView.html',
                 controller : 'ErmsMapfilesController',
                 controllerAs: 'emfc'
