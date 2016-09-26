@@ -13,10 +13,12 @@ function ErmsExportService($http) {
         removeItem          : removeItem,
         exportItems         : exportItems,
         clearBasket         : clearBasket,
+        checkExportStatus   : checkExportStatus,
         itemDeselected      : itemDeselected,
         deSelectItem        : deSelectItem,
         toggleItemInBasket  : toggleItemInBasket,
-        initExportParams    : initExportParams
+        initExportParams    : initExportParams,
+        uploadEAD           : uploadEAD
     };
 
     function initExportParams(profileName, mapName){
@@ -34,7 +36,7 @@ function ErmsExportService($http) {
 
     function exportItems(){
         console.log("The number of items to be exported is:" + exportBasket.length +"\nThe number of items to exclude: "+exclusionList.length);
-        return $http.post('/webapi/repository/extract', {
+        return $http.post('/webapi/extraction/extract', {
             name: exportProfile,
             mapName : exportMap,
             exportList: _getItemIds(exportBasket),
@@ -110,6 +112,26 @@ function ErmsExportService($http) {
         exclusionList = [];
     }
 
+    function uploadEAD(eadFileObject){
+        var formData = new FormData();
+        formData.append('file', eadFileObject.file);
+        formData.append('eadFile', eadFileObject.file.name);
+        return $http.post('/webapi/extraction/ead/upload', formData, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        }).then(function (response) {
+            console.log(response.data);
+            return response.data;
+        });
+    }
+
+    function checkExportStatus(){
+        console.log("Checking export status");
+        return $http.get('/webapi/extraction/status').then(function(response){
+            return response.data;
+        });
+    }
+
     /**
      *
      * @param item the item to be removed
@@ -151,7 +173,6 @@ function ErmsExportService($http) {
         basket.forEach(function(item){
             flatList.push(item.objectId);
         });
-        debugger;
         return flatList;
     }
 }

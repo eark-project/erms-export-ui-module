@@ -6,14 +6,14 @@
             </div>
         </md-toolbar>
         <md-dialog-content layout-padding layout-margin>
-            <label>Select a template XML file for export:</label>
-            <input type="file" name="file">
+            <label>{{ 'ERMS_EXPORT.DIALOG.LABELS.EAD_FILE' | translate }}: </label>
+            <input type="file" name="file" file-model="stdc.eadFile.file" onchange="angular.element(this).$scope.fileNameChanged(this)" required>
         </md-dialog-content>
         <md-dialog-actions layout="row">
             <md-button ng-click="stdc.cancel()">
                 {{ 'COMMON.CANCEL' | translate }}
             </md-button>
-            <md-button class="md-primary" ng-click="stdc.selectTemplate()" aria-label="Save profile edits">
+            <md-button class="md-primary" ng-click="stdc.upload()" aria-label="Save profile edits">
                 {{ 'COMMON.UPLOAD' | translate }}
             </md-button>
         </md-dialog-actions>

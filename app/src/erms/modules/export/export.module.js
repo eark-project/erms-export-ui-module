@@ -3,7 +3,6 @@ angular
     .config(config);
 
 function config($stateProvider, languageFilesProvider){
-
     $stateProvider.state('erms.pre-export', {
         parent: 'erms',
         url: '/pre-export',
@@ -20,12 +19,11 @@ function config($stateProvider, languageFilesProvider){
         views: {
             'erms': {
                 templateUrl : 'app/src/erms/modules/export/view/exportView.html',
-                controller  : 'ErmsExportController',
-                controllerAs: 'rxc'
+                controller  : 'ErmsExportProcessController',
+                controllerAs: 'rxpc'
             }
         }
     });
 
     languageFilesProvider.addFile('app/src/erms/modules/export/i18n/','-export.json');
-
 }

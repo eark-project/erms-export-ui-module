@@ -199,7 +199,6 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $transla
               .cancel( $translate.instant('COMMON.CANCEL') );
         $mdDialog.show(confirm).then(function() {
             ermsProfilesService.deleteProfile(profile.name).then(function(response){
-                debugger;
                 errorService.displayErrorMsg( 'profile successfully deleted' );
                 initialise();
 
