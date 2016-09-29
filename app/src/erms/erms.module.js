@@ -50,7 +50,7 @@ function httpTicketInterceptor() {
 
     function prefixServiceUrl(url) {
         if (url.indexOf("/webapi/") == 0 ) {
-            return "http://eark.magenta.dk:9090" + url;
+            return "http://eark.magenta.dk:9090/export-bridge" + url;
         }
         return url;
     }

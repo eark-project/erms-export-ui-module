@@ -111,7 +111,6 @@ function ermsRepoService($q, $http, fileUtilsService, ermsExportService) {
             selected: response.selected
         };
         ermSvc.breadcrumbs.push(crumb);
-
         ermSvc.notifyObservers();
     }
 
