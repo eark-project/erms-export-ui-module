@@ -13,7 +13,6 @@ angular
         'eArkPlatform.init',
         'eArkPlatform.translations.init',
         'eArkPlatform.header',
-        'eArkPlatform.dashboard',
         'eArkPlatform.errors',
         'eArkPlatform.erms',
         'eArkPlatform.erms.profile',
@@ -66,14 +65,14 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, $httpPro
                 controllerAs: 'vm'
             }
         }
-    }).state('dashboard', {
+    }).state('root', {
         parent: 'site',
         url: '/',
         views: {
             'content@': {
-                templateUrl: 'app/src/dashboard/view/dashboard.html',
-                controller: 'DashboardController',
-                controllerAs: 'vm'
+                templateUrl: 'app/src/erms/view/erms.html',
+                controller: 'ErmsMenuController',
+                controllerAs: 'emc'
             }
         }
     });
