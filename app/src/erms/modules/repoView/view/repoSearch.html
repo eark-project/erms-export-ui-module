@@ -1,35 +1,30 @@
 <div id="repo-view" layout="column" layout-fill>
-    
+
     <md-toolbar class="md-hue-2 repo-view__toolbar">
         <div class="md-toolbar-tools">
-            
+
             <md-button
                 class="md-icon-button"
                 ui-sref="erms.repos.browseRepo({ profileName: rvc.profileName, mapName: rvc.mapName })">
                 <i class="material-icons">arrow_back</i>
             </md-button>
-            
-            <span>
-                {{ rvc.profileName }}
-                <span class="muted">
-                    {{ 'SEARCH.SEARCH' | translate }}
-                </span>
-            </span>
-            
+
+            <span>{{ 'SEARCH.SEARCH' | translate }}</span>
+
             <span flex></span>
-                    
+
         </div>
     </md-toolbar>
-    
+
     <div layout="column" flex layout-padding class="repo-view__list">
-        
+
         <form ng-submit="rvc.searchRepo()">
             <md-input-container md-no-float layout="row" class="search__input">
-                <input type="search" placeholder="Search repository">
+                <input type="search" placeholder="Search {{ rvc.profileName }}">
                 <i class="material-icons">search</i>
             </md-input-container>
         </form>
-        
+
         <div class="search__list tlist">
             <div class="tlist__body">
                 <div ng-repeat="item in rvc.searchResult" layout="column" flex>
@@ -55,13 +50,14 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
     
     <div layout="row" layout-align="end center">
-        <md-button class="md-raised md-primary" ng-disabled="rvc.repo.length === 0" ui-sref="erms.pre-export">{{ 'COMMON.NEXT' | translate }}: {{ 'ERMS_EXPORT.REVIEW' | translate}}</md-button>    
+        <md-button class="md-raised md-primary" ng-disabled="rvc.exportItemsLength === 0" ui-sref="erms.pre-export">
+            {{ 'ERMS_EXPORT.REVIEW' | translate}}
+            <span class="export-btn-label" ng-hide="rvc.exportItemsLength === 0">{{ rvc.exportItemsLength }}</span>
+        </md-button>    
     </div>
-    
+
 </div>
-        
-        

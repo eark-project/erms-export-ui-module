@@ -13,7 +13,8 @@ function RepoViewController($scope, $state, $stateParams, ermsRepoService, fileU
     rvc.breadcrumbs = ermsRepoService.breadcrumbs;
     rvc.gotoCrumb = ermsRepoService.goToCrumb;
     rvc.selectItemForExport = selectItemForExport;
-
+    rvc.exportItemsLength = ermsExportService.getBasketLength();
+    
     rvc.loadRepoView();
 
     /**
@@ -106,6 +107,7 @@ function RepoViewController($scope, $state, $stateParams, ermsRepoService, fileU
 
     function selectItemForExport(item){
         ermsExportService.toggleItemInBasket(item);
+        rvc.exportItemsLength = ermsExportService.getBasketLength();
     }
 
     /**

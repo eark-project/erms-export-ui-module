@@ -1,7 +1,7 @@
 ﻿{
     "ERMS_MAPS": {
         "MAPPINGS": {
-            "LABEL": "Kortlægningsfiler",
+            "LABEL": "Redigér kortlægningsfiler",
             "LIST": {
                 "LABELS": {
                     "MAPPING_NAME" : "Navn"

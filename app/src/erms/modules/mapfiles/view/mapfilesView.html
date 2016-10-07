@@ -1,17 +1,24 @@
-<div layout="column" layout-padding layout-fill id="mapfiles">
-    
-    <h1 class="md-title">
-        {{ 'COMMON.EDIT' | translate }} {{ 'ERMS_MAPS.MAPPINGS.LABEL' | translate }}
-    </h1>
-    
-    <p ng-show="!emfc.mapfiles || emfc.mapfiles.length === 0">{{ 'ERMS_MAPS.MAPPINGS.NO_MAP_FILES' | translate }}</p>
-    
-    <div>
-        <md-button class="md-primary md-text-icon-button" ng-click="emfc.addMapFile($event)">
-            <i class="material-icons ng-scope">add</i>
-            {{ 'COMMON.ADD' | translate }} {{ 'ERMS_MAPS.MAPPINGS.DIALOG.LABELS.MAPPING_FILE' | translate }}
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+        <md-button ui-sref="erms.repos" class="md-icon-button">
+            <i class="material-icons">arrow_back</i>
         </md-button>
+        <h1 class="md-title">
+            {{ 'ERMS_MAPS.MAPPINGS.LABEL' | translate }}
+        </h1>
     </div>
+</md-toolbar>
+
+<div layout="column" layout-padding id="mapfiles">
+    
+    <div layout="column" layout-align="center center">
+        <p ng-show="!emfc.mapfiles || emfc.mapfiles.length === 0">{{ 'ERMS_MAPS.MAPPINGS.NO_MAP_FILES' | translate }}</p>
+    </div>
+    
+    <md-button class="md-primary md-text-icon-button" ng-click="emfc.addMapFile($event)">
+        <i class="material-icons ng-scope">add</i>
+        {{ 'COMMON.ADD' | translate }} {{ 'ERMS_MAPS.MAPPINGS.DIALOG.LABELS.MAPPING_FILE' | translate }}
+    </md-button>
     
     <md-list>
         <md-list-item

@@ -6,10 +6,12 @@
             </div>
         </md-toolbar>
         <md-dialog-content layout="column" layout-padding layout-margin>
-            <h3>{{ 'ERMS_PROFILES.PROFILES.DIALOG.LABELS.SELECT_MAP_FILE' | translate }}</h3>
-            <md-button ng-repeat="mapfile in pmdc.mapFiles" ng-click="pmdc.selectMap(mapfile)">
-                {{ mapfile.name }}
-            </md-button>
+            <h3 class="md-subhead">{{ 'ERMS_PROFILES.PROFILES.DIALOG.LABELS.SELECT_MAP_FILE' | translate }}</h3>
+            <md-list style="border-top: solid 1px #eee;">
+                <md-list-item ng-repeat="mapfile in pmdc.mapFiles" ng-click="pmdc.selectMap(mapfile)">
+                    <strong>{{ mapfile.name }}</strong>
+                </md-list-item>
+            </md-list>
         </md-dialog-content>
         <md-dialog-actions layout="row">
             <md-button ng-click="cancel()">

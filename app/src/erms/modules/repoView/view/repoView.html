@@ -3,17 +3,19 @@
     <md-toolbar class="md-hue-2 repo-view__toolbar">
         <div class="md-toolbar-tools">
             
-            <span>{{ rvc.profileName }} <span class="muted">{{ 'DOCUMENT.DOCUMENTS' | translate }}</span></span>
+            <md-button ui-sref="erms.repos" class="md-icon-button">
+                <i class="material-icons">arrow_back</i>
+            </md-button>
+            
+            <span>{{ rvc.profileName }}</span>
             
             <span flex></span>
             
-            <form ng-submit="rvc.searchRepo()">
-                <md-input-container md-no-float layout="row" class="search__input">
-                    <input class="repo-view__search__input" type="search" placeholder="Search repository">
-                    <i class="material-icons">search</i>
-                </md-input-container>
-            </form>
-                    
+            <md-button ui-sref="erms.repos.searchRepo({ profileName: rvc.profileName, mapName: rvc.mapName })"
+                class="md-icon-button"
+                ng-disabled="true">
+                <i class="material-icons">search</i>
+            </md-button>
         </div>
     </md-toolbar>
     
@@ -25,36 +27,40 @@
     </div>
     
     <div layout="column" flex layout-padding class="repo-view__list">
-        <div class="tlist">
+        
+        <div ng-if="rvc.repo.children.length === 0"
+            class="empty_file_list muted md-subhead"
+            layout="column"
+            layout-align="center center">
+            {{ "COMMON.EMPTY" | translate }}
+        </div>
+        
+        <div ng-if="rvc.repo.children.length !== 0" class="tlist">
             <div class="tlist__header" layout="row">
                 <div class="tlist__cell" flex sort-table="title">{{ 'COMMON.TITLE' | translate }}</div>
-                <div hide-xs hide-sm class="tlist__cell" flex="10" sort-table="creator.fullName">
+                <div hide class="tlist__cell" flex="10" sort-table="creator.fullName">
                     {{ 'COMMON.CREATEDBY' | translate }}
                 </div>
                 <!-- might not be convenient to sort if multiple owner -->
-                <div hide-xs hide-sm class="tlist__cell" flex="10" sort-table="created">
+                <div hide class="tlist__cell" flex="10" sort-table="created">
                     {{ 'COMMON.CREATED' | translate }}
                 </div>
-                <div hide-xs hide-sm class="tlist__cell" flex="10" sort-table="modified">
+                <div hide class="tlist__cell" flex="10" sort-table="modified">
                     {{ 'COMMON.MODIFIED_BY' | translate }}
                 </div>
-                <div hide-xs class="tlist__cell" flex="10" sort-table="lastModificationDate">
+                <div hide class="tlist__cell" flex="10" sort-table="lastModificationDate">
                     {{ 'COMMON.MODIFIED' | translate }}
                 </div>
-                <div class="tlist__cell" flex="10">
+                <div class="tlist__cell" flex="20" style="text-align: center;">
                     {{ 'SELECT' | translate }}
                 </div>
             </div>
-            <div
-                class="tlist__body"
-                ng-if="rvc.repo.children.length > 0">
-                <div
-                    ng-repeat="item in rvc.repo.children | orderObjectBy:orderByAttribute:reverseOrder"
+            <div class="tlist__body" ng-if="rvc.repo.children.length > 0">
+                <div ng-repeat="item in rvc.repo.children | orderObjectBy:orderByAttribute:reverseOrder"
                     layout="column"
                     flex>
                     <!--class="tlist__item {{ item.locked ? 'muted' : '' }}" ng-disabled="item.locked">-->
-                    <div
-                        class="tlist__item__link"
+                    <div class="tlist__item__link"
                         style="cursor: pointer"
                         ng-click="rvc.getItem(item)"
                         layout="row">
@@ -65,25 +71,25 @@
                                 ({{item.displaySize}})
                             </span>
                         </span>
-                        <span hide-xs hide-sm class="tlist__cell muted" flex="10">{{ item.createdBy }}</span>
-                        <span hide-xs hide-sm class="tlist__cell muted" flex="10">{{ item.creationDate }}</span>
-                        <span hide-xs hide-sm class="tlist__cell muted" flex="10">{{ item.lastModifiedBy }}</span>
-                        <span hide-xs class="tlist__cell muted" flex="10">{{ item.lastModificationDate }}</span>
-                        <span class="tlist__cell muted" flex="10">
+                        <span hide class="tlist__cell muted" flex="10">{{ item.createdBy }}</span>
+                        <span hide class="tlist__cell muted" flex="10">{{ item.creationDate }}</span>
+                        <span hide class="tlist__cell muted" flex="10">{{ item.lastModifiedBy }}</span>
+                        <span hide class="tlist__cell muted" flex="10">{{ item.lastModificationDate }}</span>
+                        <span class="tlist__cell muted" flex="20" style="text-align: center;">
                             <md-checkbox ng-show="item.exportable" ng-click="rvc.selectItemForExport(item); $event.stopPropagation();" ng-checked="item.selected" aria-label="Check for export"></md-checkbox>
                         </span>
                     </div>
                 </div>
             </div>
-            <div ng-if="rvc.repo.children.length == 0" class="empty_file_list muted">
-                <i class="material-icons">insert_drive_file</i><br>
-                {{"COMMON.EMPTY" | translate}}
-            </div>
         </div>
+        
     </div>
     
     <div layout="row" layout-align="end center">
-        <md-button class="md-raised md-primary" ng-disabled="rvc.repo.length === 0" ui-sref="erms.pre-export">{{ 'COMMON.NEXT' | translate }}: {{ 'ERMS_EXPORT.REVIEW' | translate}}</md-button>    
+        <md-button class="md-raised md-primary" ng-disabled="rvc.exportItemsLength === 0" ui-sref="erms.pre-export">
+            {{ 'ERMS_EXPORT.REVIEW' | translate}}
+            <span class="export-btn-label" ng-hide="rvc.exportItemsLength === 0">{{ rvc.exportItemsLength }}</span>
+        </md-button>    
     </div>
     
 </div>

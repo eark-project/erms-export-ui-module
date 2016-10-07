@@ -1,11 +1,20 @@
-<div layout="row" layout-fill>
-    <div
-         id="erms-profile-nav"
-         flex-sm="33"
-         flex-md="25"
-         flex-gt-md="20"
-         layout="column"
-         layout-align="space-between">
+<div>
+    
+    <div layout="column" layout-padding>
+        <p style="text-align: center;" ng-show="!empc.profiles || empc.profiles.length === 0">
+            {{ 'ERMS_PROFILES.PROFILES.NO_PROFILES' | translate }}
+        </p>
+        <p class="md-subhead" style="text-align: center;">
+            You are not connected to a repository. Please pick one.
+        </p>
+    </div>
+    
+    <div id="erms-profile-nav">
+        
+        <md-button class="md-primary md-text-icon-button" ng-click="empc.showProfileDialog()">
+            <i class="material-icons ng-scope">add</i>
+            {{ 'COMMON.ADD' | translate }} {{ 'ERMS_PROFILES.PROFILES.PROFILE_LABEL' | translate }}
+        </md-button>
         
         <md-list class="profile-list" flex>
             <md-list-item
@@ -47,34 +56,11 @@
             </md-list-item>
         </md-list>
         
-        <div>
-            <md-button class="md-primary md-text-icon-button" ng-click="empc.showProfileDialog()">
-                <i class="material-icons ng-scope">add</i>
-                {{ 'COMMON.ADD' | translate }} {{ 'ERMS_PROFILES.PROFILES.PROFILE_LABEL' | translate }}
-            </md-button>    
-            <md-button ui-sref="erms.mapfiles">
-                {{ 'ERMS_MAPS.MAPPINGS.LABEL' | translate }}
-            </md-button>
-        </div>
-        
     </div>
     
-    <div flex-sm="66" flex-md="75" flex-gt-md="80">
-        
-        <p ng-show="!empc.profiles || empc.profiles.length === 0">
-            {{ 'ERMS_PROFILES.PROFILES.NO_PROFILES' | translate }}
-        </p>
-
-        
-        <div ui-view="repo-browser" layout-fill>
-            
-            <div layout="column" layout-align="center center" style="height: 100%;">
-                <p style="text-align: center; font-size: larger; font-weight: 100;">You haven't connected to a repository yet.</p>
-                <p style="text-align: center; font-size: larger; font-weight: 100;">Please pick one</p>
-            </div>
-            
-        </div>
-        
-    </div>
-
+    <md-button ui-sref="erms.mapfiles" class="md-text-icon-button">
+        <i class="material-icons">file_upload</i>
+        {{ 'ERMS_MAPS.MAPPINGS.LABEL' | translate }}
+    </md-button>
+    
 </div>

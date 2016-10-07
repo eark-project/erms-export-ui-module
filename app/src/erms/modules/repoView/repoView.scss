@@ -68,3 +68,9 @@
         vertical-align: middle;
     }
 }
+
+.export-btn-label {
+    display: inline-block;
+    background-color: rgba(0,0,0,0.2);
+    padding: $u*0.25 $u*0.5;
+}

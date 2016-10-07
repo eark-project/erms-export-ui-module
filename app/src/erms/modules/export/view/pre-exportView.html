@@ -23,10 +23,10 @@
                 <div ng-show="rxc.exportItems">
                     <div ng-repeat="item in rxc.exportItems" layout="row" layout-align="space-between center">
                         
-                        <div>
-                            <img class="md-avatar" ng-src="app/assets/images/filetypes/{{item.thumbNailURL}}" alt="">
+                        <div class="pre-export__list__item">
+                            <img ng-src="app/assets/images/filetypes/{{item.thumbNailURL}}" alt="">
                             {{item.name}}
-                            <div class="muted">({{item.path}})</div>
+                            <div class="muted">{{item.path}}</div>
                         </div>
                         
                         <md-button ng-click="rxc.removeItem(item)">
@@ -36,8 +36,10 @@
                     </div>
                 </div>
                 
-                <div ng-if="rxc.exportItems.length == 0" class="empty_file_list muted">
-                    <i class="material-icons">insert_drive_file</i>
+                <div ng-if="rxc.exportItems.length == 0"
+                    class="empty_file_list muted md-subhead"
+                    layout="column"
+                    layout-align="center center">
                     {{"COMMON.EMPTY" | translate}}
                 </div>
                 
