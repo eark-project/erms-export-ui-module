@@ -49,7 +49,7 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, $httpPro
         .warnPalette('deep-orange');
 
     $urlRouterProvider
-        .otherwise('/');
+        .otherwise('/erms/repositories');
 
     $stateProvider.state('site', {
         abstract: true,
@@ -63,16 +63,6 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, $httpPro
                 templateUrl: 'app/src/header/view/header.html',
                 controller: 'HeaderController',
                 controllerAs: 'vm'
-            }
-        }
-    }).state('root', {
-        parent: 'site',
-        url: '/',
-        views: {
-            'content@': {
-                templateUrl: 'app/src/erms/view/erms.html',
-                controller: 'ErmsMenuController',
-                controllerAs: 'emc'
             }
         }
     });
