@@ -1,15 +1,23 @@
-<div>
+<div id="erms-profile-view"
+    layout-gt-sm="row"
+    layout-fill>
     
-    <div layout="column" layout-padding>
-        <p style="text-align: center;" ng-show="!empc.profiles || empc.profiles.length === 0">
+    <div layout="column"
+        layout-padding
+        layout-align="center center"
+        flex
+        flex-order-gt-sm="2">
+        <p ng-show="!empc.profiles || empc.profiles.length === 0">
             {{ 'ERMS_PROFILES.PROFILES.NO_PROFILES' | translate }}
         </p>
-        <p class="md-subhead" style="text-align: center;">
-            You are not connected to a repository. Please pick one.
+        <p ng-show="empc.profiles.length > 0" class="md-subhead">
+            {{ 'ERMS_PROFILES.PROFILES.NO_CONNECTION' | translate }}
         </p>
     </div>
     
-    <div id="erms-profile-nav">
+    <div id="erms-profile-nav"
+        flex-gt-sm="33"
+        flex-order-gt-sm="1">
         
         <md-button class="md-primary md-text-icon-button" ng-click="empc.showProfileDialog()">
             <i class="material-icons ng-scope">add</i>
@@ -56,11 +64,14 @@
             </md-list-item>
         </md-list>
         
+        <div id="edit-mapfiles-btn">
+            <md-button ui-sref="erms.mapfiles"
+                class="md-text-icon-button">
+                <i class="material-icons">file_upload</i>
+                {{ 'ERMS_MAPS.MAPPINGS.LABEL' | translate }}
+            </md-button>
+        </div>
+        
     </div>
-    
-    <md-button ui-sref="erms.mapfiles" class="md-text-icon-button">
-        <i class="material-icons">file_upload</i>
-        {{ 'ERMS_MAPS.MAPPINGS.LABEL' | translate }}
-    </md-button>
     
 </div>

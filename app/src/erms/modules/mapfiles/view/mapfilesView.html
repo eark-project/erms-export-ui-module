@@ -11,14 +11,16 @@
 
 <div layout="column" layout-padding id="mapfiles">
     
-    <div layout="column" layout-align="center center">
+    <div layout="column" layout-align="center center" layout-align-gt-md="center start">
         <p ng-show="!emfc.mapfiles || emfc.mapfiles.length === 0">{{ 'ERMS_MAPS.MAPPINGS.NO_MAP_FILES' | translate }}</p>
     </div>
     
-    <md-button class="md-primary md-text-icon-button" ng-click="emfc.addMapFile($event)">
-        <i class="material-icons ng-scope">add</i>
-        {{ 'COMMON.ADD' | translate }} {{ 'ERMS_MAPS.MAPPINGS.DIALOG.LABELS.MAPPING_FILE' | translate }}
-    </md-button>
+    <div>
+        <md-button class="md-primary md-text-icon-button" ng-click="emfc.addMapFile($event)">
+            <i class="material-icons ng-scope">add</i>
+            {{ 'COMMON.ADD' | translate }} {{ 'ERMS_MAPS.MAPPINGS.DIALOG.LABELS.MAPPING_FILE' | translate }}
+        </md-button>
+    </div>
     
     <md-list>
         <md-list-item

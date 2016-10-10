@@ -37,45 +37,89 @@
         
         <div ng-if="rvc.repo.children.length !== 0" class="tlist">
             <div class="tlist__header" layout="row">
-                <div class="tlist__cell" flex sort-table="title">{{ 'COMMON.TITLE' | translate }}</div>
-                <div hide class="tlist__cell" flex="10" sort-table="creator.fullName">
+                <div flex
+                    class="tlist__cell"
+                    sort-table="title">
+                    {{ 'COMMON.TITLE' | translate }}
+                </div>
+                <div hide
+                    show-gt-sm
+                    flex="10"
+                    class="tlist__cell"
+                    sort-table="creator.fullName"
+                    >
                     {{ 'COMMON.CREATEDBY' | translate }}
                 </div>
-                <!-- might not be convenient to sort if multiple owner -->
-                <div hide class="tlist__cell" flex="10" sort-table="created">
+                <div hide
+                    show-gt-sm
+                    flex="20"
+                    flex-gt-md="10"
+                    class="tlist__cell"
+                    sort-table="created">
                     {{ 'COMMON.CREATED' | translate }}
                 </div>
-                <div hide class="tlist__cell" flex="10" sort-table="modified">
+                <div hide
+                    show-gt-xs
+                    flex="20"
+                    flex-gt-sm="10"
+                    class="tlist__cell"
+                    sort-table="modified">
                     {{ 'COMMON.MODIFIED_BY' | translate }}
                 </div>
-                <div hide class="tlist__cell" flex="10" sort-table="lastModificationDate">
+                <div hide
+                    show-gt-xs
+                    flex="20"
+                    flex-gt-md="10"
+                    class="tlist__cell"
+                    sort-table="lastModificationDate">
                     {{ 'COMMON.MODIFIED' | translate }}
                 </div>
-                <div class="tlist__cell" flex="20" style="text-align: center;">
+                <div flex="20"
+                    flex-gt-xs="10"
+                    class="tlist__cell"
+                    style="justify-content: center;">
                     {{ 'SELECT' | translate }}
                 </div>
             </div>
             <div class="tlist__body" ng-if="rvc.repo.children.length > 0">
                 <div ng-repeat="item in rvc.repo.children | orderObjectBy:orderByAttribute:reverseOrder"
                     layout="column"
-                    flex>
-                    <!--class="tlist__item {{ item.locked ? 'muted' : '' }}" ng-disabled="item.locked">-->
+                    flex
+                    class="tlist__item">
                     <div class="tlist__item__link"
                         style="cursor: pointer"
                         ng-click="rvc.getItem(item)"
                         layout="row">
-                        <span class="tlist__cell" flex>
+                        <span flex class="tlist__cell">
                             <img class="md-avatar" alt="" ng-src="app/assets/images/filetypes/{{item.thumbNailURL}}">
                             {{item.name}}
                             <span class="muted" ng-show="rvc.isFile(item)">
                                 ({{item.displaySize}})
                             </span>
                         </span>
-                        <span hide class="tlist__cell muted" flex="10">{{ item.createdBy }}</span>
-                        <span hide class="tlist__cell muted" flex="10">{{ item.creationDate }}</span>
-                        <span hide class="tlist__cell muted" flex="10">{{ item.lastModifiedBy }}</span>
-                        <span hide class="tlist__cell muted" flex="10">{{ item.lastModificationDate }}</span>
-                        <span class="tlist__cell muted" flex="20" style="text-align: center;">
+                        <span hide
+                            show-gt-sm
+                            flex="10"
+                            class="tlist__cell muted">{{ item.createdBy }}</span>
+                        <span hide
+                            show-gt-sm
+                            flex="20"
+                            flex-gt-md="10"
+                            class="tlist__cell muted">{{ item.creationDate }}</span>
+                        <span hide
+                            show-gt-xs
+                            flex="20"
+                            flex-gt-sm="10"
+                            class="tlist__cell muted">{{ item.lastModifiedBy }}</span>
+                        <span hide
+                            show-gt-xs
+                            flex="20"
+                            flex-gt-md="10"
+                            class="tlist__cell muted">{{ item.lastModificationDate }}</span>
+                        <span class="tlist__cell muted"
+                            flex="20"
+                            flex-gt-xs="10"
+                            style="text-align: center;">
                             <md-checkbox ng-show="item.exportable" ng-click="rvc.selectItemForExport(item); $event.stopPropagation();" ng-checked="item.selected" aria-label="Check for export"></md-checkbox>
                         </span>
                     </div>

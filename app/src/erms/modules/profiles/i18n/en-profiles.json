@@ -38,6 +38,7 @@
             "CONNECT": "Repository connect",
             "PROFILE_LABEL": "Connection profile",
             "NO_PROFILES": "There are no profiles",
+            "NO_CONNECTION": "You are not connected to a repository. Please pick one.",
             "PROFILE_ACTIONS": "Profile actions",
             "REALLY_DELETE_PROFILE": "Do you want to delete {{ profile }}?"
         }

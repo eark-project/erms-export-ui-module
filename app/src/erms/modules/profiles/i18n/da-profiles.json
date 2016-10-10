@@ -38,6 +38,7 @@
             "CONNECT": "Forbind til arkiv",
             "PROFILE_LABEL": "Forbindelsesprofil",
             "NO_PROFILES": "Der er ingen forbindelsesprofiler",
+            "NO_CONNECTION": "Du er ikke forbundet til noget arkiv. Vælg én at forbinde til.",
             "PROFILE_ACTIONS": "Forbindelsesprofilhandlinger",
             "REALLY_DELETE_PROFILE": "Vil du slette {{ profile }}?"
         }

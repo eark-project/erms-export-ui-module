@@ -1,20 +1,27 @@
 ﻿{
-  "ERMS_EXPORT": {
-    "DIALOG": {
-      "LABELS": {
-        "EAD_FILE": "Select EAD.xml file to use for export"
-      }
-    },
-    "LABEL": "Export",
-    "ITEMS": "Items ready for export",
-    "BROWSE_REPOS": "Continue browsing repository",
-    "EXPORT": "Start export",
-    "REVIEW": "Review export",
-    "MESSAGES" : {
-      "EXPORTING": "Exporting items.",
-      "EXPORT_INFO": "Depending on the size of your export, the process may take some time.",
-      "EXPORT_WAIT1": "When your export is done there will be a message containing, ",
-      "EXPORT_WAIT2":"The file system location where the export may be retrieved"
+    "ERMS_EXPORT": {
+        "DIALOG": {
+            "LABELS": {
+                "EAD_FILE": "Select EAD.xml file to use for export"
+            }
+        },
+        "LABEL": "Export",
+        "ITEMS": "Items ready for export",
+        "BROWSE_REPOS": "Continue browsing repository",
+        "EXPORT": "Start export",
+        "REVIEW": "Review export",
+        "MESSAGES" : {
+            "EXPORTING": "Exporting items.",
+            "EXPORT_INFO": "Depending on the size of your export, the process may take some time.",
+            "EXPORT_WAIT1": "When your export is done there will be a message containing the file system location where the export may be retrieved",
+            "INITIATING": "Initiating export",
+            "ACCESS_PATH": "You can access your exported items at this path",
+            "EAD_VALID": "EAD file was successfully validated.",
+            "EAD_INVALID": "EAD file was not validated.",
+            "NOT_RUNNING": "There are no exports running.",
+            "RUNNING": "Export is running",
+            "SOMETHING_WRONG": "Something went wrong with the export.",
+            "CONTACT_SYSADM": "Please contact systems administrator."
+        }
     }
-  }
 }
