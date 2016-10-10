@@ -1,7 +1,7 @@
 ﻿{
     "ERMS_MAPS": {
         "MAPPINGS": {
-            "LABEL": "Mapping files",
+            "LABEL": "Manage mapping files",
             "LIST": {
                 "LABELS": {
                     "MAPPING_NAME" : "Name"

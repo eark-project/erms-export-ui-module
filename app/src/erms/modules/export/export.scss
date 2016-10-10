@@ -7,6 +7,19 @@
     overflow: auto;
 }
 
+.pre-export__list__row {
+    border-top: solid 1px #eee;
+    padding: 4px 0;
+}
+
+.pre-export__list__row:first-child {
+    border-top: none;
+}
+
+.pre-export__list__item {
+    overflow: hidden;
+}
+
 .export__content {
     text-align: center;
 }

@@ -16,7 +16,7 @@ function config(modulesMenuServiceProvider, $stateProvider, languageFilesProvide
      * Inject the modules translation files
      */
     languageFilesProvider.addFile('app/src/erms/i18n/','-erms.json');
-
+    
     $stateProvider.state('erms', {
         parent: 'site',
         url: '/erms',

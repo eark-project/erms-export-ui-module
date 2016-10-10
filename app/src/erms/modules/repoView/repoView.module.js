@@ -5,20 +5,20 @@ angular
 function config($stateProvider, languageFilesProvider ){
 
     $stateProvider.state('erms.repos.browseRepo', {
-        parent: 'erms.repos',
+        parent: 'erms',
         url: '/:profileName/:mapName/browse',
         views: {
-            'repo-browser': {
+            'erms': {
                 templateUrl : 'app/src/erms/modules/repoView/view/repoView.html',
                 controller : 'RepoViewController',
                 controllerAs: 'rvc'
             }
         }
     }).state('erms.repos.searchRepo', {
-        parent: 'erms.repos',
+        parent: 'erms',
         url: '/:profileName/:mapName/search',
         views: {
-            'repo-browser': {
+            'erms': {
                 templateUrl : 'app/src/erms/modules/repoView/view/repoSearch.html',
                 controller : 'RepoViewController',
                 controllerAs: 'rvc'

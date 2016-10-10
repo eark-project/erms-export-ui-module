@@ -52,11 +52,20 @@
 
 .tlist {
     
+    .tlist__item {
+        border-top: solid 1px #eee;
+    }
+    
     .tlist__header {
         .tlist__cell {
             color: #999;
             text-transform: uppercase;
             font-size: 0.8em;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 32px;
         }
     }
     
@@ -67,4 +76,10 @@
         white-space: nowrap;
         vertical-align: middle;
     }
+}
+
+.export-btn-label {
+    display: inline-block;
+    background-color: rgba(0,0,0,0.2);
+    padding: $u*0.25 $u*0.5;
 }

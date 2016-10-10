@@ -3,7 +3,7 @@ angular
     .controller('ErmsExportController', ErmsExportController)
     .controller('ErmsExportProcessController', ErmsExportProcessController);
 
-function ErmsExportController($state, ermsExportService, $mdDialog, errorService) {
+function ErmsExportController($state, ermsExportService, $mdDialog, errorService, $mdToast, $translate) {
     var rxc = this;
 
     rxc.exportItems = [];
@@ -36,9 +36,8 @@ function ErmsExportController($state, ermsExportService, $mdDialog, errorService
         }).then(function (response) {
             $state.go('erms.export');
             ermsExportService.exportItems().then(function (response) {
-                console.log(response.data);
+                $mdToast.showSimple(response.data.message);
             });
-
         });
     }
 
@@ -54,49 +53,61 @@ function ErmsExportController($state, ermsExportService, $mdDialog, errorService
         };
         stdc.upload = function () {
             $mdDialog.hide();
-            ermsExportService.uploadEAD(stdc.eadFile).then(function (response) {
-                if (response.success) {
-                    errorService.displayErrorMsg('EAD file was successfully validated. Proceeding with export.');
+            ermsExportService.uploadEAD(stdc.eadFile).then(
+                function (response) {
+                    $mdToast.showSimple( $translate.instant('ERMS_EXPORT.MESSAGES.EAD_VALID') );
+                }, function (response) {
+                    errorService.displayErrorMsg( $translate.instant('ERMS_EXPORT.MESSAGES.EAD_INVALID') );
                 }
-            });
+            );
         };
+        /*
         $scope.fileNameChanged = function (el) {
-            file = el.files[0];
-        };
+            if (el.files[0]) {
+                file = el.files[0];
+            };
+        };*/
     }
 }
 
-function ErmsExportProcessController(ermsExportService, errorService, $state, $timeout, $interval){
+function ErmsExportProcessController(ermsExportService, errorService, $state, $timeout, $interval, $mdToast, $translate){
     var rxpc = this;
-    $interval(checkStatus, 10000);
+    rxpc.exportResponse = '';
+    rxpc.exportStatus = 'NOT_RUNNING';
+    
+    var checking = $interval(checkStatus, 10000);
 
     function checkStatus() {
         ermsExportService.checkExportStatus().then(statusResponse);
     }
 
     function statusResponse(response){
-        console.log(response.status);
-        if(response.status == 'DONE'){
-            $interval.cancel(checkStatus);
-            errorService.displayErrorMsg(response.message ? response.message : response.error);
-            $timeout(function(){
-                $state.go('dashboard');
-            }, 15000);
-        }
+        
+        rxpc.exportStatus = response.status;
+        
         if(response.status == 'NOT_RUNNING'){
-            $interval.cancel(checkStatus);
-            errorService.displayErrorMsg("There are no exports running.");
-            $state.go('erms');$timeout(function(){
-                $state.go('erms');
-            }, 5000);
+            rxpc.exportResponse = $translate.instant('ERMS_EXPORT.MESSAGES.NOT_RUNNING');
+            $interval.cancel(checking);
+        };
+        if(response.status == 'RUNNING'){
+            rxpc.exportResponse = $translate.instant('ERMS_EXPORT.MESSAGES.RUNNING');
+        };
+        if(response.status == 'DONE'){
+            rxpc.exportResponse = response.path;
+            $interval.cancel(checking);
+            //errorService.displayErrorMsg(response.message ? response.message : response.error);
+        };
+        if (angular.isDefined(response.error)) {
+            rxpc.exportResponse = response.error;
+            $interval.cancel(checking);
         }
         if(!angular.isDefined(response.status)){
-            $interval.cancel(checkStatus);
-            errorService.displayErrorMsg("Something went wrong with the export. Please contact systems administrator.");
-            $state.go('erms');$timeout(function(){
-                $state.go('erms');
-            }, 5000);
-        }
+            errorService.displayErrorMsg( $translate.instant('ERMS_EXPORT.MESSAGES.SOMETHING_WRONG') );
+            rxpc.exportResponse = $translate.instant('ERMS_EXPORT.MESSAGES.SOMETHING_WRONG') + ' ' + $translate.instant('ERMS_EXPORT.MESSAGES.CONTACT_SYSADM');
+            $interval.cancel(checking);
+        };
+        
     }
+    
 }
 

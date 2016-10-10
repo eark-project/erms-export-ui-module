@@ -18,7 +18,8 @@ function ErmsExportService($http) {
         deSelectItem        : deSelectItem,
         toggleItemInBasket  : toggleItemInBasket,
         initExportParams    : initExportParams,
-        uploadEAD           : uploadEAD
+        uploadEAD           : uploadEAD,
+        getBasketLength     : getBasketLength
     };
 
     function initExportParams(profileName, mapName){
@@ -130,6 +131,10 @@ function ErmsExportService($http) {
         return $http.get('/webapi/extraction/status').then(function(response){
             return response.data;
         });
+    }
+    
+    function getBasketLength() {
+        return exportBasket.length;
     }
 
     /**

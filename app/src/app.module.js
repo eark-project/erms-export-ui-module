@@ -13,7 +13,6 @@ angular
         'eArkPlatform.init',
         'eArkPlatform.translations.init',
         'eArkPlatform.header',
-        'eArkPlatform.dashboard',
         'eArkPlatform.errors',
         'eArkPlatform.erms',
         'eArkPlatform.erms.profile',
@@ -50,7 +49,7 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, $httpPro
         .warnPalette('deep-orange');
 
     $urlRouterProvider
-        .otherwise('/');
+        .otherwise('/erms/repositories');
 
     $stateProvider.state('site', {
         abstract: true,
@@ -63,16 +62,6 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, $httpPro
             'header@': {
                 templateUrl: 'app/src/header/view/header.html',
                 controller: 'HeaderController',
-                controllerAs: 'vm'
-            }
-        }
-    }).state('dashboard', {
-        parent: 'site',
-        url: '/',
-        views: {
-            'content@': {
-                templateUrl: 'app/src/dashboard/view/dashboard.html',
-                controller: 'DashboardController',
                 controllerAs: 'vm'
             }
         }

@@ -1,11 +1,11 @@
 <md-dialog aria-label="{{ 'ERMS.PROFILES.DIALOG.LABELS.PROFILE_DIALOG' | translate }}">
-    <form name="epd.profileForm">
+    <form name="epd.profileForm" ng-submit="save(epd.profileForm)">
         <md-toolbar layout="row">
             <div class="md-toolbar-tools">
                 <h2>{{ epd.dialogMode | translate }}</h2>
             </div>
         </md-toolbar>
-        <md-dialog-content style="max-width: 800px; max-height:810px; min-width:20em" layout-padding layout-margin>
+        <md-dialog-content layout-padding layout-margin>
             <div layout>
                 <md-input-container flex>
                     <label>{{ 'ERMS_PROFILES.PROFILES.DIALOG.LABELS.NAME' | translate }} *</label>
@@ -35,7 +35,7 @@
             <md-button ng-click="cancel()">
                 {{ 'COMMON.CANCEL' | translate }}
             </md-button>
-            <md-button class="md-primary" ng-click="save(epd.profileForm)" aria-label="Save profile edits">
+            <md-button class="md-primary" type="submit" aria-label="Save profile edits">
                 {{ 'COMMON.SAVE' | translate }}
             </md-button>
         </md-dialog-actions>

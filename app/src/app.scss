@@ -4,9 +4,24 @@
 
 $u: 16px;
 
+
 /*
  * Global styles
  */
+
+dt {
+    display: block;
+    text-transform: uppercase;
+    font-size: 0.7em;
+    opacity: 0.65;
+}
+
+dd {
+    display: block;
+    padding: 0 0 $u;
+    margin: 0;
+}
+
 
 #loader {
     visibility: hidden;
