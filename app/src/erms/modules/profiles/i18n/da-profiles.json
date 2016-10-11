@@ -32,13 +32,14 @@
                     "NAME": "Navn",
                     "SELECT_MAP_FILE": "Vælg en XML-kortlægningsfil",
                     "SELECT_ROOT": "Vælg arkiv-rodbibliotek",
-                    "ADD_ROOTS": "Angiv arkiv-rodbiblioteker"
+                    "ADD_ROOTS": "Angiv arkiv-rodbiblioteker",
+                    "DEL_SUCCESS": "Profil slettet"
                 }
             },
             "CONNECT": "Forbind til arkiv",
             "PROFILE_LABEL": "Forbindelsesprofil",
             "NO_PROFILES": "Der er ingen forbindelsesprofiler",
-            "NO_CONNECTION": "Du er ikke forbundet til noget arkiv. Vælg én at forbinde til.",
+            "NO_CONNECTION": "Du er ikke forbundet til noget arkiv. Vælg ét at forbinde til.",
             "PROFILE_ACTIONS": "Forbindelsesprofilhandlinger",
             "REALLY_DELETE_PROFILE": "Vil du slette {{ profile }}?"
         }

@@ -9,7 +9,7 @@
             <h3 class="md-subhead">{{ 'ERMS_PROFILES.PROFILES.DIALOG.LABELS.SELECT_MAP_FILE' | translate }}</h3>
             <md-list style="border-top: solid 1px #eee;">
                 <md-list-item ng-repeat="mapfile in pmdc.mapFiles" ng-click="pmdc.selectMap(mapfile)">
-                    <strong>{{ mapfile.name }}</strong>
+                    <strong style="text-transform: inherit;">{{ mapfile.name }}</strong>
                 </md-list-item>
             </md-list>
         </md-dialog-content>

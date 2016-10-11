@@ -32,7 +32,8 @@
                     "NAME": "Name",
                     "SELECT_MAP_FILE": "Select a mapping XML file",
                     "SELECT_ROOT": "Select repository root directory",
-                    "ADD_ROOTS": "Add repository roots"
+                    "ADD_ROOTS": "Add repository roots",
+                    "DEL_SUCCESS": "Profile successfully deleted"
                 }
             },
             "CONNECT": "Repository connect",
