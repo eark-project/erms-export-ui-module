@@ -9,25 +9,47 @@
             <div layout>
                 <md-input-container flex>
                     <label>{{ 'ERMS_PROFILES.PROFILES.DIALOG.LABELS.NAME' | translate }} *</label>
-                    <input type="text" ng-model="epd.profile.name" name="name" required ng-disabled="epd.edit">
+                    <input type="text"
+                        ng-model="epd.profile.name"
+                        name="name"
+                        required
+                        ng-disabled="epd.edit"
+                        md-maxlength="50"
+                        maxlength="50">
                 </md-input-container>
             </div>
             <div layout>
                 <md-input-container flex>
                     <label>{{ 'ERMS_PROFILES.PROFILES.DIALOG.LABELS.REPO_URL' | translate }} *</label>
-                    <input type="text" ng-model="epd.profile.url" name="url" required>
+                    <input
+                        type="text"
+                        ng-model="epd.profile.url"
+                        name="url"
+                        required
+                        md-maxlength="255"
+                        maxlength="255">
                 </md-input-container>
             </div>
             <div layout>
                 <md-input-container flex>
                     <label>{{ 'ERMS_PROFILES.PROFILES.DIALOG.LABELS.ACCESS_ID' | translate }} *</label>
-                    <input type="text" ng-model="epd.profile.userName" name="userName" required>
+                    <input type="text"
+                        ng-model="epd.profile.userName"
+                        name="userName"
+                        required
+                        md-maxlength="50"
+                        maxlength="50">
                 </md-input-container>
             </div>
             <div layout>
                 <md-input-container flex>
                     <label>{{ 'ERMS_PROFILES.PROFILES.DIALOG.LABELS.ACCESS_PASSWORD' | translate }} *</label>
-                    <input type="password" ng-model="epd.profile.password" name="password" required>
+                    <input type="password"
+                        ng-model="epd.profile.password"
+                        name="password"
+                        required
+                        md-maxlength="50"
+                        maxlength="50">
                 </md-input-container>
             </div>
         </md-dialog-content>
