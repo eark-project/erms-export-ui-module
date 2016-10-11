@@ -122,7 +122,10 @@ function RepoViewController($scope, $state, $stateParams, ermsRepoService, fileU
     /**
      * Intermediate methods and fake data for repo search
      */
+    
+    rvc.searchTerm = '';
     rvc.searchRepo = searchRepo;
+    
     rvc.searchResult = [
         {
             name: 'Udgifter1.ods',
@@ -143,8 +146,9 @@ function RepoViewController($scope, $state, $stateParams, ermsRepoService, fileU
             lastModifiedBy: 'Someuser'
         }
     ];
-    function searchRepo() {
-        $state.go('erms.repos.searchRepo', { profileName: rvc.profileName, mapName: rvc.mapName });
+    
+    function searchRepo(term) {
+        alert('Searching for ' + term + '. Backend yet to be implemented.');
     };
     
     
