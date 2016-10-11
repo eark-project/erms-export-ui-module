@@ -6,6 +6,7 @@
             }
         },
         "LABEL": "Export",
+        "CLEAR": "Clear items",
         "ITEMS": "Items ready for export",
         "BROWSE_REPOS": "Continue browsing repository",
         "EXPORT": "Start export",

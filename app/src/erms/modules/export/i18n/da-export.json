@@ -6,6 +6,7 @@
             }
         },
         "LABEL": "Eksport",
+        "CLEAR": "Fjern alle valgte",
         "ITEMS": "Dokumenter der er klar til at blive eksporteret",
         "BROWSE_REPOS": "Fortsæt med at gennemse arkiv",
         "EXPORT": "Start eksport",

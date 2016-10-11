@@ -2,7 +2,7 @@ angular
     .module('eArkPlatform.erms.profile')
     .controller('ErmsProfilesController', ErmsProfilesController);
 
-function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $translate, errorService, $mdToast) {
+function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $translate, errorService, $mdToast, ermsExportService) {
     var empc = this;
     empc.profiles = [];
     empc.initialise = initialise;
@@ -165,6 +165,7 @@ function ErmsProfilesController($mdDialog, $state, ermsProfilesService, $transla
             focusOnOpen: true
         }).then(function () {
             console.log(profile.name + ' & selected root: ' + profile.selectedRoot + ' & map: ' + profile.selectedMap.name);
+            ermsExportService.clearBasket();
             $state.go('erms.repos.browseRepo', {
                 'profileName': encodeURIComponent(profile.name),
                 'mapName': encodeURIComponent(profile.selectedMap.name)

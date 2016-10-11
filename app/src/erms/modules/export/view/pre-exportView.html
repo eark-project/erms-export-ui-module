@@ -7,10 +7,10 @@
                 <i class="material-icons">arrow_back</i>
             </md-button>
             
-            <span>{{ 'ERMS_EXPORT.ITEMS' | translate }}</span>
+            <span class="truncate">{{ 'ERMS_EXPORT.ITEMS' | translate }}</span>
             
             <span flex></span>
-                    
+
         </div>
     </md-toolbar>
     
@@ -44,6 +44,13 @@
                     layout="column"
                     layout-align="center center">
                     {{"COMMON.EMPTY" | translate}}
+                </div>
+                
+                <div layout="column" layout-align="center center" style="border-top: solid 1px #eee; margin-top: 8px;">
+                    <md-button ng-disabled="rxc.exportItems.length <= 0" ng-click="rxc.clearBasket()" class="md-text-icon-button">
+                        <i class="material-icons">clear</i>
+                        {{ 'ERMS_EXPORT.CLEAR' | translate }}
+                    </md-button>
                 </div>
                 
             </div>

@@ -7,7 +7,7 @@
                 <i class="material-icons">arrow_back</i>
             </md-button>
             
-            <span>{{ rvc.profileName }}</span>
+            <span class="truncate">{{ rvc.profileName }}</span>
             
             <span flex></span>
             
@@ -40,45 +40,43 @@
                 <div flex
                     class="tlist__cell"
                     sort-table="title">
-                    {{ 'COMMON.TITLE' | translate }}
+                    <span>{{ 'COMMON.TITLE' | translate }}</span>
                 </div>
-                <div hide
-                    show-gt-sm
-                    flex="10"
+                <div hide-xs
+                    hide-sm
+                    flex="20"
+                    flex-gt-sm="10"
                     class="tlist__cell"
-                    sort-table="creator.fullName"
-                    >
-                    {{ 'COMMON.CREATEDBY' | translate }}
+                    sort-table="creator.fullName">
+                    <span>{{ 'COMMON.CREATEDBY' | translate }}</span>
                 </div>
-                <div hide
-                    show-gt-sm
+                <div hide-xs
+                    hide-sm
                     flex="20"
                     flex-gt-md="10"
                     class="tlist__cell"
                     sort-table="created">
-                    {{ 'COMMON.CREATED' | translate }}
+                    <span>{{ 'COMMON.CREATED' | translate }}</span>
                 </div>
-                <div hide
-                    show-gt-xs
+                <div hide-xs
                     flex="20"
                     flex-gt-sm="10"
                     class="tlist__cell"
                     sort-table="modified">
-                    {{ 'COMMON.MODIFIED_BY' | translate }}
+                    <span>{{ 'COMMON.MODIFIED_BY' | translate }}</span>
                 </div>
-                <div hide
-                    show-gt-xs
+                <div hide-xs
                     flex="20"
                     flex-gt-md="10"
                     class="tlist__cell"
                     sort-table="lastModificationDate">
-                    {{ 'COMMON.MODIFIED' | translate }}
+                    <span>{{ 'COMMON.MODIFIED' | translate }}</span>
                 </div>
                 <div flex="20"
                     flex-gt-xs="10"
                     class="tlist__cell"
-                    style="justify-content: center;">
-                    {{ 'COMMON.SELECT' | translate }}
+                    style="text-align:  center;">
+                    <span>{{ 'COMMON.SELECT' | translate }}</span>
                 </div>
             </div>
             <div class="tlist__body" ng-if="rvc.repo.children.length > 0">
@@ -97,22 +95,20 @@
                                 ({{item.displaySize}})
                             </span>
                         </span>
-                        <span hide
-                            show-gt-sm
+                        <span hide-xs
+                            hide-sm
                             flex="10"
                             class="tlist__cell muted">{{ item.createdBy }}</span>
-                        <span hide
-                            show-gt-sm
+                        <span hide-xs
+                            hide-sm
                             flex="20"
                             flex-gt-md="10"
                             class="tlist__cell muted">{{ item.creationDate }}</span>
-                        <span hide
-                            show-gt-xs
+                        <span hide-xs
                             flex="20"
                             flex-gt-sm="10"
                             class="tlist__cell muted">{{ item.lastModifiedBy }}</span>
-                        <span hide
-                            show-gt-xs
+                        <span hide-xs
                             flex="20"
                             flex-gt-md="10"
                             class="tlist__cell muted">{{ item.lastModificationDate }}</span>

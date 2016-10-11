@@ -9,6 +9,7 @@ function ErmsExportController($state, ermsExportService, $mdDialog, errorService
     rxc.exportItems = [];
     rxc.removeItem = removeItem;
     rxc.initExport = initExport;
+    rxc.clearBasket = clearBasket;
 
     loadBasket();
 
@@ -18,6 +19,11 @@ function ErmsExportController($state, ermsExportService, $mdDialog, errorService
 
     function removeItem(item) {
         ermsExportService.removeItem(item);
+        loadBasket();
+    }
+    
+    function clearBasket() {
+        ermsExportService.clearBasket();
         loadBasket();
     }
 

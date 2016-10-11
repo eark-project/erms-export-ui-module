@@ -36,7 +36,7 @@ function ErmsExportService($http, errorService, $translate, $mdToast) {
     }
 
     function exportItems(){
-        console.log("The number of items to be exported is:" + exportBasket.length +"\nThe number of items to exclude: "+exclusionList.length);
+        console.log("The number of items to be exported is:" + exportBasket.length + "\nThe number of items to exclude: " + exclusionList.length);
         return $http.post('/webapi/extraction/extract', {
             name: exportProfile,
             mapName : exportMap,

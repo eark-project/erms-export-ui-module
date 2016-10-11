@@ -2,7 +2,7 @@
     
     <md-toolbar class="md-hue-2 repo-view__toolbar">
         <div class="md-toolbar-tools">
-            <h2 class="md-heading">{{ 'ERMS_EXPORT.MESSAGES.EXPORTING' | translate }}</h2>    
+            <h2 class="md-heading truncate">{{ 'ERMS_EXPORT.MESSAGES.EXPORTING' | translate }}</h2>    
         </div>
     </md-toolbar>   
     
@@ -38,8 +38,12 @@
         
         <p><strong>{{ rxpc.exportResponse }}<strong></p>
         
-        <md-button class="md-raised" ui-sref="erms.repos">
+        <md-button class="md-raised" ng-show="rxpc.exportStatus !== 'DONE'" ui-sref="erms.repos">
             {{ 'COMMON.CANCEL' | translate }}
+        </md-button>
+        
+        <md-button ng-show="rxpc.exportStatus === 'DONE'" class="md-primary md-raised" ui-sref="erms.repos">
+            {{ 'COMMON.CLOSE' | translate }}
         </md-button>
         
     </div>
