@@ -27,9 +27,10 @@
             class="mapfiles__list__item"
             ng-repeat="mapfile in emfc.mapfiles"
             layout="row"
-            layout-align="space-between center">
+            layout-align="space-between center"
+            style="cursor: default;">
             {{ mapfile.name }}
-            <md-button ng-click="emfc.delMapFile(mapfile)">Remove</md-button>
+            <md-button ng-click="emfc.delMapFile(mapfile)">{{ 'COMMON.REMOVE' | translate }}</md-button>
         </md-list-item>
     </md-list>
     
