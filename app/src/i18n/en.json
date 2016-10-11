@@ -1,5 +1,6 @@
 ﻿{
   "COMMON": {
+    "SELECT": "Select",
     "EMPTY": "Nothing here",
     "CONFIRM": "Confirm",
     "WARNING": "Warning!",

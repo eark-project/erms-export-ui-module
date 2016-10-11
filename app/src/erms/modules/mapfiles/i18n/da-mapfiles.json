@@ -16,6 +16,12 @@
                 }
             },
             "NO_MAP_FILES": "Der er ingen kortlægningsfiler"
+        },
+        "MSG": {
+            "XML_NOT_VALID": "Den uploadede XML-fil opfylder ikke reglerne defineret i mapping.xsd",
+            "MAP_VALID": "Kortlægningsfil er valideret og gemt",
+            "DEL_MAP": "Vil du slette kortlægningsfilen {{mapfilename}}?",
+            "MAP_DELETED": "Kortlægningsfil slettet"
         }
     }
 }

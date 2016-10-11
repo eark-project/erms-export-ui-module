@@ -18,6 +18,7 @@
             "ACCESS_PATH": "You can access your exported items at this path",
             "EAD_VALID": "EAD file was successfully validated.",
             "EAD_INVALID": "EAD file was not validated.",
+            "EAD_INVALID_DESC": "The uploaded EAD template is not valid according to ead.xsd",
             "NOT_RUNNING": "There are no exports running.",
             "RUNNING": "Export is running",
             "SOMETHING_WRONG": "Something went wrong with the export.",

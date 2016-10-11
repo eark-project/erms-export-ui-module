@@ -2,7 +2,7 @@ angular
     .module('eArkPlatform.erms.export')
     .factory('ermsExportService', ErmsExportService);
 
-function ErmsExportService($http) {
+function ErmsExportService($http, errorService, $translate, $mdToast) {
 
     var exportBasket = [], exclusionList = [];
     var exportProfile = '', exportMap='';
@@ -120,10 +120,15 @@ function ErmsExportService($http) {
         return $http.post('/webapi/extraction/ead/upload', formData, {
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
-        }).then(function (response) {
-            console.log(response.data);
-            return response.data;
-        });
+        }).then(
+            function (response) {
+                console.log(response.data);
+                return response.data;    
+            },
+            function (response) {
+                errorService.displayErrorMsg( $translate.instant('COMMON.ERROR') );
+            }
+        );
     }
 
     function checkExportStatus(){
