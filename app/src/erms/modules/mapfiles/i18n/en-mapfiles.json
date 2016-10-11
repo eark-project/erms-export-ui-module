@@ -16,6 +16,12 @@
                 }
             },
             "NO_MAP_FILES": "There are no mapping files"
+        },
+        "MSG": {
+            "XML_NOT_VALID": "The uploaded XML mapping is not valid according to mapping.xsd",
+            "MAP_VALID": "Mapping validated and successfully saved",
+            "DEL_MAP": "Do you want to delete the map file {{mapfilename}}?",
+            "MAP_DELETED": "Map file deleted"
         }
     }
 }

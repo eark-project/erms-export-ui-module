@@ -32,16 +32,21 @@ function ErmsExportController($state, ermsExportService, $mdDialog, errorService
             parent: angular.element(document.body),
             clickOutsideToClose: true,
             focusOnOpen: true
-
-        }).then(function (response) {
-            $state.go('erms.export');
-            ermsExportService.exportItems().then(function (response) {
-                $mdToast.showSimple(response.data.message);
-            });
-        });
+        }).then(
+            function (response) {
+                console.log('dialog validate in order');
+                $state.go('erms.export');
+                ermsExportService.exportItems().then(function (response) {
+                    $mdToast.showSimple(response.data.message);
+                });
+            },
+            function (response) {
+                console.log('dialog validate NOT in order');
+            }
+        );
     }
 
-    function selectTemplateDialogController($scope, $mdDialog) {
+    function selectTemplateDialogController($scope, $mdDialog, errorService, $mdToast) {
         var stdc = this;
         var file = {};
         stdc.eadFile = {
@@ -55,18 +60,18 @@ function ErmsExportController($state, ermsExportService, $mdDialog, errorService
             $mdDialog.hide();
             ermsExportService.uploadEAD(stdc.eadFile).then(
                 function (response) {
-                    $mdToast.showSimple( $translate.instant('ERMS_EXPORT.MESSAGES.EAD_VALID') );
+                    if (!response.success) {
+                        errorService.displayErrorMsg( $translate.instant('ERMS_EXPORT.MESSAGES.EAD_INVALID_DESC') );
+                        return false;
+                    } else {
+                        $mdToast.showSimple( $translate.instant('ERMS_EXPORT.MESSAGES.EAD_VALID') );
+                    };
                 }, function (response) {
                     errorService.displayErrorMsg( $translate.instant('ERMS_EXPORT.MESSAGES.EAD_INVALID') );
+                    return false;
                 }
             );
         };
-        /*
-        $scope.fileNameChanged = function (el) {
-            if (el.files[0]) {
-                file = el.files[0];
-            };
-        };*/
     }
 }
 

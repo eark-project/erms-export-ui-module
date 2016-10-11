@@ -30,7 +30,7 @@
             layout-align="space-between center"
             style="cursor: default;">
             {{ mapfile.name }}
-            <md-button ng-click="emfc.delMapFile(mapfile)">{{ 'COMMON.REMOVE' | translate }}</md-button>
+            <md-button ng-click="emfc.delMapFile($event, mapfile)">{{ 'COMMON.REMOVE' | translate }}</md-button>
         </md-list-item>
     </md-list>
     

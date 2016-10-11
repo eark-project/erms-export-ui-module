@@ -18,6 +18,7 @@
             "ACCESS_PATH": "Du kan hente de eksporterede filer fra denne sti",
             "EAD_VALID": "EAD-fil er godkendt.",
             "EAD_INVALID": "EAD-fil blev ikke godkendt.",
+            "EAD_INVALID_DESC": "Den uploadede EAD-fil opfylder ikke reglerne defineret i ead.xsd",
             "NOT_RUNNING": "Der er ikke nogen eksport igang.",
             "RUNNING": "Der eksporteres",
             "SOMETHING_WRONG": "Noget gik galt under eksporten.",
