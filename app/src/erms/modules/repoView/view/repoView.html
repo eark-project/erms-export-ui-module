@@ -111,7 +111,7 @@
                             flex="20"
                             flex-gt-md="10"
                             class="tlist__cell muted">{{ item.lastModificationDate }}</span>
-                        <span class="tlist__cell muted"
+                        <span class="tlist__cell"
                             flex="20"
                             flex-gt-xs="10"
                             style="text-align: center;">
@@ -124,7 +124,7 @@
         
     </div>
     
-    <div layout="row" layout-align="end center">
+    <div layout="row" layout-align="end center" class="repo-view__actions">
         <md-button class="md-raised md-primary" ng-disabled="rvc.exportItemsLength === 0" ui-sref="erms.pre-export">
             {{ 'ERMS_EXPORT.REVIEW' | translate}}
             <span class="export-btn-label" ng-hide="rvc.exportItemsLength === 0">{{ rvc.exportItemsLength }}</span>
