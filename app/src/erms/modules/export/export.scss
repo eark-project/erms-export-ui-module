@@ -1,6 +1,6 @@
 #pre-export,
 #export {
-    background-color: #eee;
+    background-color: $background-color;
 }
 
 .pre-export__list {
@@ -8,7 +8,7 @@
 }
 
 .pre-export__list__row {
-    border-top: solid 1px #eee;
+    border-top: solid 1px $background-color;
     padding: 4px 0;
 }
 

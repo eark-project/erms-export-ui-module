@@ -10,11 +10,16 @@
 
 .repo-view__list {
     overflow: auto;
-    border-bottom: solid 1px #eee;
+    border-bottom: solid 1px $background-color;
+    background-color: #fff;
 }
 
 .repo-view__breadcrumb {
-    background-color: #eee;
+    background-color: $background-color;
+}
+
+.repo-view__actions {
+    background: #fff;
 }
 
 .od-filebrowser-breadcrumb {
@@ -28,11 +33,11 @@
         display: inline-block;
         padding: $u*0.5 0 $u*0.5 $u*0.25;
         cursor: pointer;
-        color: rgb(33,150,243);
+        color: $main-color;
     }
     a:hover,
     a:active {
-        color: rgba(33,150,243, 0.66);
+        color: darken($main-color, 20%);
     }
     a:before {
         display: inline-block;
@@ -53,12 +58,12 @@
 .tlist {
     
     .tlist__item {
-        border-top: solid 1px #eee;
+        border-top: solid 1px $background-color;
     }
     
     .tlist__header {
         .tlist__cell {
-            color: #999;
+            color: $header-color;
             text-transform: uppercase;
             font-size: 0.8em;
             vertical-align: baseline;
