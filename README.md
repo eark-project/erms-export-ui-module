@@ -1,6 +1,6 @@
 # ERMS Export Module
 
-The purpose of the ERMS Export Module is to extract data and metadata from an CMIS 1.0/1.1 compliant repository into the SMURF format.
+The purpose of the ERMS Export Module is to extract data and metadata from a CMIS 1.0/1.1 compliant repository into the SMURF format.
 
 An example of an extraction can be seen [here](https://www.youtube.com/watch?v=-L8WVfAZ3C8&index=1&list=PLj-yd-_ObnNfjfKS-lBpThD4xrs-NRAIU)
 
