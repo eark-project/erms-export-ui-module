@@ -1,0 +1,93 @@
+#repo-view {
+    
+}
+
+.repo-view__toolbar {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.repo-view__list {
+    overflow: auto;
+    border-bottom: solid 1px $background-color;
+    background-color: #fff;
+}
+
+.repo-view__breadcrumb {
+    background-color: $background-color;
+}
+
+.repo-view__actions {
+    background: #fff;
+}
+
+.od-filebrowser-breadcrumb {
+    margin: 0;
+    font-size: $u*0.9;
+    padding: 0;
+  
+    a,
+    a:link,
+    a:visited {
+        display: inline-block;
+        padding: $u*0.5 0 $u*0.5 $u*0.25;
+        cursor: pointer;
+        color: $main-color;
+    }
+    a:hover,
+    a:active {
+        color: darken($main-color, 20%);
+    }
+    a:before {
+        display: inline-block;
+        content: '/';
+        padding-right: $u*0.125;
+    }
+    a:last-child {
+        cursor: default;
+        color: #000;
+    }
+}
+
+.repo-view__search__input {
+    color: #fff !important;
+    font-size: smaller;
+}
+
+.tlist {
+    
+    .tlist__item {
+        border-top: solid 1px $background-color;
+    }
+    
+    .tlist__header {
+        .tlist__cell {
+            color: $header-color;
+            text-transform: uppercase;
+            font-size: 0.8em;
+            vertical-align: baseline;
+            cursor: pointer;
+        }
+        .tlist__cell > * {
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 1;
+            height: 24px;
+        }
+    }
+    
+    .tlist__cell {
+        padding: $u*0.25;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+}
+
+.export-btn-label {
+    display: inline-block;
+    background-color: rgba(0,0,0,0.2);
+    padding: $u*0.25 $u*0.5;
+}

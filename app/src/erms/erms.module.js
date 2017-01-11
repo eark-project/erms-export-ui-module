@@ -1,8 +1,9 @@
 angular
     .module('eArkPlatform.erms', ['ngMaterial', 'pascalprecht.translate'])
-    .config(config);
+    .config(config)
+    .factory('httpTicketInterceptor', httpTicketInterceptor);
 
-function config(modulesMenuServiceProvider, $stateProvider, languageFilesProvider, $translateProvider) {
+function config(modulesMenuServiceProvider, $stateProvider, languageFilesProvider, $translateProvider, $httpProvider) {
     /**
      * Inject a menuItem into the platform header area
      */
@@ -15,10 +16,10 @@ function config(modulesMenuServiceProvider, $stateProvider, languageFilesProvide
      * Inject the modules translation files
      */
     languageFilesProvider.addFile('app/src/erms/i18n/','-erms.json');
-
+    
     $stateProvider.state('erms', {
         parent: 'site',
-        url: '/',
+        url: '/erms',
         views: {
             'content@': {
                 templateUrl: 'app/src/erms/view/erms.html',
@@ -29,4 +30,28 @@ function config(modulesMenuServiceProvider, $stateProvider, languageFilesProvide
     });
 
     $translateProvider.forceAsyncReload(true);
+
+    $httpProvider.interceptors.push('httpTicketInterceptor');
+}
+
+function httpTicketInterceptor() {
+    return {
+        request: request
+    };
+
+    function request(config) {
+
+        config.url = prefixServiceUrl(config.url);
+
+
+        return config;
+
+    }
+
+    function prefixServiceUrl(url) {
+        if (url.indexOf("/webapi/") == 0 ) {
+            return "http://eark.magenta.dk:9090/export-bridge" + url;
+        }
+        return url;
+    }
 }

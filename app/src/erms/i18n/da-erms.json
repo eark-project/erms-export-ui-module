@@ -1,7 +1,17 @@
 ﻿{
-  "ERMS": {
-    "HEADER": {
-      "LABEL": "Erms"
+    "ERMS": {
+        "HEADER": {
+            "LABEL": "ERMS eksport",
+            "BYLINE": "Gennemse og eksportér dokumenter"
+        },
+        "MODULES":{
+            "LABEL": "Moduler"
+        },
+        "REPOSITORIES": {
+            "LABEL": "Dokumentbiblioteker"
+        },
+        "MAPFILES": {
+            "LABEL": "Kortlægningsfiler"
+        }
     }
-  }
 }

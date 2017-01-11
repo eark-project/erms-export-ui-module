@@ -1,0 +1,27 @@
+﻿{
+    "ERMS_MAPS": {
+        "MAPPINGS": {
+            "LABEL": "Manage mapping files",
+            "LIST": {
+                "LABELS": {
+                    "MAPPING_NAME" : "Name"
+                }
+            },
+            "DIALOG":{
+                "LABELS":{
+                    "UPLOAD_MAPPING_FILE": "Upload mapping file",
+                    "ADD_MAPPING": "Add Mapping File",
+                    "MAPPING_NAME": "Mapping Name",
+                    "MAPPING_FILE": "Mapping file"
+                }
+            },
+            "NO_MAP_FILES": "There are no mapping files"
+        },
+        "MSG": {
+            "XML_NOT_VALID": "The uploaded XML mapping is not valid according to mapping.xsd",
+            "MAP_VALID": "Mapping validated and successfully saved",
+            "DEL_MAP": "Do you want to delete the map file {{mapfilename}}?",
+            "MAP_DELETED": "Map file deleted"
+        }
+    }
+}

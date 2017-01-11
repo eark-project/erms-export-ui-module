@@ -1,0 +1,29 @@
+﻿{
+    "ERMS_EXPORT": {
+        "DIALOG": {
+            "LABELS": {
+                "EAD_FILE": "Vælg EAD.xml-fil til brug for eksport"
+            }
+        },
+        "LABEL": "Eksport",
+        "CLEAR": "Fjern alle valgte",
+        "ITEMS": "Dokumenter der er klar til at blive eksporteret",
+        "BROWSE_REPOS": "Fortsæt med at gennemse arkiv",
+        "EXPORT": "Start eksport",
+        "REVIEW": "Gennemgå eksport",
+        "MESSAGES" : {
+            "EXPORTING": "Eksporterer filer",
+            "EXPORT_INFO": "Dette kan tage noget tid afhængigt af hvor mange filer, der skal eksporteres.",
+            "EXPORT_WAIT1": "Når eksporten er færdig, får du besked om en placering i filsystemet, hvor du kan hente de eksporterede filer.",
+            "INITIATING": "Begynder eksport",
+            "ACCESS_PATH": "Du kan hente de eksporterede filer fra denne sti",
+            "EAD_VALID": "EAD-fil er godkendt.",
+            "EAD_INVALID": "EAD-fil blev ikke godkendt.",
+            "EAD_INVALID_DESC": "Den uploadede EAD-fil opfylder ikke reglerne defineret i ead.xsd",
+            "NOT_RUNNING": "Der er ikke nogen eksport igang.",
+            "RUNNING": "Der eksporteres",
+            "SOMETHING_WRONG": "Noget gik galt under eksporten.",
+            "CONTACT_SYSADM": "Kontakt venligst den systemansvarlige."
+        }
+    }
+}

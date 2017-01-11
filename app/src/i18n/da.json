@@ -1,5 +1,7 @@
 ﻿{
   "COMMON": {
+    "SELECT": "Vælg",
+    "EMPTY": "Her er ingenting",
     "CONFIRM": "Bekræft",
     "WARNING": "Advarsel!",
     "OK": "OK",

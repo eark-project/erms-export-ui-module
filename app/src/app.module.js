@@ -13,9 +13,12 @@ angular
         'eArkPlatform.init',
         'eArkPlatform.translations.init',
         'eArkPlatform.header',
-        'eArkPlatform.dashboard',
+        'eArkPlatform.errors',
         'eArkPlatform.erms',
         'eArkPlatform.erms.profile',
+        'eArkPlatform.erms.export',
+        'eArkPlatform.erms.repoView',
+        'eArkPlatform.erms.mapfiles',
         'eArkPlatform.common.directives',
         'eArkPlatform.common.directives.filter',
         'dcbImgFallback',
@@ -36,13 +39,36 @@ angular
     });
 
 function config($mdThemingProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
+        //$httpProvider.interceptors.push('httpTicketInterceptor');
+        //$httpProvider.defaults.headers.common.Authorization = undefined;
+        $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+    $mdThemingProvider.definePalette('earkStyle', {
+        '50': 'FFB49F',
+        '100': 'FF9885',
+        '200': 'FF7C6B',
+        '300': 'ED6053',
+        '400': 'CD453B',
+        '500': 'AD2624',
+        '600': '7A3332',
+        '700': '472C2C',
+        '800': '333333',
+        '900': '000000',
+        'A100': 'FFC7B8',
+        'A200': 'FFAD9E',
+        'A400': 'FF9385',
+        'A700': 'AD3736',
+        'contrastDefaultColor': 'light', // whether, by default, text (contrast) on this palette should be dark or light
+        'contrastDarkColors': ['50', '100', '200', '300', '400', 'A100'] //hues which contrast should be 'dark' by default
+    });
+    
     $mdThemingProvider.theme('default')
-        .primaryPalette('blue')
-        .accentPalette('yellow')
-        .warnPalette('deep-orange');
+        .primaryPalette('earkStyle')
+        .accentPalette('grey')
+        .warnPalette('amber');
 
     $urlRouterProvider
-        .otherwise('/');
+        .otherwise('/erms/repositories');
 
     $stateProvider.state('site', {
         abstract: true,
@@ -55,16 +81,6 @@ function config($mdThemingProvider, $stateProvider, $urlRouterProvider, $httpPro
             'header@': {
                 templateUrl: 'app/src/header/view/header.html',
                 controller: 'HeaderController',
-                controllerAs: 'vm'
-            }
-        }
-    }).state('dashboard', {
-        parent: 'site',
-        url: '/',
-        views: {
-            'content@': {
-                templateUrl: 'app/src/dashboard/view/dashboard.html',
-                controller: 'DashboardController',
                 controllerAs: 'vm'
             }
         }

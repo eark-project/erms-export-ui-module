@@ -6,19 +6,40 @@ function ermsProfilesService($q, $http){
     return {
         getProfiles     : getProfiles,
         createProfile   : createProfile,
-        updateProfile   : updateProfile
+        deleteProfile   : deleteProfile,
+        updateProfile   : updateProfile,
+        addProfileRepo  : addProfileRepo,
+        removeProfileRepo : removeProfileRepo
     };
 
     function getProfiles(){
-        return $http.get('http://localhost:8080/webapi/database/getProfiles').then(_returnResult);
+        return $http.get('/webapi/profile/getProfiles').then(_returnResult);
     }
     function createProfile(profile){
-        return $http.post('http://localhost:8080/webapi/database/addProfile', profile).then(_returnResult);
+        return $http.post('/webapi/profile/addProfile', profile).then(_returnResult);
     }
     function updateProfile(profile){
-        return $http.put('http://localhost:8080/webapi/database/updateProfile', profile).then(_returnResult);
+        return $http.put('/webapi/profile/updateProfile', profile).then(_returnResult);
     }
 
+    function deleteProfile(profileName){
+        return $http.delete('/webapi/profile/delete/'+ profileName).then(_returnResult);
+    }
+
+    function addProfileRepo(profileName, repo){
+        return $http.put('/webapi/profile/add/'+profileName+'/repository/'+repo).then(_returnResult);
+    }
+
+    function removeProfileRepo(profileName, repo){
+        return $http.delete('/webapi/profile/remove/'+profileName+'/repository/'+repo).then(_returnResult);
+    }
+
+    /**
+     * Generic function for returning the results from the profile as promise
+     * @param response
+     * @returns {*}
+     * @private
+     */
     function _returnResult(response){
         var defer = $q.defer();
 

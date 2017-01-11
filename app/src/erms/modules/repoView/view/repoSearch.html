@@ -1,0 +1,127 @@
+<div id="repo-view" layout="column" layout-fill>
+
+    <md-toolbar class="md-hue-2 repo-view__toolbar">
+        <div class="md-toolbar-tools">
+
+            <md-button
+                class="md-icon-button"
+                ui-sref="erms.repos.browseRepo({ profileName: rvc.profileName, mapName: rvc.mapName })">
+                <i class="material-icons">arrow_back</i>
+            </md-button>
+
+            <span class="truncate">{{ 'SEARCH.SEARCH' | translate }}</span>
+
+            <span flex></span>
+
+        </div>
+    </md-toolbar>
+
+    <div layout="column" flex layout-padding class="repo-view__list">
+
+        <form ng-submit="rvc.searchRepo(rvc.searchTerm)">
+            <md-input-container md-no-float layout="row" class="search__input">
+                <input type="search"
+                    ng-model="rvc.searchTerm"
+                    placeholder="Search {{ rvc.profileName }}">
+                <i class="material-icons">search</i>
+            </md-input-container>
+        </form>
+        
+        <div ng-if="rvc.searchResult.length > 0" class="tlist">
+            <div class="tlist__header" layout="row">
+                <div flex
+                    class="tlist__cell"
+                    sort-table="title">
+                    <span>{{ 'COMMON.TITLE' | translate }}</span>
+                </div>
+                <div hide-xs
+                    hide-sm
+                    flex="20"
+                    flex-gt-sm="10"
+                    class="tlist__cell"
+                    sort-table="creator.fullName">
+                    <span>{{ 'COMMON.CREATEDBY' | translate }}</span>
+                </div>
+                <div hide-xs
+                    hide-sm
+                    flex="20"
+                    flex-gt-md="10"
+                    class="tlist__cell"
+                    sort-table="created">
+                    <span>{{ 'COMMON.CREATED' | translate }}</span>
+                </div>
+                <div hide-xs
+                    flex="20"
+                    flex-gt-sm="10"
+                    class="tlist__cell"
+                    sort-table="modified">
+                    <span>{{ 'COMMON.MODIFIED_BY' | translate }}</span>
+                </div>
+                <div hide-xs
+                    flex="20"
+                    flex-gt-md="10"
+                    class="tlist__cell"
+                    sort-table="lastModificationDate">
+                    <span>{{ 'COMMON.MODIFIED' | translate }}</span>
+                </div>
+                <div flex="20"
+                    flex-gt-xs="10"
+                    class="tlist__cell"
+                    style="text-align:  center;">
+                    <span>{{ 'COMMON.SELECT' | translate }}</span>
+                </div>
+            </div>
+            <div class="tlist__body">
+                <div ng-repeat="item in rvc.searchResult"
+                    layout="column"
+                    flex
+                    class="tlist__item">
+                    <div class="tlist__item__link"
+                        style="cursor: pointer"
+                        ng-click="rvc.getItem(item)"
+                        layout="row">
+                        <span flex class="tlist__cell">
+                            <img class="md-avatar" alt="" ng-src="app/assets/images/filetypes/{{item.thumbNailURL}}">
+                            {{item.name}}
+                            <span class="muted" ng-show="rvc.isFile(item)">
+                                ({{item.displaySize}})
+                            </span>
+                        </span>
+                        <span hide-xs
+                            hide-sm
+                            flex="10"
+                            class="tlist__cell muted">{{ item.createdBy }}</span>
+                        <span hide-xs
+                            hide-sm
+                            flex="20"
+                            flex-gt-md="10"
+                            class="tlist__cell muted">{{ item.creationDate }}</span>
+                        <span hide-xs
+                            flex="20"
+                            flex-gt-sm="10"
+                            class="tlist__cell muted">{{ item.lastModifiedBy }}</span>
+                        <span hide-xs
+                            flex="20"
+                            flex-gt-md="10"
+                            class="tlist__cell muted">{{ item.lastModificationDate }}</span>
+                        <span class="tlist__cell muted"
+                            flex="20"
+                            flex-gt-xs="10"
+                            style="text-align: center;">
+                            <md-checkbox ng-show="item.exportable" ng-click="rvc.selectItemForExport(item);" ng-checked="item.selected" aria-label="Check for export"></md-checkbox>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised md-primary" ng-disabled="rvc.exportItemsLength === 0" ui-sref="erms.pre-export">
+            {{ 'ERMS_EXPORT.REVIEW' | translate}}
+            <span class="export-btn-label" ng-hide="rvc.exportItemsLength === 0">{{ rvc.exportItemsLength }}</span>
+        </md-button>    
+    </div>
+
+</div>

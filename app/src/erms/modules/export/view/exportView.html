@@ -1,0 +1,51 @@
+<div id="export" layout="column" layout-fill>
+    
+    <md-toolbar class="md-hue-2 repo-view__toolbar">
+        <div class="md-toolbar-tools">
+            <h2 class="md-heading truncate">{{ 'ERMS_EXPORT.MESSAGES.EXPORTING' | translate }}</h2>    
+        </div>
+    </md-toolbar>   
+    
+    <div layout-padding class="export__content">
+        
+        <div ng-show="rxpc.exportStatus === 'NOT_RUNNING'">
+            <h3 class="md-subhead">{{ 'ERMS_EXPORT.MESSAGES.INITIATING' | translate }} &hellip;</h3>
+            <p>{{ 'ERMS_EXPORT.MESSAGES.EXPORT_INFO' | translate }}</p>
+            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+        </div>
+        
+        <div ng-show="rxpc.exportStatus === 'RUNNING'">
+            <div>
+                <h3 class="md-subhead">{{ 'ERMS_EXPORT.MESSAGES.EXPORTING' | translate }}</h3>
+                <p>{{ 'ERMS_EXPORT.MESSAGES.EXPORT_INFO' | translate }}</p>
+                <p class="muted">
+                    {{ 'ERMS_EXPORT.MESSAGES.EXPORT_WAIT1' | translate }}
+                </p>
+            </div>
+            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+        </div>
+        
+        <div ng-show="rxpc.exportStatus === 'DONE'">
+            <h3 class="md-subhead">{{ 'COMMON.DONE' | translate }}</h3>
+            <md-progress-linear md-mode="determinate" value="100"></md-progress-linear>
+            <p>{{ 'ERMS_EXPORT.MESSAGES.ACCESS_PATH' | translate }}:</p>
+        </div>
+        
+        <div ng-show="rxpc.exportStatus === 'ERROR'">
+            <h3 class="md-subhead">{{ 'COMMON.ERROR' | translate }}</h3>
+            <md-progress-linear md-mode="determinate" value="1"></md-progress-linear>
+        </div>
+        
+        <p><strong>{{ rxpc.exportResponse }}<strong></p>
+        
+        <md-button class="md-raised" ng-show="rxpc.exportStatus !== 'DONE'" ui-sref="erms.repos">
+            {{ 'COMMON.CANCEL' | translate }}
+        </md-button>
+        
+        <md-button ng-show="rxpc.exportStatus === 'DONE'" class="md-primary md-raised" ui-sref="erms.repos">
+            {{ 'COMMON.CLOSE' | translate }}
+        </md-button>
+        
+    </div>
+    
+</div>

@@ -7,4 +7,12 @@ angular
     .constant('APP_CONFIG', {
         appName: 'ERMS-Export',
         logoSrc: './app/assets/images/logo.gif'
+    })
+    .filter('urlEncode', function(){
+        return function(input){
+            if (input)
+                return window.encodeURIComponent(input)
+
+            return "";
+        }
     });

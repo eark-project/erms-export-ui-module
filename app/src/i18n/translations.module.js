@@ -4,13 +4,39 @@ angular.module('eArkPlatform.translations', ['pascalprecht.translate'])
     .factory('availableLanguages', AvailableLanguages)
     .config(config);
 
-var availableLanguages = {
-    keys: ['en', 'da'],
-    localesKeys: {
-        'en_GB': 'en',
-        'en_US': 'en',
-        'da_DK': 'da'
+/*
+ * This is where you define the languages you'll want to use in your project.
+ * Make sure to include the corresponding language files (ex en.json).
+ */
+var defineLangs = [
+    {
+        title: 'English (UK)',
+        code: 'en',
+        locale: 'en_GB'
+    },
+    {
+        title: 'Dansk',
+        code: 'da',
+        locale: 'da_DK'
     }
+];
+
+var availableLanguages = {
+    keys: [],
+    localesKeys: {},
+    languages: []
+};
+
+for (var l in defineLangs) {
+    availableLanguages.keys.push(defineLangs[l].code);
+    availableLanguages.localesKeys[defineLangs[l].locale] = defineLangs[l].code;
+    availableLanguages.languages.push(
+        {
+            title: defineLangs[l].title,
+            code: defineLangs[l].code,
+            locale: defineLangs[l].locale
+        }
+    );
 };
 
 function AvailableLanguages() {

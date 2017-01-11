@@ -1,28 +1,14 @@
 <md-toolbar>
     <div class="md-toolbar-tools">
-        <div>
-            <span>E-Ark tools:</span>
-
-            <h1>
-                <span>ERMS export</span>
-            </h1>
-        </div>
-
+    
+        <img src="./app/assets/images/logos/e-ark-text.svg" alt="E-Ark" style="height: 50%; margin-right: 8px;">
+        <h1 class="md-title" hide-xs style="margin-right: 16px;">{{ 'ERMS.HEADER.LABEL' | translate }}</h1>
+    
         <span flex></span>
-
-        <md-button class="md-icon-button" aria-label="menu" ng-click="vm.toggleMenu()">
-            <i class="material-icons">menu</i>
-        </md-button>
+        
+        <language-selector></language-selector>
+        
     </div>
 </md-toolbar>
 
-<md-sidenav md-component-id="right" class="md-sidenav-right">
-
-    <md-list ng-controller="ModulesMenuController as menu">
-        <md-list-item ng-repeat="item in menu.items | orderBy: 'order'">
-            <ng-include src="item.templateUrl"></ng-include>
-            <md-divider></md-divider>
-        </md-list-item>
-    </md-list>
-
-</md-sidenav>
+<error-msg></error-msg>
