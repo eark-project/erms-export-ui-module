@@ -21,6 +21,18 @@ Before installing this frontend, you need to setup the backend of the EEM. The i
 ... more to follow - handling backend doc first
 
 
+# Mapping of metadata from the ERMS to the SMURF format
+
+The EEM needs to know how to map the metadata associated with the content in the ERMS to the extended EAD format used in the SMURF profile. This mapping is facilitated via an XML mapping file which must be valid according to this [XML schema](https://github.com/magenta-aps/E-Ark-ERMS-export-bridge/blob/master/src/main/resources/mapping.xsd). In order to explain how to create the required mapping file, we will use a concrete mapping as an example. This mapping can be found [here](https://github.com/magenta-aps/E-Ark-ERMS-export-bridge/blob/master/src/main/resources/mapping.xml), but it will also be broken down to smaller pieces below.
+
+## Example of how to create a mapping
+
+Before diving into the details of the mapping, a few comments are needed on the CMIS compliant repository used in this example.
+
+### Example CMIS compliant repository
+
+We will assume that we are extracting data from the [Alfreco](https://community.alfresco.com/community/ecm) ECM system. Let us further assume that this Alfresco repository contains three content types that are of interest to us: *series*, *subseries* and *records*, and that the content within the repository is organized in a hierarchically manner as shown in this figure:
+
 
 
 # Angular stub for Alfresco/AngularJS UI projects
