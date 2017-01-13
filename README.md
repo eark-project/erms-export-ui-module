@@ -81,11 +81,94 @@ it is seen that the frontend will show more CMIS object types than the semantic 
 </viewTypes>
 ```
 
-The next section is the EAD templates section, i.e. the . In this section, the `<c>` element that is going to be used in the EAD file is constructed. The relevant 
-`<c>` element (for the semantic type of interest) is located within the `<ead>` element which in turn is located within the `<eadTemplates>` element. 
+The next section is the EAD templates section, i.e. the contained within the `<eadTemplate>` element. This section has a number of `<template>` elements belonging to 
+the different semantic types described above. Note that the template elements for the semantic types are located side by side within the eadTemplates element, i.e. 
+the semantic *structure* in the form of a tree as seen in the figure above is not reflected in the mapping file (that part is handled automatically when 
+the EEM is traversing the repository in a recursive manner via CMIS):
 
+```
+<eadTemplates>
+  <template id="series">
+    <hook>...</hook>
+    <ead>...</ead>
+  </templates>
+    <hook>...</hook>
+    <ead>...</ead>
+   <template id="subseries">
+  </templates>
+    <hook>...</hook>
+    <ead>...</ead>
+   <template id="record">
+  </templates>
+<</eadTemplates>
+```
 
+In the template element we see two elements: `<hook>` (inside `<hooks>`) and `<ead>`. The ead element will be discussed first. This element must contain the `<c>` element that is going to 
+be used in the final EAD file in the SMURF profile. This c element contains anything that is allowed within a c element according to the EAD XML schema, i.e. 
+it defines which EAD elements and attributes should go into the final EAD. The `<hook>` elements defines how to map the repository metadata (exposed via CMIS) to 
+the elements and/or attributes that have been defined in the `<c>` element. Let's use the record as an example:
 
+```
+<template id="record">
+  <hooks>
+    <hook>
+      <xpath>child::ead:did/child::ead:unitdate</xpath>
+      <cmisPropertyId>cmis:creationDate</cmisPropertyId>
+    </hook>
+    <hook>
+      <xpath>child::ead:did/child::ead:unittitle</xpath>
+      <cmisPropertyId>cmis:name</cmisPropertyId>
+    </hook>
+    <hook>
+      <xpath>child::ead:did/child::ead:unitid</xpath>
+      <cmisPropertyId>cmis:objectId</cmisPropertyId>
+      <cmisEscapes>
+        <escape regex="workspace://SpacesStore/" replacement="ID-"/>
+      </cmisEscapes>
+    </hook>
+    <hook>
+      <xpath>child::ead:did/child::ead:dao/attribute::id</xpath>
+      <cmisPropertyId>cmis:versionSeriesId</cmisPropertyId>
+      <cmisEscapes>
+        <escape regex="workspace://SpacesStore/" replacement="ID-"/>
+      </cmisEscapes>
+    </hook>
+  </hooks>
+  <ead>
+    <c level="file">
+    <ead:did>
+      <ead:unitdate datechar="created" />
+      <ead:unittitle />
+      <ead:unitid localtype="system_id" />
+      <ead:dao id="to-be-filled-out-with-cmis-metadata" daotype="borndigital"	href="path-to-file" />
+    </ead:did>
+    </c>
+  </ead>
+</template>
+```
+
+The `<c level="file">` shows that the record is mapped to c-level "file" in the EAD. To keep it simple in this example, this c element only contains a `<did>` element 
+that in turn contains the elements `<unitdate>`, `<unittitle>`, `<unitid>` and `<dao>`. Let us examine the first hook in the hooks section. This hook has the elements  
+`<xpath>child::ead:did/child::ead:unitdate</xpath>` and `<cmisPropertyId>cmis:creationDate</cmisPropertyId>`. The `<xpath>` element indicates that the EEM will look 
+for the unitdate element (inside the c element) by using the specified xpath expression. Then the EEM will extract the CMIS property `cmis:creationDate` and put the value 
+of this into the `<unitdate>` element in the `<c>` element. For the other hooks/elements the same procedure goes. Note that some of the hooks also contain a `<cmisEscape>` 
+element:
+
+```
+<cmisEscapes>
+  <escape regex="workspace://SpacesStore/" replacement="ID-"/>
+</cmisEscapes>
+   
+```
+
+This cmisEscapes section is not mandatory, but it is sometimes necessay to include it. It is use to replace part of the CMIS property value if this is not allowed 
+according the the EAD XML schema, i.e. in the example showed above, the string "workspace://SpacesStore" is replaced with "ID-" because the EAD schema does not 
+allow "://" in the unitid element.
+
+Finally, there is a `<dao>` element in the ead template in the mapping file. The dao element is only allowed in the leaf semantic type (have another look at the 
+`<objectType>` elements). These dao element will be replaced with dao elements corresponding to the actual file(s) found within the records. If the record contains 
+a hierarchy of folders and files, the dao elements for these will be placed side by side, i.e. the folder structure within the record will no longer be visible. 
+So as a result we will just have one long list of dao elements referencing all the files in the record.
 
 
 
