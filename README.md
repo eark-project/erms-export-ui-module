@@ -16,9 +16,28 @@ Included features are
 * Extraction of data and metadata from a repository
 
 # Installation
-Before installing this frontend, you need to setup the backend of the EEM. The instructions for how to do this can be found on the link above.
+Before installing this frontend, you need to setup and start the backend of the EEM. The instructions for how to do this can be found on the link above. You will also need to have 
+[Node.js](https://nodejs.org/en/) and [NPM](https://www.npmjs.com/) installed and running.
 
-... more to follow - handling backend doc first
+1. Clone the GitHub project. You can do it with a terminal command:
+
+```
+$ git clone https://github.com/magenta-aps/erms-export-ui-module.git
+```
+
+2. Wire the EARK Platform UI to the backend by changing the proxy settings in the gulpfile.js.
+
+3. Browse to the project folder and build the project using npm and gulp:
+
+```
+/erms-export-ui-module/$ npm update
+/erms-export-ui-module/$ npm install
+/erms-export-ui-module/$ gulp build
+```
+
+4. Set up hosting (for example by using an [Apache HTTP server](https://httpd.apache.org/)) for your project files and point it to `/erms-export-ui-module/index.html`
+
+5. Open a web browser and point it to the URL where your project is hosted. Consult your backend provider to get usernames and passwords for login.
 
 
 # Mapping of metadata from the ERMS to the SMURF format
@@ -179,52 +198,8 @@ i.e. basically the `<control>` section, but also the very first part of the `<ar
 the repository is traversed in order to extract data and metadata.
 
 
+# Contact
+In case of problems please contact [Magenta Aps](http://www.magenta.dk).
 
 
 
-# Angular stub for Alfresco/AngularJS UI projects
-
-This repo's code serves as a starting point for new projects combining Alfresco backend and AngularJS frontends.
-
-
-* Authentication
-* Build setup with Gulp
-* Sass pre-processing of CSS (scss)
-
-
-## Get up and running
-
-1. Clone the project
-2. Setup a server
-3. Run terminal commands
-´´´
-npm update
-npm install
-gulp build
-´´´
-4. [Then read the documentation](/documentation/README.md)
-
-
-## ToDo
-
-**Good to go**
-
-- [x] authentication - maybe add some documentation
-- [x] dashboard - modularize
-- [x] footer - maybe add some documentation
-- [x] header - maybe add some documentation
-- [x] i18n
-
-**Shame**
-- [ ] common
-- [ ] core
-- [ ] *documents*
-- [ ] *files*
-- [ ] shared
-- [ ] *search*
-
-**Possibly delete**
-- [ ] groups
-- [ ] system_settings
-- [ ] admin
-- [ ] users 
