@@ -21,19 +21,19 @@ Before installing this frontend, you need to setup and start the backend of the 
 
 1. Clone the GitHub project. You can do it with a terminal command:
 
-```
-$ git clone https://github.com/magenta-aps/erms-export-ui-module.git
-```
+  ```
+  $ git clone https://github.com/magenta-aps/erms-export-ui-module.git
+  ```
 
 2. Wire the EARK Platform UI to the backend by changing the proxy settings in the gulpfile.js.
 
 3. Browse to the project folder and build the project using npm and gulp:
 
-```
-/erms-export-ui-module/$ npm update
-/erms-export-ui-module/$ npm install
-/erms-export-ui-module/$ gulp build
-```
+  ```
+  /erms-export-ui-module/$ npm update
+  /erms-export-ui-module/$ npm install
+  /erms-export-ui-module/$ gulp build
+  ```
 
 4. Set up hosting (for example by using an [Apache HTTP server](https://httpd.apache.org/)) for your project files and point it to `/erms-export-ui-module/index.html`
 
